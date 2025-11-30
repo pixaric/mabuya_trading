@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mabuya Trading - Estudio y Análisis de Mercados</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="top-bar">
+        <div class="brand">
+          <div class="logo-circle">M</div>
+          <div class="brand-text">
+            <span class="brand-name">Mabuya Trading</span>
+            <span class="brand-tagline">Estudio, análisis y estrategias</span>
+          </div>
+        </div>
+        <nav class="nav-tabs" aria-label="Secciones principales">
+          <button class="tab-button active" data-tab="inicio">Inicio</button>
+          <button class="tab-button" data-tab="academia">Academia</button>
+          <button class="tab-button" data-tab="noticias">Noticias</button>
+          <button class="tab-button" data-tab="videos">Videos</button>
+        </nav>
+      </header>
+
+      <main class="main">
+        <!-- INICIO -->
+        <section class="tab-panel active" id="tab-inicio">
+          <div class="panel-inner">
+            <h1 class="panel-title">Laboratorio de mercado</h1>
+            <p class="panel-lead">
+              Espacio dedicado al estudio disciplinado del mercado financiero: estructura, flujo de órdenes, gestión de riesgo y psicología del trading.
+            </p>
+            <div class="grid-2">
+              <div class="card">
+                <h2 class="card-title">Ruta de aprendizaje</h2>
+                <ul class="bullet-list">
+                  <li>Fundamentos del mercado y tipos de activos.</li>
+                  <li>Estructura de precio, zonas de valor y liquidez.</li>
+                  <li>Diseño de sistemas y backtesting.</li>
+                  <li>Gestión de riesgo y plan de trading.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h2 class="card-title">Enfoque de Mabuya</h2>
+                <p class="card-text">
+                  No se trata de “señales”, sino de entender el contexto, formular hipótesis y documentar cada decisión para construir ventaja estadística.
+                </p>
+                <p class="card-text">
+                  Todo el contenido está pensado para que puedas estudiar, anotar y revisar tus propias observaciones del mercado.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACADEMIA -->
+        <section class="tab-panel" id="tab-academia">
+          <div class="panel-inner">
+            <h1 class="panel-title">Academia Mabuya</h1>
+            <p class="panel-lead">
+              Módulos cortos para construir una base sólida antes de tomar decisiones en mercado real.
+            </p>
+
+            <section class="asset-search-section">
+              <form class="asset-search-form" id="asset-search-form">
+                <div class="field-group">
+                  <label class="field-label" for="asset-search-input">Buscar activo</label>
+                  <input
+                    id="asset-search-input"
+                    name="asset"
+                    class="field-input"
+                    list="asset-suggestions"
+                    placeholder="Ej: EURUSD, BTCUSD, XAUUSD, AAPL..."
+                    autocomplete="off"
+                  />
+                  <datalist id="asset-suggestions">
+                    <option value="EURUSD"></option>
+                    <option value="GBPUSD"></option>
+                    <option value="USDJPY"></option>
+                    <option value="XAUUSD"></option>
+                    <option value="BTCUSD"></option>
+                    <option value="ETHUSD"></option>
+                    <option value="SPX500"></option>
+                    <option value="NAS100"></option>
+                    <option value="AAPL"></option>
+                    <option value="TSLA"></option>
+                  </datalist>
+                </div>
+              </form>
+              <div class="asset-chart-container">
+                <div id="asset-chart" class="asset-chart-placeholder">
+                  Selecciona un activo para ver su gráfico en tiempo real.
+                </div>
+              </div>
+            </section>
+
+            <div class="modules">
+              <article class="module-card">
+                <h2 class="module-title">Módulo 1 · Fundamentos del mercado</h2>
+                <p class="module-text">
+                  Tipos de mercados, participantes, liquidez, horarios y conceptos clave como spread, apalancamiento y margen.
+                </p>
+                <div class="module-tags">
+                  <span class="tag">Principiante</span>
+                  <span class="tag">Teoría</span>
+                </div>
+              </article>
+
+              <article class="module-card">
+                <h2 class="module-title">Módulo 2 · Lectura de precio</h2>
+                <p class="module-text">
+                  Estructura de mercado, tendencias, rangos, ruptura y reacumulación. Cómo marcar zonas relevantes y contexto multiframe.
+                </p>
+                <div class="module-tags">
+                  <span class="tag">Intermedio</span>
+                  <span class="tag">Price Action</span>
+                </div>
+              </article>
+
+              <article class="module-card">
+                <h2 class="module-title">Módulo 3 · Sistema y gestión de riesgo</h2>
+                <p class="module-text">
+                  Definición de setup, reglas objetivas, tamaño de posición, R/R, drawdown y bitácora de operaciones.
+                </p>
+                <div class="module-tags">
+                  <span class="tag">Sistema</span>
+                  <span class="tag">Gestión</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- NOTICIAS -->
+        <section class="tab-panel" id="tab-noticias">
+          <div class="panel-inner">
+            <h1 class="panel-title">Noticias y eventos</h1>
+            <p class="panel-lead">
+              Registra las noticias, datos económicos y eventos que pueden impactar tus escenarios de mercado.
+            </p>
+
+            <form class="analysis-form" id="news-form">
+              <div class="field-group">
+                <label class="field-label" for="headline">Titular</label>
+                <input
+                  id="headline"
+                  name="headline"
+                  class="field-input"
+                  placeholder="Ej: Decisión de tipos de la Fed, IPC EE.UU., discurso de Lagarde..."
+                  required
+                />
+              </div>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="source">Fuente</label>
+                  <input
+                    id="source"
+                    name="source"
+                    class="field-input"
+                    placeholder="Ej: ForexFactory, Investing, Calendario propio..."
+                  />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="impact">Impacto</label>
+                  <select id="impact" name="impact" class="field-input">
+                    <option value="Bajo">Bajo</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Alto">Alto</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="category">Sección</label>
+                <select id="category" name="category" class="field-input">
+                  <option value="Macro">Noticias macro / datos</option>
+                  <option value="Empresa">Noticias de empresas / índices</option>
+                  <option value="Otros">Otros / mis notas</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="details">Notas</label>
+                <textarea
+                  id="details"
+                  name="details"
+                  class="field-input field-textarea"
+                  placeholder="Cómo puede afectar a tus posiciones, pares afectados, horarios, escenario base..."
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="primary-button">
+                Guardar noticia
+              </button>
+            </form>
+
+            <section class="saved-section">
+              <div class="saved-header">
+                <h2 class="saved-title">Noticias guardadas</h2>
+                <button class="ghost-button" id="clear-news">
+                  Limpiar
+                </button>
+              </div>
+
+              <div class="news-groups">
+                <div class="news-group">
+                  <h3 class="news-group-title">Macro y datos económicos</h3>
+                  <div class="saved-list news-list" id="news-list-macro">
+                    <!-- Noticias macro -->
+                  </div>
+                </div>
+
+                <div class="news-group">
+                  <h3 class="news-group-title">Empresas, índices y resultados</h3>
+                  <div class="saved-list news-list" id="news-list-empresa">
+                    <!-- Noticias de empresas -->
+                  </div>
+                </div>
+
+                <div class="news-group">
+                  <h3 class="news-group-title">Otros / notas personales</h3>
+                  <div class="saved-list news-list" id="news-list-otros">
+                    <!-- Otras noticias -->
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <!-- VIDEOS -->
+        <section class="tab-panel" id="tab-videos">
+          <div class="panel-inner">
+            <h1 class="panel-title">Videos</h1>
+            <p class="panel-lead">
+              Colección de videos de tu canal de YouTube organizados en tarjetas para un acceso rápido.
+            </p>
+
+            <section class="saved-section">
+              <div class="saved-header">
+                <h2 class="saved-title">Videos de YouTube</h2>
+              </div>
+              <div class="videos-search-wrapper">
+                <input
+                  id="video-search"
+                  class="field-input"
+                  type="search"
+                  placeholder="Buscar por título o descripción..."
+                />
+              </div>
+              <div class="saved-list videos-list" id="videos-list">
+                <!-- Videos generados por JS -->
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
