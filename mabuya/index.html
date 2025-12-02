@@ -25,13 +25,13 @@
       </header>
 
       <main class="main">
-        <!-- INICIO -->
-        <section class="tab-panel active" id="tab-inicio">
+        <div id="inicio" class="tab-panel active"><section class="tab-panel active" id="tab-inicio">
           <div class="panel-inner">
             <h1 class="panel-title">Laboratorio de mercado</h1>
             <p class="panel-lead">
               Espacio dedicado al estudio disciplinado del mercado financiero: estructura, flujo de órdenes, gestión de riesgo y psicología del trading.
             </p>
+            
             <div class="grid-2">
               <div class="card">
                 <h2 class="card-title">Ruta de aprendizaje</h2>
@@ -50,217 +50,129 @@
                 <p class="card-text">
                   Todo el contenido está pensado para que puedas estudiar, anotar y revisar tus propias observaciones del mercado.
                 </p>
+                <h2 class="card-title" >Filosofía</h2>
+                <ul class="bullet-list">
+                    <li>Riesgo siempre definido y limitado.</li>
+                    <li>Operar el contexto, no la emoción.</li>
+                    <li>El trading es un negocio de probabilidades.</li>
+                </ul>
               </div>
             </div>
-          </div>
-        </section>
 
-        <!-- ACADEMIA -->
-        <section class="tab-panel" id="tab-academia">
-          <div class="panel-inner">
-            <h1 class="panel-title">Academia Mabuya</h1>
-            <p class="panel-lead">
-              Módulos cortos para construir una base sólida antes de tomar decisiones en mercado real.
-            </p>
+            <h2 class="panel-title" >Desarrollo de la Ruta</h2>
 
-            <section class="asset-search-section">
-              <form class="asset-search-form" id="asset-search-form">
-                <div class="field-group">
-                  <label class="field-label" for="asset-search-input">Buscar activo</label>
-                  <input
-                    id="asset-search-input"
-                    name="asset"
-                    class="field-input"
-                    list="asset-suggestions"
-                    placeholder="Ej: EURUSD, BTCUSD, XAUUSD, AAPL..."
-                    autocomplete="off"
-                  />
-                  <datalist id="asset-suggestions">
-                    <option value="EURUSD"></option>
-                    <option value="GBPUSD"></option>
-                    <option value="USDJPY"></option>
-                    <option value="XAUUSD"></option>
-                    <option value="BTCUSD"></option>
-                    <option value="ETHUSD"></option>
-                    <option value="SPX500"></option>
-                    <option value="NAS100"></option>
-                    <option value="AAPL"></option>
-                    <option value="TSLA"></option>
-                  </datalist>
-                </div>
-              </form>
-              <div class="asset-chart-container">
-                <div id="asset-chart" class="asset-chart-placeholder">
-                  Selecciona un activo para ver su gráfico en tiempo real.
-                </div>
-              </div>
-            </section>
-
-            <div class="modules">
-              <article class="module-card">
-                <h2 class="module-title">Módulo 1 · Fundamentos del mercado</h2>
-                <p class="module-text">
-                  Tipos de mercados, participantes, liquidez, horarios y conceptos clave como spread, apalancamiento y margen.
-                </p>
-                <div class="module-tags">
-                  <span class="tag">Principiante</span>
-                  <span class="tag">Teoría</span>
+            <article class="topic-card" id="topic-aprendisaje">
+            <h2 class="topic-title">Ruta de Aprendizaje: Maestría en Trading de Activos Financieros</h2>
+                <div class="topic-content">
+                  <p>
+                  Esta ruta de cuatro módulos está diseñada para transformar a un principiante en un trader sistemático y rentable, enfocándose en la disciplina, la estrategia basada en la liquidez y una gestión de riesgo inquebrantable.
+                  </p>
+            </article>
+            <div class="learning-modules">
+              
+              <article class="topic-card" id="topic-fundamentos">
+                <h2 class="topic-title">1. 🌎 Fundamentos de Mercado y Tipología de Activos</h2>
+                <div class="topic-content">
+                  <p>
+                    Comprender la mecánica del mercado es el primer paso. Aquí se establecen los cimientos de cómo se mueve el precio y dónde residen las principales oportunidades de capital.
+                  </p>
+                 <ul class="topic-list">
+                  <li>Mecánica Esencial: Definición de Liquidez (el volumen disponible) y Volatilidad (la magnitud del movimiento).</li>
+                  <li>Herramientas de Capital: Análisis profundo de Apalancamiento (la herramienta para potenciar el capital) y Margen (la garantía requerida para mantener posiciones).</li>
+                  <li>Clasificación de Activos:
+                    <ul>
+                      <li>Forex (Divisas): El mercado más grande y líquido ($6.6 billones diarios). Nos centramos en los pares principales (EUR/USD, USD/JPY).</li>
+                      <li>Índices Bursátiles: Reflejan el sentimiento económico sectorial o nacional (ej. US100, SPX500).</li>
+                      <li>Criptomonedas: Activos digitales con operación 24/7 y extrema volatilidad (BTC/USD, ETH/USD).</li>
+                    </ul>
+                  </li>
+                </ul>
+                  <p class="topic-example">
+                    Concepto Clave: Un trader debe dominar los Horarios de Sesiones (Asia, Londres, Nueva York) para posicionarse estratégicamente durante los picos de actividad institucional.
+                  </p>
                 </div>
               </article>
 
-              <article class="module-card">
-                <h2 class="module-title">Módulo 2 · Lectura de precio</h2>
-                <p class="module-text">
-                  Estructura de mercado, tendencias, rangos, ruptura y reacumulación. Cómo marcar zonas relevantes y contexto multiframe.
-                </p>
-                <div class="module-tags">
-                  <span class="tag">Intermedio</span>
-                  <span class="tag">Price Action</span>
+              <article class="topic-card" id="topic-estructura">
+                <h2 class="topic-title">2. 🔍 Estructura de Precio, Zonas de Oferta y Demanda (Smart Money Concepts)</h2>
+                <div class="topic-content">
+                  <p>
+                    La estructura es el lenguaje gráfico del mercado. Aprenderás a "leer" la intención de los grandes participantes identificando los patrones de Altos y Bajos que definen la tendencia.
+                  </p>
+
+                  <ul class="topic-list">
+                  <li>La Tesis Estructural: Identificación de una tendencia alcista mediante Bajos Más Altos (Higher Lows) y Altos Más Altos (Higher Highs).</li>
+                  <li>Cambio Estructural (Break of Structure): Saber reconocer cuándo la secuencia se rompe (un Bajo Más Bajo) y anticipar un cambio de dirección en el precio.</li>
+                  <li>Zonas de Valor Institucional: Identificación de Zonas de Demanda (Compra) y Zonas de Oferta (Venta), que actúan como puntos clave para la reversión del precio.</li>
+                  <li>El Imán de la Liquidez: Entender que la Liquidez (órdenes pendientes de Retail) es el objetivo principal del precio, permitiendo a los Smart Money rebalancear sus posiciones.</li>
+                </ul>
+                  <div class="image-wrapper">
+                    
+
+[Image of market structure depicting highs, lows, and liquidity zones]
+
+                  </div>
+                  <p class="topic-example">
+                    **Concepto clave:** En una tendencia alcista, el precio forma **Higher Lows** (Bajos Más Altos). Un cambio en esta secuencia (un Bajo Más Bajo) sugiere un cambio en la dirección estructural (Break of Structure).
+                  </p>
                 </div>
               </article>
 
-              <article class="module-card">
-                <h2 class="module-title">Módulo 3 · Sistema y gestión de riesgo</h2>
-                <p class="module-text">
-                  Definición de setup, reglas objetivas, tamaño de posición, R/R, drawdown y bitácora de operaciones.
-                </p>
-                <div class="module-tags">
-                  <span class="tag">Sistema</span>
-                  <span class="tag">Gestión</span>
+              <article class="topic-card" id="topic-sistemas">
+                <h2 class="topic-title">🧪 Diseño de Sistemas y Validación Estadística</h2>
+                <div class="topic-content">
+                  <p>
+                    Un trader profesional no opera por intuición; opera con un Sistema de Trading que proporciona una ventaja estadística clara y medible en el tiempo.
+                  </p>
+                  <ul class="topic-list">
+                    <li>El Setup Objetivo: Creación de un conjunto de reglas inmutables que definen la entrada precisa, la colocación del Stop Loss y la estrategia de toma de ganancias.</li>
+                    <li>Backtesting (Prueba Histórica): El proceso crítico de simular tu estrategia con datos pasados para validar dos métricas fundamentales:
+                      <ul>
+                        <li>Tasa de Acierto (Win Rate): El porcentaje de operaciones ganadoras.</li>
+                        <li>Ratio Riesgo-Recompensa (R/R): La relación entre lo que arriesgas y lo que esperas ganar (ej. 1:2 o 1:3).</li>
+                      </ul>
+                    </li>
+                    <li>Métrica de Rentabilidad: Una explicación clara de por qué un sistema con un R/R de 1:2 y una tasa de acierto del $50\%$ es altamente rentable a largo plazo (ganas el doble de lo que pierdes, el $50\%$ de las veces).</li>
+                  </ul>
+                  <p class="topic-example">
+                    **Métrica crucial:** Si tu sistema tiene un R/R de 1:2 y una tasa de acierto del 50%, tu sistema es rentable a largo plazo, ya que ganas el doble de lo que arriesgas en la mitad de las operaciones.
+                  </p>
                 </div>
               </article>
+
+              <article class="topic-card" id="topic-riesgo">
+                <h2 class="topic-title">4. 🛡️ Gestión de Riesgo y el Plan de Trading Inquebrantable</h2>
+                <div class="topic-content">
+                  <p>
+                    Este es el módulo de la Supervivencia. La gestión de riesgo es la única variable que está $100\%$ bajo tu control en un entorno incierto. Aprenderás a proteger tu capital y a mantenerte en el juego a largo plazo.
+                  </p>
+                  <ul class="topic-list">
+                    <li>Regla de Oro (El 1%): El mandamiento de nunca arriesgar más del $1\%$ del capital total de la cuenta en una única operación.</li>
+                    <li>Cálculo Preciso de Posición: Aprendizaje del cálculo para ajustar el tamaño del lote (o número de unidades) de forma que el Stop Loss se alinee perfectamente con el límite de riesgo del $1\%$.</li>
+                    <li>El Plan de Trading Integral: La creación de un documento único y estricto que fusiona tu sistema, tu gestión de riesgo y tus reglas de Psicología de Trading para eliminar la discrecionalidad y el error humano.</li>
+                  </ul>
+                  <p>
+                    El **Plan de Trading** unifica tu sistema, tu gestión de riesgo y tus reglas psicológicas en un único documento de referencia.
+                  </p>
+                  <p class="topic-example">
+                    **Ejemplo:** Si tu cuenta es de $5,000, solo arriesgas $50 por trade (1%). Si pierdes 10 trades seguidos, solo habrás perdido el 10% de tu cuenta, manteniéndote en el juego.
+                  </p>
+                </div>
+              </article>
+              
             </div>
           </div>
-        </section>
+        </section></div>
+<div id="academia" class="tab-panel"></div> <!-- ESTE DEBE ESTAR VACÍO -->
+<div id="noticias" class="tab-panel"></div>
+<div id="videos" class="tab-panel"></div>
+        <!-- INICIO -->
+    
+       
+        
 
-        <!-- NOTICIAS -->
-        <section class="tab-panel" id="tab-noticias">
-          <div class="panel-inner">
-            <h1 class="panel-title">Noticias y eventos</h1>
-            <p class="panel-lead">
-              Registra las noticias, datos económicos y eventos que pueden impactar tus escenarios de mercado.
-            </p>
+        
 
-            <form class="analysis-form" id="news-form">
-              <div class="field-group">
-                <label class="field-label" for="headline">Titular</label>
-                <input
-                  id="headline"
-                  name="headline"
-                  class="field-input"
-                  placeholder="Ej: Decisión de tipos de la Fed, IPC EE.UU., discurso de Lagarde..."
-                  required
-                />
-              </div>
-
-              <div class="field-row">
-                <div class="field-group">
-                  <label class="field-label" for="source">Fuente</label>
-                  <input
-                    id="source"
-                    name="source"
-                    class="field-input"
-                    placeholder="Ej: ForexFactory, Investing, Calendario propio..."
-                  />
-                </div>
-                <div class="field-group">
-                  <label class="field-label" for="impact">Impacto</label>
-                  <select id="impact" name="impact" class="field-input">
-                    <option value="Bajo">Bajo</option>
-                    <option value="Medio">Medio</option>
-                    <option value="Alto">Alto</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="field-group">
-                <label class="field-label" for="category">Sección</label>
-                <select id="category" name="category" class="field-input">
-                  <option value="Macro">Noticias macro / datos</option>
-                  <option value="Empresa">Noticias de empresas / índices</option>
-                  <option value="Otros">Otros / mis notas</option>
-                </select>
-              </div>
-
-              <div class="field-group">
-                <label class="field-label" for="details">Notas</label>
-                <textarea
-                  id="details"
-                  name="details"
-                  class="field-input field-textarea"
-                  placeholder="Cómo puede afectar a tus posiciones, pares afectados, horarios, escenario base..."
-                  rows="3"
-                  required
-                ></textarea>
-              </div>
-
-              <button type="submit" class="primary-button">
-                Guardar noticia
-              </button>
-            </form>
-
-            <section class="saved-section">
-              <div class="saved-header">
-                <h2 class="saved-title">Noticias guardadas</h2>
-                <button class="ghost-button" id="clear-news">
-                  Limpiar
-                </button>
-              </div>
-
-              <div class="news-groups">
-                <div class="news-group">
-                  <h3 class="news-group-title">Macro y datos económicos</h3>
-                  <div class="saved-list news-list" id="news-list-macro">
-                    <!-- Noticias macro -->
-                  </div>
-                </div>
-
-                <div class="news-group">
-                  <h3 class="news-group-title">Empresas, índices y resultados</h3>
-                  <div class="saved-list news-list" id="news-list-empresa">
-                    <!-- Noticias de empresas -->
-                  </div>
-                </div>
-
-                <div class="news-group">
-                  <h3 class="news-group-title">Otros / notas personales</h3>
-                  <div class="saved-list news-list" id="news-list-otros">
-                    <!-- Otras noticias -->
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </section>
-
-        <!-- VIDEOS -->
-        <section class="tab-panel" id="tab-videos">
-          <div class="panel-inner">
-            <h1 class="panel-title">Videos</h1>
-            <p class="panel-lead">
-              Colección de videos de tu canal de YouTube organizados en tarjetas para un acceso rápido.
-            </p>
-
-            <section class="saved-section">
-              <div class="saved-header">
-                <h2 class="saved-title">Videos de YouTube</h2>
-              </div>
-              <div class="videos-search-wrapper">
-                <input
-                  id="video-search"
-                  class="field-input"
-                  type="search"
-                  placeholder="Buscar por título o descripción..."
-                />
-              </div>
-              <div class="saved-list videos-list" id="videos-list">
-                <!-- Videos generados por JS -->
-              </div>
-            </section>
-          </div>
-        </section>
-      </main>
-    </div>
 
     <script type="module" src="./app.js"></script>
   </body>
