@@ -20,7 +20,7 @@
         .tab-panel.active { display: block; }
         
         .header-container {
-            /* ESTILO ACTUALIZADO: Altura más corta, fondo con imagen y redondeado */
+            /* Altura más corta, fondo con imagen y redondeado */
             padding: 1rem 1rem 0.5rem; 
             max-width: 1400px;
             margin: 0 auto 1rem; /* Añadir margen inferior */
@@ -52,33 +52,48 @@
         .accent-bg { background-color: #3b82f6; }
         .accent-border-color { border-left-color: #3b82f6; }
 
-        /* Títulos y Encabezados - Colores ajustados para fondo oscuro del header */
+        /* Títulos y Encabezados - Optimizados para Móviles */
         .main-title {
-            font-size: 3rem; /* text-5xl */
-            font-weight: 800; /* font-extrabold */
-            color: #ffffff; /* Título blanco sobre la imagen */
+            font-size: 2.25rem; /* text-3xl en móvil */
+            font-weight: 800;
+            color: #ffffff;
             margin-bottom: 0.25rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejor lectura */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
+        @media (min-width: 640px) {
+            .main-title { font-size: 3rem; } /* text-5xl en SM+ */
+        }
+
         .main-slogan {
-            font-size: 1.25rem; /* text-xl */
+            font-size: 1rem; /* text-base en móvil */
             font-style: italic;
-            color: #d1d5db; /* Slogan gris claro sobre la imagen */
-            margin-bottom: 0.5rem; /* Reducido para altura */
-            border-bottom: 2px solid #ffffff33; /* Separador claro */
+            color: #d1d5db;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #ffffff33;
             padding-bottom: 0.5rem;
         }
+        @media (min-width: 640px) {
+             .main-slogan { font-size: 1.25rem; } /* text-xl en SM+ */
+        }
+
         .panel-title {
-            font-size: 2rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
+            font-size: 1.75rem; /* text-2xl en móvil */
+            font-weight: 700;
             margin-bottom: 1rem;
+        }
+        @media (min-width: 640px) {
+            .panel-title { font-size: 2rem; } /* text-3xl en SM+ */
         }
         
         .panel-lead {
-            font-size: 1.125rem; /* text-lg */
-            margin-bottom: 2rem;
+            font-size: 1rem; /* text-base en móvil */
+            margin-bottom: 1.5rem; /* Reducido para móvil */
             color: #4b5563;
         }
+        @media (min-width: 640px) {
+            .panel-lead { font-size: 1.125rem; } /* text-lg en SM+ */
+        }
+
 
         /* Grid y Tarjetas */
         .grid-2 {
@@ -94,18 +109,18 @@
 
         .card {
             padding: 1.5rem;
-            background-color: #ffffff; /* Fondo de tarjeta blanco */
+            background-color: #ffffff;
             border-radius: 0.5rem;
             border: 1px solid #e5e7eb;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .card-title, .topic-title {
-            font-size: 1.5rem; /* text-xl */
+            font-size: 1.25rem; /* text-xl */
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 0.75rem;
-            border-bottom: 2px solid #3b82f633; /* Línea de acento sutil AZUL */
+            border-bottom: 2px solid #3b82f633;
             padding-bottom: 0.5rem;
         }
         
@@ -113,14 +128,18 @@
         .topic-card {
             margin-bottom: 2rem;
             padding: 1.5rem;
-            background-color: #f9fafb; /* Fondo ligeramente gris para módulos */
+            background-color: #f9fafb;
             border-radius: 0.5rem;
-            border-left: 5px solid #3b82f6; /* Borde de acento AZUL para módulos */
+            border-left: 5px solid #3b82f6;
         }
 
         .bullet-list, .topic-list {
             list-style: none;
             padding-left: 0;
+            font-size: 0.875rem; /* text-sm en móvil */
+        }
+        @media (min-width: 640px) {
+            .bullet-list, .topic-list { font-size: 1rem; } /* text-base en SM+ */
         }
 
         .bullet-list li, .topic-list li {
@@ -131,7 +150,7 @@
         
         .bullet-list li::before {
             content: '•';
-            color: #3b82f6; /* AZUL */
+            color: #3b82f6;
             font-weight: bold;
             display: inline-block;
             width: 1em;
@@ -140,7 +159,7 @@
 
         .topic-list li::before {
             content: '→';
-            color: #3b82f6; /* AZUL */
+            color: #3b82f6;
             font-weight: bold;
             display: inline-block;
             width: 1em;
@@ -150,7 +169,7 @@
         .topic-example {
             margin-top: 1rem;
             padding: 1rem;
-            border-left: 4px solid #f59e0b; /* Color de acento AMARILLO para ejemplos */
+            border-left: 4px solid #f59e0b;
             background-color: #f59e0b1a;
             border-radius: 0.25rem;
             color: #f59e0b;
@@ -162,7 +181,7 @@
             display: flex;
             margin-bottom: 1rem;
             border-bottom: 2px solid #e5e7eb;
-            padding: 0 1rem;
+            padding: 0 0.5rem; /* Padding reducido en móvil */
             max-width: 1400px;
             margin: 0 auto;
             overflow-x: auto;
@@ -173,13 +192,14 @@
         }
 
         .tab-button {
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1rem; /* Padding horizontal reducido en móvil */
             cursor: pointer;
             color: #6b7280;
             border-bottom: 2px solid transparent;
             font-weight: 500;
             transition: all 0.2s;
-            white-space: nowrap; 
+            white-space: nowrap;
+            font-size: 0.875rem; /* text-sm para pestañas */
         }
 
         .tab-button:hover {
@@ -187,7 +207,7 @@
         }
 
         .tab-button.active {
-            color: #3b82f6; /* Color de acento AZUL */
+            color: #3b82f6;
             border-bottom-color: #3b82f6;
             font-weight: 600;
         }
@@ -212,12 +232,6 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Estilos específicos para el checkbox */
-        input[type="checkbox"] {
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
         /* Estilos para display de resultados de calculadora */
         .result-display {
             background-color: #f3f4f6;
@@ -231,10 +245,10 @@
         
         /* Estilos de la tabla de seguimiento */
         .watchlist-table th {
-            background-color: #eff6ff; /* blue-50 */
-            color: #1e40af; /* blue-800 */
-            padding: 0.75rem 0.5rem;
-            font-size: 0.75rem; /* text-xs */
+            background-color: #eff6ff;
+            color: #1e40af;
+            padding: 0.5rem 0.25rem; /* Reducido en móvil */
+            font-size: 0.65rem; /* Más pequeño para que quepa */
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -242,10 +256,15 @@
         }
 
         .watchlist-table td {
-            padding: 0.75rem 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-            color: #374151; /* gray-700 */
+            padding: 0.5rem 0.25rem; /* Reducido en móvil */
+            font-size: 0.75rem; /* text-sm */
+            color: #374151;
             border-bottom: 1px solid #f3f4f6;
+        }
+        
+        /* Fix específico para el input del precio de venta */
+        #minSellPrice {
+            font-size: 0.875rem; /* text-sm */
         }
 
     </style>
@@ -302,8 +321,8 @@
                         <div class="card p-0">
                             <!-- Header del Gráfico con Ticker Actual -->
                             <div class="p-4 flex flex-col sm:flex-row justify-between items-center border-b border-gray-100">
-                                <h2 class="text-xl font-semibold text-gray-800">Gráfico de Activo: <span id="current-ticker" class="accent-color">EURUSD</span></h2>
-                                <p class="text-sm text-gray-500 mt-2 sm:mt-0">Estado: <span class="text-xs">Sesión de Análisis Abierta</span></p>
+                                <h2 class="text-lg sm:text-xl font-semibold text-gray-800">Gráfico de Activo: <span id="current-ticker" class="accent-color">EURUSD</span></h2>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-2 sm:mt-0">Estado: <span class="text-xs">Sesión de Análisis Abierta</span></p>
                             </div>
                             
                             <!-- Área de Gráfico (TradingView Widget) -->
@@ -311,10 +330,13 @@
                                 <!-- El widget se inyectará aquí con JavaScript -->
                             </div>
                             
-                            <!-- Selector de Ticker (a la derecha) -->
-                            <div class="p-4 flex gap-3 border-t border-gray-100">
-                                <input type="text" id="ticker-input" placeholder="Ej: BTCUSD, XAUUSD, TSLA" value="EURUSD" class="flex-grow p-3 rounded bg-white border border-gray-300 text-gray-800 focus:ring-blue-500 focus:border-blue-500 uppercase">
-                                <button onclick="updateTicker()" class="px-6 py-3 accent-bg hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200 whitespace-nowrap">
+                            <!-- Selector de Ticker (Responsive: vertical en móvil, horizontal en sm+) -->
+                            <div class="p-4 flex flex-col sm:flex-row gap-3 border-t border-gray-100">
+                                <input type="text" id="ticker-input" placeholder="Ej: BTCUSD, XAUUSD, TSLA" value="EURUSD" 
+                                    class="w-full p-3 rounded bg-white border border-gray-300 text-gray-800 focus:ring-blue-500 focus:border-blue-500 uppercase text-sm"
+                                >
+                                <!-- Se añade w-full para que el botón ocupe todo el ancho en móvil -->
+                                <button onclick="updateTicker()" class="w-full sm:w-auto px-6 py-3 accent-bg hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200 whitespace-nowrap text-sm">
                                     Cargar Ticker
                                 </button>
                             </div>
@@ -325,6 +347,7 @@
                             <h2 class="card-title text-purple-600">📊 Lista de Seguimiento Personalizada</h2>
                             <p class="text-sm text-gray-600 mb-4">Activos de alto interés y sus métricas clave (Datos estáticos de ejemplo).</p>
                             
+                            <!-- Tabla Responsive con Scroll Horizontal -->
                             <div class="overflow-x-auto">
                                 <table class="watchlist-table min-w-full divide-y divide-gray-200">
                                     <thead>
@@ -414,12 +437,12 @@
                         <div class="card border-l-4 border-green-500">
                             <h2 class="card-title text-green-600">🔗 Enlaces Clave</h2>
                             <p class="text-sm text-gray-600 mb-4">Herramientas esenciales para tu análisis fundamental y técnico.</p>
-                            <ul class="space-y-3">
-                                <li><a href="https://www.investing.com/economic-calendar/" target="_blank" class="text-sm font-medium accent-color hover:underline">Calendario Económico (Investing)</a></li>
-                                <li><a href="https://finance.yahoo.com/" target="_blank" class="text-sm font-medium accent-color hover:underline">Cotizaciones y Noticias (Yahoo Finance)</a></li>
-                                <li><a href="https://finviz.com/screener.ashx" target="_blank" class="text-sm font-medium accent-color hover:underline">Screener de Acciones (Finviz)</a></li>
-                                <li><a href="https://www.tradingview.com/markets/" target="_blank" class="text-sm font-medium accent-color hover:underline">Mapas de Mercado (TradingView)</a></li>
-                                <li><a href="https://www.forexfactory.com/" target="_blank" class="text-sm font-medium accent-color hover:underline">Noticias Forex (Forex Factory)</a></li>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="https://www.investing.com/economic-calendar/" target="_blank" class="font-medium accent-color hover:underline">Calendario Económico (Investing)</a></li>
+                                <li><a href="https://finance.yahoo.com/" target="_blank" class="font-medium accent-color hover:underline">Cotizaciones y Noticias (Yahoo Finance)</a></li>
+                                <li><a href="https://finviz.com/screener.ashx" target="_blank" class="font-medium accent-color hover:underline">Screener de Acciones (Finviz)</a></li>
+                                <li><a href="https://www.tradingview.com/markets/" target="_blank" class="font-medium accent-color hover:underline">Mapas de Mercado (TradingView)</a></li>
+                                <li><a href="https://www.forexfactory.com/" target="_blank" class="font-medium accent-color hover:underline">Noticias Forex (Forex Factory)</a></li>
                             </ul>
                         </div>
                         
@@ -436,10 +459,10 @@
                                     </label>
                                     <div class="mt-1 relative rounded-md shadow-sm">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <span class="text-gray-500 sm:text-sm">$</span>
+                                            <span class="text-gray-500 text-sm">$</span>
                                         </div>
                                         <input type="number" id="compraPrice" name="compraPrice" step="0.01" value="100.00"
-                                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-3 py-2 sm:text-sm border-gray-300 rounded-md"
+                                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-3 py-2 text-sm border-gray-300 rounded-md"
                                             placeholder="0.00" oninput="actualizarCalculadoras()">
                                     </div>
                                 </div>
@@ -451,10 +474,10 @@
                                     </label>
                                     <div class="mt-1 relative rounded-md shadow-sm">
                                         <input type="number" id="profitPercent" name="profitPercent" value="25"
-                                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 pr-7 py-2 sm:text-sm border-gray-300 rounded-md"
+                                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 pr-7 py-2 text-sm border-gray-300 rounded-md"
                                             placeholder="0" oninput="actualizarCalculadoras()">
                                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <span class="text-gray-500 sm:text-sm">%</span>
+                                            <span class="text-gray-500 text-sm">%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -466,10 +489,10 @@
                                     </label>
                                     <div class="mt-1 relative rounded-md shadow-sm">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <span class="text-green-600 sm:text-sm font-bold">$</span>
+                                            <span class="text-green-600 text-sm font-bold">$</span>
                                         </div>
                                         <input type="text" id="minSellPrice" name="minSellPrice" readonly
-                                            class="block w-full pl-7 pr-3 py-2 sm:text-sm bg-green-50 text-green-800 font-bold border border-green-300 rounded-md cursor-default"
+                                            class="block w-full pl-7 pr-3 py-2 text-sm bg-green-50 text-green-800 font-bold border border-green-300 rounded-md cursor-default"
                                             value="0.00">
                                     </div>
                                 </div>
@@ -514,18 +537,18 @@
                             </div>
 
                             <div class="border-t border-gray-200 pt-6">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Resumen de Posición</h3>
-
+                                <h3 class="text-base font-semibold text-gray-800 mb-4">Resumen de Posición</h3>
+                                
                                 <!-- Resultado: Cantidad Total de Activos -->
                                 <div class="grid grid-cols-2 gap-4 items-center mb-4">
                                     <p class="text-sm text-gray-600">Total Activos (Cantidad):</p>
-                                    <div id="totalQuantity" class="result-display text-right text-blue-600">0</div>
+                                    <div id="totalQuantity" class="result-display text-right text-blue-600 text-sm">0</div>
                                 </div>
 
                                 <!-- Resultado: Total Global Invertido -->
                                 <div class="grid grid-cols-2 gap-4 items-center mb-4">
                                     <p class="text-sm text-gray-600">Total Invertido (Monto):</p>
-                                    <div id="totalInvestment" class="result-display text-right text-blue-600">0.00</div>
+                                    <div id="totalInvestment" class="result-display text-right text-blue-600 text-sm">0.00</div>
                                 </div>
 
                                 <!-- Resultado: Precio Promedio -->
@@ -556,7 +579,7 @@
                     <article class="topic-card" id="topic-fundamentos">
                         <h2 class="topic-title">1. 🌎 Fundamentos de Mercado y Tipología de Activos</h2>
                         <div class="topic-content">
-                            <p>
+                            <p class="text-sm sm:text-base">
                                 Comprender la mecánica del mercado es el primer paso. Aquí se establecen los cimientos de cómo se mueve el precio y dónde residen las principales oportunidades de capital.
                             </p>
                             <ul class="topic-list">
@@ -564,7 +587,7 @@
                                 <li>Herramientas de Capital: Análisis profundo de Apalancamiento (la herramienta para potenciar el capital) y Margen (la garantía requerida para mantener posiciones).</li>
                                 <li>Clasificación de Activos: Forex, Índices Bursátiles y Criptomonedas.</li>
                             </ul>
-                            <p class="topic-example">
+                            <p class="topic-example text-sm sm:text-base">
                                 Concepto Clave: Un trader debe dominar los Horarios de Sesiones (Asia, Londres, Nueva York) para posicionarse estratégicamente durante los picos de actividad institucional.
                             </p>
                         </div>
@@ -573,7 +596,7 @@
                     <article class="topic-card" id="topic-estructura">
                         <h2 class="topic-title">2. 🔍 Estructura de Precio, Zonas de Oferta y Demanda (Smart Money Concepts)</h2>
                         <div class="topic-content">
-                            <p>
+                            <p class="text-sm sm:text-base">
                                 La estructura es el lenguaje gráfico del mercado. Aprenderás a "leer" la intención de los grandes participantes.
                             </p>
                             <!-- Imagen de ejemplo para la estructura -->
@@ -593,7 +616,7 @@
                     <article class="topic-card" id="topic-sistemas">
                         <h2 class="topic-title">3. 🧪 Diseño de Sistemas y Validación Estadística</h2>
                         <div class="topic-content">
-                            <p>
+                            <p class="text-sm sm:text-base">
                                 Un trader profesional opera con un Sistema de Trading que proporciona una ventaja estadística clara y medible en el tiempo.
                             </p>
                             <ul class="topic-list">
@@ -601,7 +624,7 @@
                                 <li>Backtesting (Prueba Histórica): Simular tu estrategia con datos pasados.</li>
                                 <li>Métrica de Rentabilidad: Tasa de Acierto y Ratio Riesgo-Recompensa (R/R).</li>
                             </ul>
-                            <p class="topic-example">
+                            <p class="topic-example text-sm sm:text-base">
                                 **Métrica crucial:** Si tu sistema tiene un R/R de 1:2 y una tasa de acierto del 50%, tu sistema es rentable a largo plazo.
                             </p>
                         </div>
@@ -610,7 +633,7 @@
                     <article class="topic-card" id="topic-riesgo">
                         <h2 class="topic-title">4. 🛡️ Gestión de Riesgo y el Plan de Trading Inquebrantable</h2>
                         <div class="topic-content">
-                            <p>
+                            <p class="text-sm sm:text-base">
                                 Este es el módulo de la Supervivencia. La gestión de riesgo es la única variable que está $100\%$ bajo tu control.
                             </p>
                             <ul class="topic-list">
@@ -636,8 +659,8 @@
 
                 <!-- Área de Búsqueda -->
                 <div class="mb-6 flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="news-query-input" placeholder="Ej: Impacto de la inflación en el oro (XAUUSD)" class="flex-grow p-3 rounded bg-white border border-gray-300 text-gray-800 focus:ring-blue-500 focus:border-blue-500">
-                    <button id="news-search-button" onclick="handleNewsSearch()" class="px-6 py-3 accent-bg hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200 flex items-center justify-center">
+                    <input type="text" id="news-query-input" placeholder="Ej: Impacto de la inflación en el oro (XAUUSD)" class="flex-grow p-3 rounded bg-white border border-gray-300 text-gray-800 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                    <button id="news-search-button" onclick="handleNewsSearch()" class="w-full sm:w-auto px-6 py-3 accent-bg hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200 flex items-center justify-center text-sm">
                         Buscar Noticias
                     </button>
                 </div>
@@ -645,11 +668,11 @@
                 <!-- Indicador de Carga -->
                 <div id="news-loading-indicator" class="hidden flex items-center justify-center p-8 bg-gray-50 rounded-lg">
                     <div class="loading-spinner mr-3"></div>
-                    <span class="text-lg text-gray-500">Analizando el mercado global... (Esto puede tardar unos segundos)</span>
+                    <span class="text-sm sm:text-lg text-gray-500">Analizando el mercado global... (Esto puede tardar unos segundos)</span>
                 </div>
 
                 <!-- Resultados de Noticias -->
-                <div id="ai-news-results" class="card p-6 min-h-[150px] border-l-4 accent-border-color">
+                <div id="ai-news-results" class="card p-6 min-h-[150px] border-l-4 accent-border-color text-sm">
                     <p class="text-gray-500 italic">Introduce un tema de trading o macroeconomía para generar una sinopsis.</p>
                 </div>
             </div>
@@ -676,8 +699,8 @@
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h3 class="font-semibold text-lg text-gray-800 hover:text-blue-600 transition duration-150">Análisis Estructural Avanzado (SMC)</h3>
-                                <p class="text-sm text-gray-500 mt-1">Duración: 25 min | Publicado: Hace 3 días</p>
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">Análisis Estructural Avanzado (SMC)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 25 min | Publicado: Hace 3 días</p>
                             </div>
                         </a>
                     </div>
@@ -693,8 +716,8 @@
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h3 class="font-semibold text-lg text-gray-800 hover:text-blue-600 transition duration-150">Guía Definitiva de Backtesting Efectivo</h3>
-                                <p class="text-sm text-gray-500 mt-1">Duración: 45 min | Publicado: Hace 1 semana</p>
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">Guía Definitiva de Backtesting Efectivo</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 45 min | Publicado: Hace 1 semana</p>
                             </div>
                         </a>
                     </div>
@@ -710,8 +733,8 @@
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h3 class="font-semibold text-lg text-gray-800 hover:text-blue-600 transition duration-150">La Psicología Detrás de la Pérdida y el Miedo</h3>
-                                <p class="text-sm text-gray-500 mt-1">Duración: 15 min | Publicado: Hace 2 semanas</p>
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">La Psicología Detrás de la Pérdida y el Miedo</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 15 min | Publicado: Hace 2 semanas</p>
                             </div>
                         </a>
                     </div>
@@ -727,8 +750,8 @@
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h3 class="font-semibold text-lg text-gray-800 hover:text-blue-600 transition duration-150">Cálculo Preciso de Lote y Stop Loss Dinámico</h3>
-                                <p class="text-sm text-gray-500 mt-1">Duración: 30 min | Publicado: Hace 1 mes</p>
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">Cálculo Preciso de Lote y Stop Loss Dinámico</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 30 min | Publicado: Hace 1 mes</p>
                             </div>
                         </a>
                     </div>
@@ -840,8 +863,8 @@
                 "withdateranges": true,
                 "studies": ["RSI@tv-basic"],
                 "show_popup_button": true,
-                "popup_width": "1000",
-                "popup_height": "650",
+                "popup_width": "100%", // Ajuste para responsive
+                "popup_height": "100%", // Ajuste para responsive
                 "support_host": "https://www.tradingview.com"
             });
             
@@ -990,13 +1013,13 @@
                     
                     // Renderizar el resultado. 'whitespace-pre-wrap' es CLAVE para respetar los \n\n
                     let newsHtml = `
-                        <h3 class="card-title text-gray-800 mb-4">Sinopsis para: ${queryText}</h3>
-                        <p class="text-gray-600 whitespace-pre-wrap">${text}</p>
+                        <h3 class="card-title text-gray-800 mb-4 text-base sm:text-lg">Sinopsis para: ${queryText}</h3>
+                        <p class="text-gray-600 whitespace-pre-wrap text-sm">${text}</p>
                     `;
                     
                     if (sources.length > 0) {
                         newsHtml += '<div class="mt-6 pt-4 border-t border-gray-200">';
-                        newsHtml += '<h4 class="text-sm font-semibold text-gray-500 mb-2">Fuentes Citadas:</h4>';
+                        newsHtml += '<h4 class="text-xs font-semibold text-gray-500 mb-2">Fuentes Citadas:</h4>';
                         sources.forEach(source => {
                             newsHtml += `<a href="${source.uri}" target="_blank" class="block text-xs accent-color hover:underline">${source.title}</a>`;
                         });
