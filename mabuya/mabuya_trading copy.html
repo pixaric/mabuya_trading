@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mabuya Trading - El Arte de la Consistencia</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de la fuente Inter y estilos personalizados (Tema Claro y Moderno) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Fondo muy claro/blanco */
+            color: #1f2937; /* Texto oscuro */
+        }
+        /* Estilos de Pestañas y Contenedores */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        
+        .header-container {
+            /* Altura más corta, fondo con imagen y redondeado */
+            padding: 1rem 1rem 0.5rem; 
+            max-width: 1400px;
+            margin: 0 auto 1rem; /* Añadir margen inferior */
+            
+            /* IMAGEN DE FONDO MÁS PREMIUM */
+            background-size: cover;
+            background-position: center;
+            background-image: url('https://placehold.co/1400x100/1e293b/94a3b8?text=PREMIUM+ANALYSIS+DASHBOARD'); 
+            border-radius: 0.75rem; 
+            color: white; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        .main {
+            padding: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .panel-inner {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: #ffffff; /* Fondo de sección blanco */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra suave */
+        }
+
+        /* Colores de Acento (Principal: Azul Vibrante) */
+        .accent-color { color: #3b82f6; /* Blue-500 */ }
+        .accent-bg { background-color: #3b82f6; }
+        .accent-border-color { border-left-color: #3b82f6; }
+
+        /* Títulos y Encabezados - Optimizados para Móviles */
+        .main-title {
+            font-size: 2.25rem; /* text-3xl en móvil */
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        @media (min-width: 640px) {
+            .main-title { font-size: 3rem; } /* text-5xl en SM+ */
+        }
+
+        .main-slogan {
+            font-size: 1rem; /* text-base en móvil */
+            font-style: italic;
+            color: #d1d5db;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #ffffff33;
+            padding-bottom: 0.5rem;
+        }
+        @media (min-width: 640px) {
+             .main-slogan { font-size: 1.25rem; } /* text-xl en SM+ */
+        }
+
+        .panel-title {
+            font-size: 1.75rem; /* text-2xl en móvil */
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 640px) {
+            .panel-title { font-size: 2rem; } /* text-3xl en SM+ */
+        }
+        
+        .panel-lead {
+            font-size: 1rem; /* text-base en móvil */
+            margin-bottom: 1.5rem; /* Reducido para móvil */
+            color: #4b5563;
+        }
+        @media (min-width: 640px) {
+            .panel-lead { font-size: 1.125rem; } /* text-lg en SM+ */
+        }
+
+
+        /* Grid y Tarjetas */
+        .grid-2 {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .card {
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title, .topic-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px solid #3b82f633;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Estilos de Módulos de Aprendizaje y Checklist */
+        .topic-card {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f9fafb;
+            border-radius: 0.5rem;
+            border-left: 5px solid #3b82f6;
+        }
+
+        .bullet-list, .topic-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 0.875rem; /* text-sm en móvil */
+        }
+        @media (min-width: 640px) {
+            .bullet-list, .topic-list { font-size: 1rem; } /* text-base en SM+ */
+        }
+
+        .bullet-list li, .topic-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .bullet-list li::before {
+            content: '•';
+            color: #3b82f6;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1.5em;
+        }
+
+        .topic-list li::before {
+            content: '→';
+            color: #3b82f6;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1.5em;
+        }
+
+        .topic-example {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-left: 4px solid #f59e0b;
+            background-color: #f59e0b1a;
+            border-radius: 0.25rem;
+            color: #f59e0b;
+            font-style: italic;
+        }
+        
+        /* Estilos de Navegación */
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding: 0 0.5rem; /* Padding reducido en móvil */
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: auto;
+            background-color: #ffffff;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-button {
+            padding: 0.75rem 1rem; /* Padding horizontal reducido en móvil */
+            cursor: pointer;
+            color: #6b7280;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-size: 0.875rem; /* text-sm para pestañas */
+        }
+
+        .tab-button:hover {
+            color: #1f2937;
+        }
+
+        .tab-button.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* Inputs */
+        input[type="text"], textarea, input[type="number"] {
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #1f2937;
+        }
+
+        /* Estilo para el indicador de carga */
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Estilos para display de resultados de calculadora */
+        .result-display {
+            background-color: #f3f4f6;
+            color: #1f2937;
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            font-weight: 600;
+            text-align: right;
+            border: 1px solid #e5e7eb;
+        }
+        
+        /* Estilos de la tabla de seguimiento */
+        .watchlist-table th {
+            background-color: #eff6ff;
+            color: #1e40af;
+            padding: 0.5rem 0.25rem; /* Reducido en móvil */
+            font-size: 0.65rem; /* Más pequeño para que quepa */
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: left;
+        }
+
+        .watchlist-table td {
+            padding: 0.5rem 0.25rem; /* Reducido en móvil */
+            font-size: 0.75rem; /* text-sm */
+            color: #374151;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        /* Fix específico para el input del precio de venta */
+        #minSellPrice {
+            font-size: 0.875rem; /* text-sm */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor para Alertas Personalizadas (Reemplaza alert()) -->
+    <div id="custom-alert" class="fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transition-transform duration-300 transform translate-x-full"></div>
+
+    <!-- Título y Eslogan (Centrado con Logo M y Fondo de Imagen) -->
+    <header class="header-container text-center">
+        <!-- Overlay sutil para mejorar la legibilidad del texto sobre la imagen -->
+        <div class="bg-black bg-opacity-30 p-4 rounded-lg">
+            <div class="flex flex-col items-center justify-center mb-2">
+                <!-- Logo: M dentro de un círculo -->
+                <div class="w-12 h-12 accent-bg rounded-full flex items-center justify-center mb-2 shadow-xl">
+                    <svg class="w-7 h-7 text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Path que representa una M estilizada -->
+                        <path d="M15 80 L50 20 L85 80"/>
+                    </svg>
+                </div>
+                <h1 class="main-title">Mabuya Trading</h1>
+            </div>
+            <p class="main-slogan">El Arte de la Consistencia en los Mercados Financieros.</p>
+        </div>
+    </header>
+
+    <!-- Navegación de Pestañas -->
+    <nav class="nav-tabs shadow-sm">
+        <button class="tab-button active" data-tab="inicio">Inicio</button>
+        <button class="tab-button" data-tab="academia">Academia</button>
+        <button class="tab-button" data-tab="noticias-ia">Noticias IA</button>
+        <button class="tab-button" data-tab="videos">Videos</button>
+        <button class="tab-button" data-tab="eventos">Eventos Clave</button>
+    </nav>
+
+    <!-- Contenido Principal de las Pestañas -->
+    <main class="main">
+        
+        <!-- Pestaña 1: INICIO (Gráfico de TradingView y Enlaces) -->
+        <div id="inicio" class="tab-panel active">
+            <div class="panel-inner">
+                <h1 class="panel-title accent-color">Dashboard de Activos e Información</h1>
+                <p class="panel-lead">
+                    Visualiza gráficos en tiempo real con TradingView y accede a tus herramientas de análisis.
+                </p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Columna Principal: Gráfico, Lista de Seguimiento y Ticker (2/3 de ancho) -->
+                    <div class="lg:col-span-2 space-y-6">
+                        
+                        <!-- Tarjeta de Gráfico y Ticker -->
+                        <div class="card p-0">
+                            <!-- Header del Gráfico con Ticker Actual -->
+                            <div class="p-4 flex flex-col sm:flex-row justify-between items-center border-b border-gray-100">
+                                <h2 class="text-lg sm:text-xl font-semibold text-gray-800">Gráfico de Activo: <span id="current-ticker" class="accent-color">EURUSD</span></h2>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-2 sm:mt-0">Estado: <span class="text-xs">Sesión de Análisis Abierta</span></p>
+                            </div>
+                            
+                            <!-- Área de Gráfico (TradingView Widget) -->
+                            <div id="chart-widget-container" class="w-full" style="height:450px;">
+                                <!-- El widget se inyectará aquí con JavaScript -->
+                            </div>
+                            
+                            <!-- Selector de Ticker (Responsive: vertical en móvil, horizontal en sm+) -->
+                            <div class="p-4 flex flex-col sm:flex-row gap-3 border-t border-gray-100">
+                                <input type="text" id="ticker-input" placeholder="Ej: BTCUSD, XAUUSD, TSLA" value="EURUSD" 
+                                    class="w-full p-3 rounded bg-white border border-gray-300 text-gray-800 focus:ring-blue-500 focus:border-blue-500 uppercase text-sm"
+                                >
+                                <!-- Se añade w-full para que el botón ocupe todo el ancho en móvil -->
+                                <button onclick="updateTicker()" class="w-full sm:w-auto px-6 py-3 accent-bg hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200 whitespace-nowrap text-sm">
+                                    Cargar Ticker
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- NUEVA TARJETA: Lista de Seguimiento de Activos -->
+                        <div class="card border-l-4 border-purple-500">
+                            <h2 class="card-title text-purple-600">📊 Lista de Seguimiento Personalizada</h2>
+                            <p class="text-sm text-gray-600 mb-4">Activos de alto interés y sus métricas clave (Datos estáticos de ejemplo).</p>
+                            
+                            <!-- Tabla Responsive con Scroll Horizontal -->
+                            <div class="overflow-x-auto">
+                                <table class="watchlist-table min-w-full divide-y divide-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th>Activo</th>
+                                            <th class="text-center">Precio Actual</th>
+                                            <th class="text-right">Market Cap</th>
+                                            <th class="text-center">Riesgo/Recomp. (LRECOM)</th>
+                                            <th class="text-right">Target Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <!-- Activo 1: BTC/USD -->
+                                        <tr>
+                                            <td class="font-semibold">BTCUSD</td>
+                                            <td class="text-center text-green-600 font-medium">$68,500.25</td>
+                                            <td class="text-right text-gray-900">$1.35T</td>
+                                            <td class="text-center text-blue-600">1:3.5</td>
+                                            <td class="text-right text-green-600 font-bold">$75,000.00</td>
+                                        </tr>
+                                        <!-- Activo 2: EUR/USD -->
+                                        <tr>
+                                            <td class="font-semibold">EURUSD</td>
+                                            <td class="text-center text-red-600 font-medium">$1.0725</td>
+                                            <td class="text-right text-gray-900">N/A (FX)</td>
+                                            <td class="text-center text-blue-600">1:2.0</td>
+                                            <td class="text-right text-red-600 font-bold">$1.0600</td>
+                                        </tr>
+                                        <!-- Activo 3: TSLA -->
+                                        <tr>
+                                            <td class="font-semibold">TSLA</td>
+                                            <td class="text-center text-green-600 font-medium">$175.50</td>
+                                            <td class="text-right text-gray-900">$560B</td>
+                                            <td class="text-center text-blue-600">1:4.0</td>
+                                            <td class="text-right text-green-600 font-bold">$195.00</td>
+                                        </tr>
+                                        <!-- Activo 4: XAUUSD (Oro) -->
+                                        <tr>
+                                            <td class="font-semibold">XAUUSD</td>
+                                            <td class="text-center text-green-600 font-medium">$2,320.10</td>
+                                            <td class="text-right text-gray-900">N/A (Commodity)</td>
+                                            <td class="text-center text-blue-600">1:3.0</td>
+                                            <td class="text-right text-green-600 font-bold">$2,380.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <p class="mt-4 text-xs text-gray-500 italic">
+                                LRECOM = Long-term Risk/Reward (Riesgo/Recompensa a Largo Plazo). Estos datos son solo de ejemplo.
+                            </p>
+                        </div>
+                        <!-- FIN LISTA DE SEGUIMIENTO -->
+
+                        <!-- Tarjeta de Checklist Diario -->
+                        <div class="card border-l-4 border-green-500">
+                            <h2 class="card-title text-green-600">✅ Checklist de Análisis Diario</h2>
+                            <p class="text-sm text-gray-600 mb-4">Pasos esenciales antes de ejecutar cualquier operación. (Recuerda usar la Pestaña de Eventos)</p>
+                            <div class="space-y-3 text-sm text-gray-700">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                                    <span class="ml-3 font-medium">1. Revisar Eventos Clave (Impacto 3x).</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                                    <span class="ml-3 font-medium">2. Determinar la Dirección (Bias) de la Sesión (D1/H4).</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                                    <span class="ml-3 font-medium">3. Marcar Zonas de Liquidez y Oferta/Demanda Institucional.</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                                    <span class="ml-3 font-medium">4. Calcular el Riesgo Máximo y el tamaño de Lote.</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                                    <span class="ml-3 font-medium">5. Esperar la confirmación del Setup en M1/M5.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna Lateral: Enlaces y Calculadoras (1/3 de ancho) -->
+                    <div class="lg:col-span-1 space-y-6">
+                        <!-- Tarjeta de Enlaces Clave -->
+                        <div class="card border-l-4 border-green-500">
+                            <h2 class="card-title text-green-600">🔗 Enlaces Clave</h2>
+                            <p class="text-sm text-gray-600 mb-4">Herramientas esenciales para tu análisis fundamental y técnico.</p>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="https://www.investing.com/economic-calendar/" target="_blank" class="font-medium accent-color hover:underline">Calendario Económico (Investing)</a></li>
+                                <li><a href="https://finance.yahoo.com/" target="_blank" class="font-medium accent-color hover:underline">Cotizaciones y Noticias (Yahoo Finance)</a></li>
+                                <li><a href="https://finviz.com/screener.ashx" target="_blank" class="font-medium accent-color hover:underline">Screener de Acciones (Finviz)</a></li>
+                                <li><a href="https://www.tradingview.com/markets/" target="_blank" class="font-medium accent-color hover:underline">Mapas de Mercado (TradingView)</a></li>
+                                <li><a href="https://www.forexfactory.com/" target="_blank" class="font-medium accent-color hover:underline">Noticias Forex (Forex Factory)</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- CALCULADORA 1: Precio Objetivo (Margen/Venta) -->
+                        <div class="card p-6 border-l-4 border-yellow-500">
+                            <h2 class="card-title text-yellow-600">Calculadora de Precio Objetivo</h2>
+                            <p class="text-sm text-gray-600 mb-4">Calcula el precio mínimo de venta con un margen de ganancia deseado.</p>
+
+                            <div class="space-y-4">
+                                <!-- Input Compra (Precio de Costo) -->
+                                <div>
+                                    <label for="compraPrice" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Compra (Costo)
+                                    </label>
+                                    <div class="mt-1 relative rounded-md shadow-sm">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <span class="text-gray-500 text-sm">$</span>
+                                        </div>
+                                        <input type="number" id="compraPrice" name="compraPrice" step="0.01" value="100.00"
+                                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-3 py-2 text-sm border-gray-300 rounded-md"
+                                            placeholder="0.00" oninput="actualizarCalculadoras()">
+                                    </div>
+                                </div>
+
+                                <!-- Input Porcentaje (Margen) -->
+                                <div>
+                                    <label for="profitPercent" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Porciento (Margen)
+                                    </label>
+                                    <div class="mt-1 relative rounded-md shadow-sm">
+                                        <input type="number" id="profitPercent" name="profitPercent" value="25"
+                                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 pr-7 py-2 text-sm border-gray-300 rounded-md"
+                                            placeholder="0" oninput="actualizarCalculadoras()">
+                                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                            <span class="text-gray-500 text-sm">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Output Precio Mínimo de Venta -->
+                                <div>
+                                    <label for="minSellPrice" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Venta (Precio Final)
+                                    </label>
+                                    <div class="mt-1 relative rounded-md shadow-sm">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <span class="text-green-600 text-sm font-bold">$</span>
+                                        </div>
+                                        <input type="text" id="minSellPrice" name="minSellPrice" readonly
+                                            class="block w-full pl-7 pr-3 py-2 text-sm bg-green-50 text-green-800 font-bold border border-green-300 rounded-md cursor-default"
+                                            value="0.00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FIN CALCULADORA 1 -->
+                        
+                        <!-- CALCULADORA 2: Incremento de Posición (Promedio) -->
+                        <div class="card p-6 border-l-4 border-blue-500">
+                            <h2 class="card-title text-blue-600">Calculadora de Posición Promedio</h2>
+                            <p class="text-sm text-gray-600 mb-4">Refuerza hasta 3 posiciones para calcular el precio promedio.</p>
+
+                            <!-- Títulos de Columna -->
+                            <div class="grid grid-cols-4 gap-2 text-xs font-semibold text-gray-600 uppercase mb-3 text-center">
+                                <div>Precio</div>
+                                <div>Cantidad Activos</div>
+                                <div>Total Invertido</div>
+                            </div>
+                            
+                            <!-- Posición 1 -->
+                            <div class="grid grid-cols-4 gap-2 items-center mb-3">
+                                <div class="text-sm font-medium text-gray-700">Compra 1</div>
+                                <input type="number" id="price1" oninput="actualizarCalculadoras()" placeholder="Precio" class="text-right p-2 text-sm">
+                                <input type="number" id="quantity1" oninput="actualizarCalculadoras()" placeholder="Cantidad" class="text-right p-2 text-sm">
+                                <div id="total1" class="result-display text-right text-sm">0.00</div>
+                            </div>
+
+                            <!-- Posición 2 -->
+                            <div class="grid grid-cols-4 gap-2 items-center mb-3">
+                                <div class="text-sm font-medium text-gray-700">Compra 2</div>
+                                <input type="number" id="price2" oninput="actualizarCalculadoras()" placeholder="Precio" class="text-right p-2 text-sm">
+                                <input type="number" id="quantity2" oninput="actualizarCalculadoras()" placeholder="Cantidad" class="text-right p-2 text-sm">
+                                <div id="total2" class="result-display text-right text-sm">0.00</div>
+                            </div>
+
+                            <!-- Posición 3 -->
+                            <div class="grid grid-cols-4 gap-2 items-center mb-6">
+                                <div class="text-sm font-medium text-gray-700">Compra 3</div>
+                                <input type="number" id="price3" oninput="actualizarCalculadoras()" placeholder="Precio" class="text-right p-2 text-sm">
+                                <input type="number" id="quantity3" oninput="actualizarCalculadoras()" placeholder="Cantidad" class="text-right p-2 text-sm">
+                                <div id="total3" class="result-display text-right text-sm">0.00</div>
+                            </div>
+
+                            <div class="border-t border-gray-200 pt-6">
+                                <h3 class="text-base font-semibold text-gray-800 mb-4">Resumen de Posición</h3>
+                                
+                                <!-- Resultado: Cantidad Total de Activos -->
+                                <div class="grid grid-cols-2 gap-4 items-center mb-4">
+                                    <p class="text-sm text-gray-600">Total Activos (Cantidad):</p>
+                                    <div id="totalQuantity" class="result-display text-right text-blue-600 text-sm">0</div>
+                                </div>
+
+                                <!-- Resultado: Total Global Invertido -->
+                                <div class="grid grid-cols-2 gap-4 items-center mb-4">
+                                    <p class="text-sm text-gray-600">Total Invertido (Monto):</p>
+                                    <div id="totalInvestment" class="result-display text-right text-blue-600 text-sm">0.00</div>
+                                </div>
+
+                                <!-- Resultado: Precio Promedio -->
+                                <div class="grid grid-cols-2 gap-4 items-center">
+                                    <p class="text-sm text-gray-600 font-bold">Precio Promedio (P.P.):</p>
+                                    <div id="averagePrice" class="result-display text-right text-green-600 text-base">0.00</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FIN CALCULADORA 2 -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Pestaña INICIO -->
+
+        <!-- Pestaña 2: ACADEMIA (Contenido de Módulos) -->
+        <div id="academia" class="tab-panel">
+            <div class="panel-inner">
+                <h1 class="panel-title accent-color">Academia: Ruta de Maestría en Trading</h1>
+                <p class="panel-lead">
+                    Espacio dedicado al estudio disciplinado del mercado financiero: estructura, flujo de órdenes, gestión de riesgo y psicología del trading.
+                </p>
+                
+                <div class="learning-modules grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+                    
+                    <article class="topic-card" id="topic-fundamentos">
+                        <h2 class="topic-title">1. 🌎 Fundamentos de Mercado y Tipología de Activos</h2>
+                        <div class="topic-content">
+                            <p class="text-sm sm:text-base">
+                                Comprender la mecánica del mercado es el primer paso. Aquí se establecen los cimientos de cómo se mueve el precio y dónde residen las principales oportunidades de capital.
+                            </p>
+                            <ul class="topic-list">
+                                <li>Mecánica Esencial: Definición de Liquidez (el volumen disponible) y Volatilidad (la magnitud del movimiento).</li>
+                                <li>Herramientas de Capital: Análisis profundo de Apalancamiento (la herramienta para potenciar el capital) y Margen (la garantía requerida para mantener posiciones).</li>
+                                <li>Clasificación de Activos: Forex, Índices Bursátiles y Criptomonedas.</li>
+                            </ul>
+                            <p class="topic-example text-sm sm:text-base">
+                                Concepto Clave: Un trader debe dominar los Horarios de Sesiones (Asia, Londres, Nueva York) para posicionarse estratégicamente durante los picos de actividad institucional.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="topic-card" id="topic-estructura">
+                        <h2 class="topic-title">2. 🔍 Estructura de Precio, Zonas de Oferta y Demanda (Smart Money Concepts)</h2>
+                        <div class="topic-content">
+                            <p class="text-sm sm:text-base">
+                                La estructura es el lenguaje gráfico del mercado. Aprenderás a "leer" la intención de los grandes participantes.
+                            </p>
+                            <!-- Imagen de ejemplo para la estructura -->
+                            <div class="image-wrapper text-center my-4">
+                                
+                            </div>
+
+                            <ul class="topic-list">
+                                <li>La Tesis Estructural: Identificación de una tendencia alcista (Higher Highs y Higher Lows).</li>
+                                <li>Cambio Estructural (Break of Structure): Reconocer cuándo la secuencia se rompe.</li>
+                                <li>Zonas de Valor Institucional: Identificación de Zonas de Demanda y Oferta.</li>
+                                <li>El Imán de la Liquidez: Entender que la Liquidez es el objetivo principal del precio.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="topic-card" id="topic-sistemas">
+                        <h2 class="topic-title">3. 🧪 Diseño de Sistemas y Validación Estadística</h2>
+                        <div class="topic-content">
+                            <p class="text-sm sm:text-base">
+                                Un trader profesional opera con un Sistema de Trading que proporciona una ventaja estadística clara y medible en el tiempo.
+                            </p>
+                            <ul class="topic-list">
+                                <li>El Setup Objetivo: Creación de un conjunto de reglas inmutables.</li>
+                                <li>Backtesting (Prueba Histórica): Simular tu estrategia con datos pasados.</li>
+                                <li>Métrica de Rentabilidad: Tasa de Acierto y Ratio Riesgo-Recompensa (R/R).</li>
+                            </ul>
+                            <p class="topic-example text-sm sm:text-base">
+                                **Métrica crucial:** Si tu sistema tiene un R/R de 1:2 y una tasa de acierto del 50%, tu sistema es rentable a largo plazo.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="topic-card" id="topic-riesgo">
+                        <h2 class="topic-title">4. 🛡️ Gestión de Riesgo y el Plan de Trading Inquebrantable</h2>
+                        <div class="topic-content">
+                            <p class="text-sm sm:text-base">
+                                Este es el módulo de la Supervivencia. La gestión de riesgo es la única variable que está $100\%$ bajo tu control.
+                            </p>
+                            <ul class="topic-list">
+                                <li>Regla de Oro (El 1%): Nunca arriesgar más del $1\%$ del capital total en una operación.</li>
+                                <li>Cálculo Preciso de Posición: Ajustar el tamaño del lote.</li>
+                                <li>El Plan de Trading Integral: Documento único que fusiona sistema, riesgo y psicología.</li>
+                            </ul>
+                        </div>
+                    </article>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Fin Pestaña ACADEMIA -->
+
+        <!-- Pestaña 3: NOTICIAS IA (Generación de Texto con Formato) -->
+        <div id="noticias-ia" class="tab-panel">
+            <div class="panel-inner">
+                <h1 class="panel-title accent-color">Noticias IA: Sinopsis de Mercado con Google Search</h1>
+                <p class="panel-lead">
+                    Obtén un resumen de noticias de alto impacto en tiempo real. La sinopsis está formateada con párrafos separados por espacios.
+                </p>
+
+                <!-- Área de Búsqueda -->
+                <div class="mb-6 flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="news-query-input" placeholder="Ej: Impacto de la inflación en el oro (XAUUSD)" class="flex-grow p-3 rounded bg-white border border-gray-300 text-gray-800 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                    <button id="news-search-button" onclick="handleNewsSearch()" class="w-full sm:w-auto px-6 py-3 accent-bg hover:bg-blue-600 text-white font-semibold rounded-md transition duration-200 flex items-center justify-center text-sm">
+                        Buscar Noticias
+                    </button>
+                </div>
+                
+                <!-- Indicador de Carga -->
+                <div id="news-loading-indicator" class="hidden flex items-center justify-center p-8 bg-gray-50 rounded-lg">
+                    <div class="loading-spinner mr-3"></div>
+                    <span class="text-sm sm:text-lg text-gray-500">Analizando el mercado global... (Esto puede tardar unos segundos)</span>
+                </div>
+
+                <!-- Resultados de Noticias -->
+                <div id="ai-news-results" class="card p-6 min-h-[150px] border-l-4 accent-border-color text-sm">
+                    <p class="text-gray-500 italic">Introduce un tema de trading o macroeconomía para generar una sinopsis.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Pestaña NOTICIAS IA -->
+
+        <!-- Pestaña 4: VIDEOS (Recursos Educativos) -->
+        <div id="videos" class="tab-panel">
+            <div class="panel-inner">
+                <h1 class="panel-title accent-color">Biblioteca de Videos Tutoriales</h1>
+                <p class="panel-lead">
+                    Acceso a grabaciones de sesiones en vivo y tutoriales sobre el uso de la plataforma y el análisis técnico avanzado de tu canal de YouTube.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Video Card 1 -->
+                    <div class="card p-0 overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <a href="https://www.youtube.com/watch?v=tutorial-estructura" target="_blank" class="block">
+                            <!-- Placeholder de Miniatura -->
+                            <div class="h-36 bg-gray-200 flex items-center justify-center relative">
+                                <img src="https://placehold.co/300x180/ef4444/ffffff?text=ESTRUCTURA+AVANZADA" alt="Miniatura de video 1" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M6 3l12 9-12 9V3z"/></svg>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">Análisis Estructural Avanzado (SMC)</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 25 min | Publicado: Hace 3 días</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Video Card 2 -->
+                    <div class="card p-0 overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <a href="https://www.youtube.com/watch?v=tutorial-backtesting" target="_blank" class="block">
+                            <!-- Placeholder de Miniatura -->
+                            <div class="h-36 bg-gray-200 flex items-center justify-center relative">
+                                <img src="https://placehold.co/300x180/f59e0b/ffffff?text=BACKTESTING+GUIA" alt="Miniatura de video 2" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M6 3l12 9-12 9V3z"/></svg>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">Guía Definitiva de Backtesting Efectivo</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 45 min | Publicado: Hace 1 semana</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Video Card 3 -->
+                    <div class="card p-0 overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <a href="https://www.youtube.com/watch?v=tutorial-psicologia" target="_blank" class="block">
+                            <!-- Placeholder de Miniatura -->
+                            <div class="h-36 bg-gray-200 flex items-center justify-center relative">
+                                <img src="https://placehold.co/300x180/10b981/ffffff?text=PSICOLOGIA+TRADING" alt="Miniatura de video 3" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M6 3l12 9-12 9V3z"/></svg>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">La Psicología Detrás de la Pérdida y el Miedo</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 15 min | Publicado: Hace 2 semanas</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Video Card 4 -->
+                    <div class="card p-0 overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                        <a href="https://www.youtube.com/watch?v=tutorial-gestion-riesgo" target="_blank" class="block">
+                            <!-- Placeholder de Miniatura -->
+                            <div class="h-36 bg-gray-200 flex items-center justify-center relative">
+                                <img src="https://placehold.co/300x180/3b82f6/ffffff?text=RIESGO+Y+LOTE" alt="Miniatura de video 4" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M6 3l12 9-12 9V3z"/></svg>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-base text-gray-800 hover:text-blue-600 transition duration-150">Cálculo Preciso de Lote y Stop Loss Dinámico</h3>
+                                <p class="text-xs text-gray-500 mt-1">Duración: 30 min | Publicado: Hace 1 mes</p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Fin Pestaña VIDEOS -->
+
+        <!-- Pestaña 5: EVENTOS CLAVE (Calendario Económico) -->
+        <div id="eventos" class="tab-panel">
+            <div class="panel-inner">
+                <h1 class="panel-title" style="color: #f59e0b;">Calendario de Eventos Clave</h1>
+                <p class="panel-lead">
+                    Mantente al día con los anuncios económicos de alto impacto que mueven el mercado (Noticias de "Alto Impacto").
+                </p>
+                
+                <div class="card p-6 border-l-4 border-red-500">
+                    <h2 class="card-title text-red-500">Próximos Anuncios Relevantes</h2>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center">
+                            <span class="text-xs font-semibold bg-red-600 px-2 py-1 rounded mr-3 text-white">3x</span>
+                            <span>**IPC (Índice de Precios al Consumidor) - US:** 📅 10 de Diciembre, 8:30 AM EST.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-xs font-semibold bg-red-600 px-2 py-1 rounded mr-3 text-white">3x</span>
+                            <span>**Decisión de Tasa de Interés (FED):** 📅 18 de Diciembre, 2:00 PM EST.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-xs font-semibold bg-orange-500 px-2 py-1 rounded mr-3 text-white">2x</span>
+                            <span>**PMI Manufacturero:** 📅 2 de Enero, 9:45 AM EST.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-xs font-semibold bg-orange-500 px-2 py-1 rounded mr-3 text-white">2x</span>
+                            <span>**Nóminas no Agrícolas (NFP):** 📅 5 de Enero, 8:30 AM EST.</span>
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-xs text-gray-500">
+                        Nota: Los eventos 3x (rojo) generan la mayor volatilidad. Evita operar 30 minutos antes y después de su publicación.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Pestaña EVENTOS CLAVE -->
+
+    </main>
+
+    <script>
+        // --- Lógica de Utilidad ---
+        function alertMessage(message, type = 'info') {
+            const alertBox = document.getElementById('custom-alert');
+            alertBox.textContent = message;
+            alertBox.className = 'fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transition-transform duration-300 transform translate-x-0';
+
+            if (type === 'success') {
+                alertBox.classList.add('bg-green-600', 'text-white');
+            } else if (type === 'error') {
+                alertBox.classList.add('bg-red-600', 'text-white');
+            } else {
+                alertBox.classList.add('bg-blue-600', 'text-white');
+            }
+
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                alertBox.classList.add('translate-x-full');
+            }, 5000);
+            alertBox.classList.remove('translate-x-full');
+        }
+
+        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return response;
+                    if (response.status === 429 && i < retries - 1) { // Too Many Requests
+                        await new Promise(resolve => setTimeout(resolve, delay * (2 ** i)));
+                        continue;
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay * (2 ** i)));
+                }
+            }
+        }
+
+        // --- Lógica de la Pestaña INICIO (Gráfico TradingView) ---
+
+        window.loadTradingViewWidget = function(symbol) {
+            const container = document.getElementById('chart-widget-container');
+            container.innerHTML = ''; // Limpiar el widget anterior
+            
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+            script.async = true;
+            
+            script.innerHTML = JSON.stringify({
+                "symbol": symbol,
+                "interval": "60",
+                "timezone": "America/New_York",
+                "theme": "light",
+                "style": "1",
+                "locale": "es",
+                "enable_publishing": false,
+                "allow_symbol_change": true,
+                "save_image": false,
+                "details": true,
+                "withdateranges": true,
+                "studies": ["RSI@tv-basic"],
+                "show_popup_button": true,
+                "popup_width": "100%", // Ajuste para responsive
+                "popup_height": "100%", // Ajuste para responsive
+                "support_host": "https://www.tradingview.com"
+            });
+            
+            container.appendChild(script);
+        };
+
+        window.updateTicker = function() {
+            const input = document.getElementById('ticker-input');
+            const currentTickerSpan = document.getElementById('current-ticker');
+            const newTicker = input.value.trim().toUpperCase();
+
+            if (newTicker) {
+                currentTickerSpan.textContent = newTicker;
+                window.loadTradingViewWidget(newTicker);
+                alertMessage(`Cargando gráfico para ${newTicker}...`, 'success');
+            } else {
+                alertMessage("Por favor, introduce un símbolo de activo válido.", 'error');
+            }
+        }
+
+        // --- Lógica de Calculadoras (Combinadas) ---
+
+        /**
+         * Función que llama a las dos calculadoras para actualizar todos los resultados.
+         */
+        window.actualizarCalculadoras = function() {
+            calcularPrecioObjetivo();
+            calcularPosicionPromedio();
+        }
+
+        /**
+         * Calcula el precio de Venta sumando el valor de Compra más el margen
+         * calculado por el Porcentaje. (Calculadora 1: Precio Objetivo)
+         */
+        function calcularPrecioObjetivo() {
+            const compraPriceInput = document.getElementById('compraPrice');
+            const profitPercentInput = document.getElementById('profitPercent');
+            const minSellPriceOutput = document.getElementById('minSellPrice');
+
+            const compraPrice = parseFloat(compraPriceInput.value) || 0;
+            const profitPercent = parseFloat(profitPercentInput.value) || 0;
+
+            const margen = (compraPrice * profitPercent) / 100;
+            const venta = compraPrice + margen;
+
+            if (isNaN(venta) || venta < 0) {
+                minSellPriceOutput.value = "0.00";
+            } else {
+                minSellPriceOutput.value = venta.toFixed(2);
+            }
+        }
+
+        /**
+         * Calcula el precio promedio de la posición de compra (Calculadora 2: Posición Promedio)
+         */
+        function calcularPosicionPromedio() {
+            let totalQuantity = 0;
+            let totalInvestment = 0;
+
+            // Iterar sobre las 3 posibles posiciones (Compra 1, 2, 3)
+            for (let i = 1; i <= 3; i++) {
+                const priceInput = document.getElementById(`price${i}`);
+                const quantityInput = document.getElementById(`quantity${i}`);
+                const totalDisplay = document.getElementById(`total${i}`);
+
+                const price = parseFloat(priceInput.value) || 0;
+                const quantity = parseFloat(quantityInput.value) || 0;
+                const total = price * quantity;
+
+                // Actualizar total individual y acumular globales
+                totalDisplay.textContent = total.toFixed(2);
+                
+                totalQuantity += quantity;
+                totalInvestment += total;
+            }
+
+            let averagePrice = 0;
+            if (totalQuantity > 0) {
+                averagePrice = totalInvestment / totalQuantity;
+            }
+
+            // Actualizar resultados globales
+            document.getElementById('totalQuantity').textContent = totalQuantity.toFixed(0);
+            document.getElementById('totalInvestment').textContent = totalInvestment.toFixed(2);
+            document.getElementById('averagePrice').textContent = averagePrice.toFixed(4); // Usar 4 decimales para mayor precisión
+        }
+
+        // --- Lógica de Noticias IA (Gemini API) ---
+
+        window.handleNewsSearch = function() {
+            const queryText = document.getElementById('news-query-input').value.trim();
+            fetchFilteredNews(queryText);
+        }
+
+        async function fetchFilteredNews(queryText) {
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const searchButton = document.getElementById('news-search-button');
+            const newsContainer = document.getElementById('ai-news-results');
+            const loadingIndicator = document.getElementById('news-loading-indicator');
+
+            if (!queryText) {
+                alertMessage("Por favor, introduce un tema de búsqueda.", 'error');
+                return;
+            }
+
+            loadingIndicator.classList.remove('hidden');
+            searchButton.disabled = true;
+            newsContainer.innerHTML = '';
+            
+            const systemPrompt = `Eres un analista de mercado financiero de élite. Proporciona una sinopsis concisa y profesional de las últimas noticias sobre el tema solicitado. Tu respuesta DEBE ESTAR FORMATEADA usando saltos de línea doble (\n\n) entre párrafos completos para asegurar una lectura fluida en el navegador. No uses encabezados ni listas. Solo texto continuo separado por párrafos vacíos.`;
+
+            const userQuery = `Busca y resume la situación actual y las noticias clave sobre: ${queryText}. Ensure the response is in Spanish.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            try {
+                const response = await fetchWithRetry(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    let sources = [];
+                    const groundingMetadata = candidate.groundingMetadata;
+
+                    if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                        sources = groundingMetadata.groundingAttributions
+                            .map(attribution => ({
+                                uri: attribution.web?.uri,
+                                title: attribution.web?.title,
+                            }))
+                            .filter(source => source.uri && source.title);
+                    }
+                    
+                    // Renderizar el resultado. 'whitespace-pre-wrap' es CLAVE para respetar los \n\n
+                    let newsHtml = `
+                        <h3 class="card-title text-gray-800 mb-4 text-base sm:text-lg">Sinopsis para: ${queryText}</h3>
+                        <p class="text-gray-600 whitespace-pre-wrap text-sm">${text}</p>
+                    `;
+                    
+                    if (sources.length > 0) {
+                        newsHtml += '<div class="mt-6 pt-4 border-t border-gray-200">';
+                        newsHtml += '<h4 class="text-xs font-semibold text-gray-500 mb-2">Fuentes Citadas:</h4>';
+                        sources.forEach(source => {
+                            newsHtml += `<a href="${source.uri}" target="_blank" class="block text-xs accent-color hover:underline">${source.title}</a>`;
+                        });
+                        newsHtml += '</div>';
+                    }
+                    
+                    newsContainer.innerHTML = newsHtml;
+                    alertMessage("Noticia generada con éxito.", 'success');
+
+                } else {
+                    newsContainer.innerHTML = '<p class="text-red-500">No se pudo generar la sinopsis. Inténtalo de nuevo o prueba una consulta diferente.</p>';
+                    alertMessage("Error en la respuesta del modelo.", 'error');
+                }
+
+            } catch (error) {
+                console.error("API Call Error:", error);
+                newsContainer.innerHTML = `<p class="text-red-500">Error al contactar al servicio de noticias: ${error.message}</p>`;
+                alertMessage(`Error de red o API: ${error.message}`, 'error');
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                searchButton.disabled = false;
+            }
+        }
+
+
+        // --- Lógica General de Pestañas y Arranque ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const panels = document.querySelectorAll('.tab-panel');
+
+            function activateTab(tabId) {
+                tabs.forEach(tab => tab.classList.remove('active'));
+                panels.forEach(panel => panel.classList.remove('active'));
+
+                const activeTabButton = document.querySelector(`[data-tab="${tabId}"]`);
+                const activePanel = document.getElementById(tabId);
+                
+                if (activeTabButton) activeTabButton.classList.add('active');
+                if (activePanel) activePanel.classList.add('active');
+
+                // Si la pestaña es 'inicio', forzar la actualización de las calculadoras
+                if (tabId === 'inicio') {
+                    // Los listeners ya están adjuntos en el HTML (oninput="actualizarCalculadoras()"),
+                    // solo necesitamos ejecutar la función al cargar la pestaña.
+                    actualizarCalculadoras(); 
+                }
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (event) => {
+                    const tabId = event.target.getAttribute('data-tab');
+                    activateTab(tabId);
+                });
+            });
+
+            // Cargar el widget de TradingView por defecto al inicio
+            window.loadTradingViewWidget('FX_IDC:EURUSD');
+
+            // Activar la pestaña inicial ("inicio") al cargar y configurar listeners
+            activateTab('inicio');
+        });
+    </script>
+</body>
+</html>
