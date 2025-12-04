@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Objetivo | Mabuya Trading Academy</title>
+    <!-- Carga de Tailwind CSS para estilos responsivos y rápidos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de Tailwind para usar el color principal y la fuente -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0a0a0a',
+                        'accent': '#06b6d4', // Cyan
+                        'secondary-accent': '#facc15', // Amber
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Estilo para el enlace activo */
+        .nav-link:hover, .nav-link.active-page {
+            color: #06b6d4; /* Cyan */
+            border-bottom: 2px solid #06b6d4;
+        }
+        /* Estilo personalizado para las cajas de contenido */
+        .content-card {
+            background-color: #1f2937; /* Dark Gray for cards */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+        }
+        /* Ajuste de altura de inputs para mejor densidad en móvil */
+        .input-compact {
+            padding-top: 0.625rem; /* p-2.5 */
+            padding-bottom: 0.625rem; /* p-2.5 */
+        }
+    </style>
+</head>
+<body class="bg-primary-dark">
+
+    <!-- BARRA DE NAVEGACIÓN (HEADER) - Enlaces externos a otros archivos -->
+    <header class="sticky top-0 z-50 bg-primary-dark/95 border-b border-gray-800 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="inicio.html" class="text-3xl font-extrabold text-accent tracking-widest">
+                        MABUYA
+                        <span class="text-secondary-accent text-lg block leading-none">Trading Academy</span>
+                    </a>
+                </div>
+                <!-- Menú de Navegación (Escritorio) -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="inicio.html" class="nav-link text-lg px-2 py-1 transition duration-300">Inicio</a>
+                    <a href="academia.html" class="nav-link text-lg px-2 py-1 transition duration-300">Academia</a>
+                    <a href="calculadora.html" class="nav-link active-page text-lg px-2 py-1 transition duration-300">Calculadora RR</a>
+                    <a href="videos.html" class="nav-link text-lg px-2 py-1 transition duration-300">Videos</a>
+                </nav>
+                <!-- Botón de Menú Móvil -->
+                <button id="menu-button" class="md:hidden p-2 text-white hover:text-accent focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-primary-dark/95 border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="inicio.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Inicio</a>
+                <a href="academia.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Academia</a>
+                <a href="calculadora.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Calculadora RR</a>
+                <a href="videos.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Videos</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: CALCULADORA DE PRECIO OBJETIVO POR PORCENTAJE -->
+        <section id="calculadora-objetivo" class="py-10 px-4 flex items-start justify-center">
+            <div class="max-w-xl mx-auto w-full"> 
+                <h2 class="text-3xl font-bold text-center mb-8 text-secondary-accent sm:text-4xl">Calculadora de Precio Objetivo (Ganancia %)</h2>
+                <div class="content-card p-6 rounded-xl sm:p-8">
+                    <p class="text-gray-300 mb-6 text-center text-sm sm:text-base">Calcula el precio de venta y la ganancia total para alcanzar un porcentaje objetivo, basado en el número de unidades.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 sm:gap-6 sm:mb-8">
+                        <!-- Campo 1: Precio de Compra/Entrada -->
+                        <div>
+                            <label for="entryPrice" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Precio de Compra (Entrada)</label>
+                            <input type="number" id="entryPrice" value="" step="0.01" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 100.00">
+                        </div>
+                        <!-- Campo 2: Porcentaje de Ganancia Deseado -->
+                        <div>
+                            <label for="percentage" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Porcentaje de Ganancia Deseado (%)</label>
+                            <input type="number" id="percentage" value="" step="0.1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 5">
+                        </div>
+                        <!-- Campo 3: Cantidad de Acciones/Unidades (Ocupa todo el ancho) -->
+                        <div class="md:col-span-2"> 
+                            <label for="numberOfUnits" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Cantidad de Acciones/Unidades</label>
+                            <input type="number" id="numberOfUnits" value="" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 10">
+                        </div>
+                    </div>
+                    
+                    <!-- Botón de Cálculo -->
+                    <button onclick="calculateTargetPrice()" class="w-full bg-accent text-primary-dark font-bold py-3 rounded-lg hover:bg-cyan-500 transition duration-300 transform hover:scale-[1.01]">
+                        Calcular Objetivo
+                    </button>
+
+                    <!-- Resultados: Fuentes de texto ajustadas (text-base y text-xl) -->
+                    <div id="results-objetivo" class="mt-6 pt-4 border-t border-gray-700 space-y-2 sm:mt-8 sm:pt-6 sm:space-y-3">
+                        <h3 class="text-lg font-semibold text-white mb-2 sm:text-xl">Resultados del Objetivo:</h3>
+                        <p class="text-base sm:text-lg">Precio de Venta (Objetivo): <span id="sellingPrice" class="font-bold text-accent">0.00</span> USD</p>
+                        <p class="text-base sm:text-lg">Cantidad Invertida: <span id="amountInvestedDisplay" class="font-bold text-gray-400">0.00</span> USD</p>
+                        <p class="text-base sm:text-lg">Ganancia Bruta Estimada: <span id="totalProfit" class="font-bold text-green-500">0.00</span> USD</p>
+                        <p class="text-xl pt-1 font-extrabold sm:text-2xl sm:pt-2">Retorno Total Estimado: <span id="totalReturn" class="text-secondary-accent">0.00</span> USD</p>
+                        <p id="riskWarning" class="text-red-400 text-xs mt-1 hidden sm:text-sm">⚠️ Por favor, ingresa valores numéricos válidos y positivos.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CALCULADORA DE PRECIO PROMEDIO -->
+        <section id="calculadora-promedio" class="py-10 px-4 flex items-start justify-center">
+            <div class="max-w-xl mx-auto w-full"> 
+                <h2 class="text-3xl font-bold text-center mb-8 text-secondary-accent sm:text-4xl">Calculadora de Precio Promedio (Aumento de Posición)</h2>
+                <div class="content-card p-6 rounded-xl sm:p-8">
+                    <p class="text-gray-300 mb-6 text-center text-sm sm:text-base">Calcula el precio promedio de tu posición después de realizar hasta tres compras.</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6 sm:gap-6 sm:mb-8">
+                        <!-- Compra 1 -->
+                        <div>
+                            <label for="price1" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Precio 1</label>
+                            <input type="number" id="price1" value="" step="0.01" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Precio de Compra">
+                        </div>
+                        <div>
+                            <label for="shares1" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Acciones 1</label>
+                            <input type="number" id="shares1" value="" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Cantidad">
+                        </div>
+
+                        <!-- Compra 2 -->
+                        <div>
+                            <label for="price2" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Precio 2</label>
+                            <input type="number" id="price2" value="" step="0.01" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Precio de Compra (Opcional)">
+                        </div>
+                        <div>
+                            <label for="shares2" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Acciones 2</label>
+                            <input type="number" id="shares2" value="" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Cantidad (Opcional)">
+                        </div>
+                        
+                        <!-- Compra 3 -->
+                        <div>
+                            <label for="price3" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Precio 3</label>
+                            <input type="number" id="price3" value="" step="0.01" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Precio de Compra (Opcional)">
+                        </div>
+                        <div>
+                            <label for="shares3" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Acciones 3</label>
+                            <input type="number" id="shares3" value="" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Cantidad (Opcional)">
+                        </div>
+                    </div>
+                    
+                    <!-- Botón de Cálculo -->
+                    <button onclick="calculateAveragePrice()" class="w-full bg-secondary-accent text-primary-dark font-bold py-3 rounded-lg hover:bg-amber-400 transition duration-300 transform hover:scale-[1.01]">
+                        Calcular Promedio
+                    </button>
+
+                    <!-- Resultados -->
+                    <div id="results-promedio" class="mt-6 pt-4 border-t border-gray-700 space-y-2 sm:mt-8 sm:pt-6 sm:space-y-3">
+                        <h3 class="text-lg font-semibold text-white mb-2 sm:text-xl">Resultados del Promedio:</h3>
+                        <p class="text-base sm:text-lg">Costo Total: <span id="totalCost" class="font-bold text-gray-400">0.00</span> USD</p>
+                        <p class="text-base sm:text-lg">Cantidad Total de Acciones: <span id="totalShares" class="font-bold text-accent">0</span> unidades</p>
+                        <p class="text-xl pt-1 font-extrabold sm:text-2xl sm:pt-2">Precio Promedio: <span id="averagePrice" class="text-secondary-accent">0.00</span> USD</p>
+                        <p id="avgWarning" class="text-red-400 text-xs mt-1 hidden sm:text-sm">⚠️ Por favor, ingresa al menos la Compra 1 con valores numéricos válidos y positivos.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CALCULADORA DE OPCIONES -->
+        <section id="calculadora-opciones" class="py-10 px-4 flex items-start justify-center">
+            <div class="max-w-xl mx-auto w-full"> 
+                <h2 class="text-3xl font-bold text-center mb-8 text-accent sm:text-4xl">Calculadora de Opciones (Objetivo de Retorno)</h2>
+                <div class="content-card p-6 rounded-xl sm:p-8">
+                    <p class="text-gray-300 mb-6 text-center text-sm sm:text-base">Calcula el precio de venta necesario y la ganancia neta para un porcentaje de retorno deseado en contratos de opciones (asumiendo 1 contrato = 100 acciones).</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6 sm:gap-6 sm:mb-8">
+                        <!-- Precio por Contrato (o prima) -->
+                        <div>
+                            <label for="optionsPrice" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Precio por Contrato (Prima)</label>
+                            <input type="number" id="optionsPrice" value="" step="0.01" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 2.50 USD">
+                        </div>
+                        <!-- Número de Contratos -->
+                        <div>
+                            <label for="optionsContracts" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Número de Contratos</label>
+                            <input type="number" id="optionsContracts" value="" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 10">
+                        </div>
+                        <!-- Porcentaje de Retorno Deseado (Positivo/Negativo) -->
+                        <div>
+                            <label for="optionsPercentage" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Porcentaje de Retorno Deseado (%)</label>
+                            <input type="number" id="optionsPercentage" value="" step="0.1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 20 o -10">
+                        </div>
+                        <!-- Comisión Total (Editable, por defecto 2) -->
+                        <div>
+                            <label for="optionsCommission" class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Comisión Total (Round Trip)</label>
+                            <input type="number" id="optionsCommission" value="2.00" step="0.01" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 2.00 USD">
+                        </div>
+                    </div>
+                    
+                    <!-- Botón de Cálculo -->
+                    <button onclick="calculateOptionsTarget()" class="w-full bg-accent text-primary-dark font-bold py-3 rounded-lg hover:bg-cyan-500 transition duration-300 transform hover:scale-[1.01]">
+                        Calcular Opciones
+                    </button>
+
+                    <!-- Resultados -->
+                    <div id="results-opciones" class="mt-6 pt-4 border-t border-gray-700 space-y-2 sm:mt-8 sm:pt-6 sm:space-y-3">
+                        <h3 class="text-lg font-semibold text-white mb-2 sm:text-xl">Resultados del Cálculo de Opciones:</h3>
+                        <p class="text-base sm:text-lg">Costo Total de Entrada: <span id="optionsTotalCost" class="font-bold text-gray-400">0.00</span> USD</p>
+                        <p class="text-base sm:text-lg">Ganancia Bruta (sin comisión): <span id="optionsGrossProfit" class="font-bold text-green-500">0.00</span> USD</p>
+                        <p class="text-xl pt-1 font-extrabold sm:text-2xl sm:pt-2">Ganancia Neta (Retorno): <span id="optionsNetProfit" class="text-secondary-accent">0.00</span> USD</p>
+                        <p class="text-base sm:text-lg">Precio de Venta Objetivo (Prima): <span id="optionsSalePrice" class="font-bold text-accent">0.00</span> USD</p>
+                        <p id="optionsWarning" class="text-red-400 text-xs mt-1 hidden sm:text-sm">⚠️ Por favor, ingresa valores numéricos válidos. Precio debe ser ≥ 0 y Contratos debe ser > 0.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary-dark border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; 2024 Mabuya Trading Academy. Todos los derechos reservados.</p>
+            <div class="mt-4 space-x-4 text-sm">
+                <a href="#" class="hover:text-accent transition duration-300">Términos y Condiciones</a>
+                <span class="text-gray-600">|</span>
+                <a href="#" class="hover:text-accent transition duration-300">Política de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT: Lógica de las Calculadoras y Navegación Móvil -->
+    <script>
+        // --- Lógica de la Navegación Móvil ---
+        document.getElementById('menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Opciones de formato de moneda
+        const formatOptionsPrice = { minimumFractionDigits: 2, maximumFractionDigits: 4 };
+        const formatOptionsCurrency = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+        
+        /**
+         * CALCULADORA 1: Precio Objetivo (Ganancia %)
+         */
+        function calculateTargetPrice() {
+            // Obtener valores de los campos
+            const entryPrice = parseFloat(document.getElementById('entryPrice').value);
+            const percentage = parseFloat(document.getElementById('percentage').value);
+            const numberOfUnits = parseFloat(document.getElementById('numberOfUnits').value);
+
+            // Calcular Cantidad Invertida: Precio Compra * Cantidad de Unidades
+            const amountInvested = entryPrice * numberOfUnits; 
+
+            const sellingPriceEl = document.getElementById('sellingPrice');
+            const amountInvestedDisplayEl = document.getElementById('amountInvestedDisplay');
+            const totalProfitEl = document.getElementById('totalProfit');
+            const totalReturnEl = document.getElementById('totalReturn');
+            const riskWarningEl = document.getElementById('riskWarning');
+
+            // Resetear resultados
+            sellingPriceEl.textContent = '0.00';
+            amountInvestedDisplayEl.textContent = '0.00';
+            totalProfitEl.textContent = '0.00';
+            totalReturnEl.textContent = '0.00';
+            riskWarningEl.classList.add('hidden');
+            riskWarningEl.textContent = "⚠️ Por favor, ingresa valores numéricos válidos y positivos.";
+
+
+            // Validar que los campos sean números válidos (NaN cuando están vacíos) y que no sean negativos.
+            if (isNaN(entryPrice) || isNaN(percentage) || isNaN(numberOfUnits) || entryPrice < 0 || numberOfUnits < 0) {
+                riskWarningEl.classList.remove('hidden');
+                return;
+            }
+            
+            // Cálculos
+            const factor = 1 + (percentage / 100);
+            
+            // 1. Precio de Venta (Objetivo)
+            const sellingPrice = entryPrice * factor;
+
+            // 2. Ganancia Bruta Estimada
+            const totalProfit = amountInvested * (percentage / 100);
+
+            // 3. Retorno Total Estimado (Capital + Ganancia)
+            const totalReturn = amountInvested + totalProfit;
+
+
+            // Mostrar resultados
+            sellingPriceEl.textContent = sellingPrice.toLocaleString('es-ES', formatOptionsPrice);
+            amountInvestedDisplayEl.textContent = amountInvested.toLocaleString('es-ES', formatOptionsCurrency);
+            totalProfitEl.textContent = totalProfit.toLocaleString('es-ES', formatOptionsCurrency);
+            totalReturnEl.textContent = totalReturn.toLocaleString('es-ES', formatOptionsCurrency);
+            
+            // Mostrar advertencias si el porcentaje o la inversión son cero
+            if (entryPrice === 0 || numberOfUnits === 0) {
+                 riskWarningEl.textContent = `⚠️ Advertencia: El Precio de Compra o la Cantidad de Acciones es cero, la Ganancia Bruta y el Retorno Total serán 0.`;
+                 riskWarningEl.classList.remove('hidden');
+            } else if (percentage < 0) {
+                 riskWarningEl.textContent = `⚠️ Advertencia: El porcentaje es negativo (${percentage}%), calculando precio objetivo para una pérdida.`;
+                 riskWarningEl.classList.remove('hidden');
+            } else if (percentage === 0) {
+                 riskWarningEl.textContent = `⚠️ El porcentaje de ganancia es 0%, el precio objetivo será igual al precio de entrada.`;
+                 riskWarningEl.classList.remove('hidden');
+            } else {
+                 riskWarningEl.classList.add('hidden');
+            }
+
+        }
+
+        /**
+         * CALCULADORA 2: Precio Promedio (Aumento de Posición)
+         */
+        function calculateAveragePrice() {
+            // Get inputs, treating empty fields as 0 for calculation purposes
+            const price1 = parseFloat(document.getElementById('price1').value) || 0;
+            const shares1 = parseFloat(document.getElementById('shares1').value) || 0;
+            const price2 = parseFloat(document.getElementById('price2').value) || 0;
+            const shares2 = parseFloat(document.getElementById('shares2').value) || 0;
+            const price3 = parseFloat(document.getElementById('price3').value) || 0;
+            const shares3 = parseFloat(document.getElementById('shares3').value) || 0;
+
+            const totalCostEl = document.getElementById('totalCost');
+            const totalSharesEl = document.getElementById('totalShares');
+            const averagePriceEl = document.getElementById('averagePrice');
+            const avgWarningEl = document.getElementById('avgWarning');
+            
+            // Reset results and warning
+            totalCostEl.textContent = '0.00';
+            totalSharesEl.textContent = '0';
+            averagePriceEl.textContent = '0.00';
+            avgWarningEl.classList.add('hidden');
+
+            // Basic validation for the first purchase and negative values
+            if (shares1 <= 0 || price1 < 0 || shares1 < 0 || price2 < 0 || shares2 < 0 || price3 < 0 || shares3 < 0) {
+                if (shares1 <= 0) {
+                    avgWarningEl.textContent = "⚠️ Debe ingresar un número positivo de acciones para la Compra 1.";
+                } else {
+                    avgWarningEl.textContent = "⚠️ Por favor, ingresa precios y cantidades positivas.";
+                }
+                avgWarningEl.classList.remove('hidden');
+                return;
+            }
+
+            // Calculations
+            // Total Cost (Weighted Sum)
+            const totalCost = (price1 * shares1) + (price2 * shares2) + (price3 * shares3);
+
+            // Total Shares
+            const totalShares = shares1 + shares2 + shares3;
+
+            // Average Price (Handle division by zero, though shares1 > 0 guarantees totalShares > 0)
+            const averagePrice = totalShares > 0 ? (totalCost / totalShares) : 0;
+            
+            // Display results
+            totalCostEl.textContent = totalCost.toLocaleString('es-ES', formatOptionsCurrency);
+            totalSharesEl.textContent = totalShares.toLocaleString('es-ES', { maximumFractionDigits: 0 }); // Shares are usually integers
+            averagePriceEl.textContent = averagePrice.toLocaleString('es-ES', formatOptionsPrice);
+        }
+
+        /**
+         * CALCULADORA 3: Opciones (Objetivo de Retorno)
+         */
+        function calculateOptionsTarget() {
+            // Obtener valores (tratar vacíos como 0, excepto comisión que tiene default)
+            const price = parseFloat(document.getElementById('optionsPrice').value) || 0;
+            const contracts = parseFloat(document.getElementById('optionsContracts').value) || 0;
+            const percentage = parseFloat(document.getElementById('optionsPercentage').value) || 0;
+            // Comisión tiene valor por defecto de 2.00 en el HTML, pero se obtiene el valor actual.
+            const commission = parseFloat(document.getElementById('optionsCommission').value) || 0; 
+
+            // Elementos de resultado y advertencia
+            const totalCostEl = document.getElementById('optionsTotalCost');
+            const grossProfitEl = document.getElementById('optionsGrossProfit');
+            const netProfitEl = document.getElementById('optionsNetProfit');
+            const salePriceEl = document.getElementById('optionsSalePrice');
+            const optionsWarningEl = document.getElementById('optionsWarning');
+
+            // Resetear resultados
+            totalCostEl.textContent = '0.00';
+            grossProfitEl.textContent = '0.00';
+            netProfitEl.textContent = '0.00';
+            salePriceEl.textContent = '0.00';
+            optionsWarningEl.classList.add('hidden');
+            
+            // Validaciones: Price >= 0, Contracts > 0, y todos deben ser números
+            if (price < 0 || contracts <= 0 || isNaN(price) || isNaN(contracts) || isNaN(percentage) || isNaN(commission)) {
+                optionsWarningEl.textContent = "⚠️ Por favor, ingresa valores numéricos válidos. El Precio por Contrato debe ser ≥ 0 y el Número de Contratos debe ser > 0.";
+                optionsWarningEl.classList.remove('hidden');
+                return;
+            }
+
+            // Constante: 1 contrato de opciones representa 100 acciones.
+            const sharesPerContract = 100;
+
+            // 1. Costo Total de Entrada (Inversión Inicial)
+            const totalCost = price * contracts * sharesPerContract;
+            
+            // 2. Ganancia Bruta (Profit/Loss basado en porcentaje)
+            const grossProfit = totalCost * (percentage / 100);
+
+            // 3. Ganancia Neta (Ganancia Bruta - Comisión Total)
+            const netProfit = grossProfit - commission;
+
+            // 4. Retorno Total Esperado (Capital + Ganancia Bruta)
+            const totalReturn = totalCost + grossProfit;
+            
+            // 5. Precio de Venta Objetivo (Precio de Prima Necesario)
+            // Se calcula Price_Sale = totalReturn / (contracts * sharesPerContract)
+            let targetSalePrice = 0;
+            if (contracts > 0) {
+                 targetSalePrice = totalReturn / (contracts * sharesPerContract);
+            }
+
+            // Mostrar resultados y aplicar estilos de color
+            totalCostEl.textContent = totalCost.toLocaleString('es-ES', formatOptionsCurrency);
+            
+            // Ganancia Bruta
+            grossProfitEl.textContent = grossProfit.toLocaleString('es-ES', formatOptionsCurrency);
+            grossProfitEl.classList.remove('text-green-500', 'text-red-500');
+            grossProfitEl.classList.add(grossProfit >= 0 ? 'text-green-500' : 'text-red-500');
+
+            // Ganancia Neta
+            netProfitEl.textContent = netProfit.toLocaleString('es-ES', formatOptionsCurrency);
+            netProfitEl.classList.remove('text-green-500', 'text-red-500', 'text-secondary-accent');
+            
+            if (netProfit > 0) {
+                netProfitEl.classList.add('text-green-500');
+            } else if (netProfit < 0) {
+                netProfitEl.classList.add('text-red-500');
+            } else {
+                netProfitEl.classList.add('text-secondary-accent'); // Amarillo si es cero
+            }
+            
+            // Precio de Venta Objetivo
+            salePriceEl.textContent = targetSalePrice.toLocaleString('es-ES', formatOptionsPrice);
+            
+            // Advertencias adicionales (e.g., net loss due to commission)
+            if (netProfit < 0 && grossProfit > 0) {
+                optionsWarningEl.textContent = `⚠️ Advertencia: Aunque la Ganancia Bruta es positiva, la Comisión Total (${commission.toLocaleString('es-ES', formatOptionsCurrency)} USD) resulta en una Pérdida Neta.`;
+                optionsWarningEl.classList.remove('hidden');
+            } else if (percentage === 0 && commission !== 0) {
+                optionsWarningEl.textContent = `⚠️ Advertencia: Con 0% de retorno, la Ganancia Neta será igual al negativo de su Comisión Total.`;
+                optionsWarningEl.classList.remove('hidden');
+            } else if (percentage === 0 && commission === 0) {
+                optionsWarningEl.classList.add('hidden'); // Sin advertencia si todo es cero
+            } else if (totalReturn < 0) {
+                optionsWarningEl.textContent = `⚠️ Advertencia: El Precio de Venta Objetivo es negativo. Esto ocurre si la pérdida porcentual es mayor al 100%.`;
+                optionsWarningEl.classList.remove('hidden');
+            }
+        }
+        
+        // --- Lógica de Navegación por Teclado (Enter y Flechas) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Seleccionar todos los inputs dentro de la sección de la calculadora Objetivo
+            const inputsObjetivo = document.querySelectorAll('#calculadora-objetivo input');
+            const buttonObjetivo = document.querySelector('#calculadora-objetivo button');
+            
+            // Seleccionar todos los inputs dentro de la sección de la calculadora Promedio
+            const inputsPromedio = document.querySelectorAll('#calculadora-promedio input');
+            const buttonPromedio = document.querySelector('#calculadora-promedio button');
+
+            // Seleccionar todos los inputs dentro de la sección de la calculadora Opciones
+            const inputsOpciones = document.querySelectorAll('#calculadora-opciones input');
+            const buttonOpciones = document.querySelector('#calculadora-opciones button');
+
+            // Función genérica de navegación por Enter/Flechas
+            const setupKeyboardNavigation = (inputs, button, calculateFunction) => {
+                inputs.forEach((input, index) => {
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault(); 
+                            if (index < inputs.length - 1) {
+                                inputs[index + 1].focus();
+                            } else {
+                                calculateFunction();
+                            }
+                        } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            if (e.key === 'ArrowDown' && index < inputs.length - 1) {
+                                inputs[index + 1].focus();
+                            } else if (e.key === 'ArrowUp' && index > 0) {
+                                inputs[index - 1].focus();
+                            }
+                        }
+                    });
+                });
+                // Enlazar el botón a la función de cálculo
+                if (button) {
+                    button.addEventListener('click', calculateFunction);
+                }
+            };
+            
+            // Aplicar navegación a todas las calculadoras
+            setupKeyboardNavigation(inputsObjetivo, buttonObjetivo, calculateTargetPrice);
+            setupKeyboardNavigation(inputsPromedio, buttonPromedio, calculateAveragePrice);
+            setupKeyboardNavigation(inputsOpciones, buttonOpciones, calculateOptionsTarget);
+        });
+    </script>
+
+</body>
+</html>
