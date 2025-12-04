@@ -50,14 +50,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
-                    <a href="index.html" class="text-3xl font-extrabold text-accent tracking-widest">
+                    <a href="inicio.html" class="text-3xl font-extrabold text-accent tracking-widest">
                         MABUYA
                         <span class="text-secondary-accent text-lg block leading-none">Trading Academy</span>
                     </a>
                 </div>
                 <!-- Menú de Navegación (Escritorio) -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="nav-link text-lg px-2 py-1 transition duration-300">Inicio</a>
+                    <a href="inicio.html" class="nav-link text-lg px-2 py-1 transition duration-300">Inicio</a>
                     <a href="academia.html" class="nav-link text-lg px-2 py-1 transition duration-300">Academia</a>
                     <a href="calculadora.html" class="nav-link text-lg px-2 py-1 transition duration-300">Calculadora RR</a>
                     <a href="videos.html" class="nav-link active-page text-lg px-2 py-1 transition duration-300">Videos</a>
@@ -71,7 +71,7 @@
         <!-- Menú Móvil Desplegable -->
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-primary-dark/95 border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Inicio</a>
+                <a href="inicio.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Inicio</a>
                 <a href="academia.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Academia</a>
                 <a href="calculadora.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Calculadora RR</a>
                 <a href="videos.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Videos</a>
@@ -83,49 +83,105 @@
         <!-- SECCIÓN 4: VIDEOS -->
         <section id="videos" class="py-20 px-4 bg-gray-900 min-h-[calc(100vh-10rem)]">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-4xl font-bold text-center mb-12 text-accent">Videos Educativos Gratuitos</h2>
-                <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-16">
-                    Mira algunos de nuestros tutoriales y análisis de mercado más recientes para empezar a practicar.
+                <h2 class="text-4xl font-bold text-center mb-6 text-accent">Videos Educativos Gratuitos</h2>
+                <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-10">
+                    Mira nuestros tutoriales y análisis de mercado más recientes para empezar a practicar.
                 </p>
 
-                <!-- Cuadrícula de Videos (Placeholders) -->
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Video 1 -->
-                    <div class="content-card rounded-xl overflow-hidden shadow-2xl">
-                        <div class="relative w-full aspect-video bg-gray-800 flex items-center justify-center">
-                            <span class="text-xl text-gray-500">Video Placeholder</span>
+                <!-- BUSCADOR DE VIDEOS -->
+                <div class="max-w-2xl mx-auto mb-16">
+                    <div class="relative">
+                        <input type="text" id="video-search" placeholder="Buscar por título o palabra clave..."
+                               class="w-full p-4 pl-12 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-accent focus:border-accent transition duration-300 shadow-md">
+                        <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 1: TUTORIALES -->
+                <h3 class="text-3xl font-bold text-left mb-6 text-secondary-accent border-b border-gray-700 pb-2">Tutoriales (Paso a Paso)</h3>
+                
+                <div id="tutoriales-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                    
+                    <!-- NUEVO VIDEO DEL USUARIO: Tutorial de TradingView -->
+                    <div class="content-card rounded-xl overflow-hidden shadow-2xl video-item" data-title="Tutorial de Configuración de TradingView" data-category="Tutoriales">
+                        <div class="relative w-full aspect-video">
+                            <!-- Reproductor de YouTube Embed -->
+                            <iframe 
+                                class="absolute top-0 left-0 w-full h-full rounded-t-xl" 
+                                src="https://www.youtube.com/embed/E-6GXpuUpro" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
                         <div class="p-4">
-                            <h3 class="text-xl font-semibold text-white mb-2">Análisis Semanal del Mercado Forex</h3>
-                            <p class="text-gray-400 text-sm">Resumen de pares principales y oportunidades de la semana. (15 min)</p>
-                            <a href="#" class="text-accent hover:underline text-sm mt-2 block">Ver video</a>
+                            <h4 class="text-xl font-semibold text-white mb-2 video-title">Configuración Inicial y Uso Básico de TradingView</h4>
+                            <p class="text-gray-400 text-sm video-desc">Guía esencial para configurar tus gráficos y empezar a analizar el mercado. (12 min)</p>
+                            <a href="https://youtu.be/E-6GXpuUpro" target="_blank" class="text-accent hover:underline text-sm mt-2 block">Ir a YouTube</a>
                         </div>
                     </div>
 
-                    <!-- Video 2 -->
-                    <div class="content-card rounded-xl overflow-hidden shadow-2xl">
-                        <div class="relative w-full aspect-video bg-gray-800 flex items-center justify-center">
-                            <span class="text-xl text-gray-500">Video Placeholder</span>
+                    <!-- Video 2 (Original): Patrones de Vela Japonesa -->
+                    <div class="content-card rounded-xl overflow-hidden shadow-2xl video-item" data-title="Entendiendo los Patrones de Vela Japonesa" data-category="Tutoriales">
+                        <div class="relative w-full aspect-video">
+                            <!-- Placeholder Embed (Usando un ID genérico para simular el reproductor) -->
+                            <iframe 
+                                class="absolute top-0 left-0 w-full h-full rounded-t-xl" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
                         <div class="p-4">
-                            <h3 class="text-xl font-semibold text-white mb-2">Entendiendo los Patrones de Vela Japonesa</h3>
-                            <p class="text-gray-400 text-sm">Guía completa para identificar y operar con patrones clave. (20 min)</p>
-                            <a href="#" class="text-accent hover:underline text-sm mt-2 block">Ver video</a>
-                        </div>
-                    </div>
-
-                    <!-- Video 3 -->
-                    <div class="content-card rounded-xl overflow-hidden shadow-2xl">
-                        <div class="relative w-full aspect-video bg-gray-800 flex items-center justify-center">
-                            <span class="text-xl text-gray-500">Video Placeholder</span>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-xl font-semibold text-white mb-2">Introducción a la Gestión de Riesgo (1%)</h3>
-                            <p class="text-gray-400 text-sm">Cómo proteger tu capital usando la regla del 1%. Fundamental. (10 min)</p>
+                            <h4 class="text-xl font-semibold text-white mb-2 video-title">Entendiendo los Patrones de Vela Japonesa</h4>
+                            <p class="text-gray-400 text-sm video-desc">Guía completa para identificar y operar con patrones clave. (20 min)</p>
                             <a href="#" class="text-accent hover:underline text-sm mt-2 block">Ver video</a>
                         </div>
                     </div>
                 </div>
+
+                <!-- SECCIÓN 2: ANÁLISIS Y ESTRATEGIAS -->
+                <h3 class="text-3xl font-bold text-left mb-6 text-accent border-b border-gray-700 pb-2">Análisis de Trading y Estrategias</h3>
+
+                <div id="trading-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Video 1 (Original): Análisis Semanal -->
+                    <div class="content-card rounded-xl overflow-hidden shadow-2xl video-item" data-title="Análisis Semanal del Mercado Forex" data-category="Trading">
+                        <div class="relative w-full aspect-video">
+                            <!-- Placeholder Embed -->
+                            <iframe 
+                                class="absolute top-0 left-0 w-full h-full rounded-t-xl" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="text-xl font-semibold text-white mb-2 video-title">Análisis Semanal del Mercado Forex</h4>
+                            <p class="text-gray-400 text-sm video-desc">Resumen de pares principales y oportunidades de la semana. (15 min)</p>
+                            <a href="#" class="text-accent hover:underline text-sm mt-2 block">Ver video</a>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 (Original): Gestión de Riesgo -->
+                    <div class="content-card rounded-xl overflow-hidden shadow-2xl video-item" data-title="Introducción a la Gestión de Riesgo (1%)" data-category="Trading">
+                        <div class="relative w-full aspect-video">
+                            <!-- Placeholder Embed -->
+                            <iframe 
+                                class="absolute top-0 left-0 w-full h-full rounded-t-xl" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="text-xl font-semibold text-white mb-2 video-title">Introducción a la Gestión de Riesgo (1%)</h4>
+                            <p class="text-gray-400 text-sm video-desc">Cómo proteger tu capital usando la regla del 1%. Fundamental. (10 min)</p>
+                            <a href="#" class="text-accent hover:underline text-sm mt-2 block">Ver video</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
@@ -142,8 +198,9 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT: Lógica de la Navegación Móvil -->
+    <!-- JAVASCRIPT: Lógica de la Navegación Móvil y Buscador -->
     <script>
+        // Lógica de navegación móvil
         document.getElementById('menu-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
@@ -152,6 +209,27 @@
             link.addEventListener('click', function() {
                 document.getElementById('mobile-menu').classList.add('hidden');
             });
+        });
+
+        // Lógica del Buscador de Videos
+        document.getElementById('video-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const videoItems = document.querySelectorAll('.video-item');
+
+            videoItems.forEach(item => {
+                const title = item.getAttribute('data-title').toLowerCase();
+                const description = item.querySelector('.video-desc').textContent.toLowerCase();
+                
+                // Muestra u oculta el elemento basado en la coincidencia del término de búsqueda
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Opcional: Ocultar secciones si no hay videos visibles en ellas (mejorar la estética si es necesario)
+            // (La lógica de ocultar secciones enteras se puede añadir aquí si es requerido)
         });
     </script>
 
