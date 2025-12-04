@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Mabuya Trading Academy</title>
+    <!-- Carga de Tailwind CSS para estilos responsivos y rápidos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de Tailwind para usar el color principal y la fuente -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0a0a0a',
+                        'accent': '#06b6d4', // Cyan
+                        'secondary-accent': '#facc15', // Amber
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Estilo para el enlace activo */
+        .nav-link:hover, .nav-link.active-page {
+            color: #06b6d4; /* Cyan */
+            border-bottom: 2px solid #06b6d4;
+        }
+    </style>
+</head>
+<body class="bg-primary-dark">
+
+    <!-- BARRA DE NAVEGACIÓN (HEADER) - Enlaces externos a otros archivos -->
+    <header class="sticky top-0 z-50 bg-primary-dark/95 border-b border-gray-800 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="inicio.html" class="text-3xl font-extrabold text-accent tracking-widest">
+                        MABUYA
+                        <span class="text-secondary-accent text-lg block leading-none">Trading Academy</span>
+                    </a>
+                </div>
+                <!-- Menú de Navegación (Escritorio) -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="inicio.html" class="nav-link active-page text-lg px-2 py-1 transition duration-300">Inicio</a>
+                    <a href="academia.html" class="nav-link text-lg px-2 py-1 transition duration-300">Academia</a>
+                    <a href="calculadora.html" class="nav-link text-lg px-2 py-1 transition duration-300">Calculadora RR</a>
+                    <a href="videos.html" class="nav-link text-lg px-2 py-1 transition duration-300">Videos</a>
+                </nav>
+                <!-- Botón de Menú Móvil -->
+                <button id="menu-button" class="md:hidden p-2 text-white hover:text-accent focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-primary-dark/95 border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="inicio.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Inicio</a>
+                <a href="academia.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Academia</a>
+                <a href="calculadora.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Calculadora RR</a>
+                <a href="videos.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Videos</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: INICIO (HOME) -->
+        <section id="inicio" class="min-h-[calc(100vh-10rem)] flex items-center justify-center p-4">
+            <div class="max-w-4xl text-center">
+                <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight mb-4">
+                    Domina el Mercado con <span class="text-accent">Mabuya Trading</span>
+                </h1>
+                <p class="text-xl sm:text-2xl text-gray-300 mb-8">
+                    Transforma tu futuro financiero aprendiendo estrategias probadas de trading.
+                </p>
+                <a href="academia.html" class="inline-block px-8 py-3 text-lg font-bold text-primary-dark bg-secondary-accent rounded-full hover:bg-yellow-600 transition duration-300 shadow-lg shadow-secondary-accent/50">
+                    ¡Empieza a Invertir Hoy!
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary-dark border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; 2024 Mabuya Trading Academy. Todos los derechos reservados.</p>
+            <div class="mt-4 space-x-4 text-sm">
+                <a href="#" class="hover:text-accent transition duration-300">Términos y Condiciones</a>
+                <span class="text-gray-600">|</span>
+                <a href="#" class="hover:text-accent transition duration-300">Política de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT: Lógica de la Navegación Móvil -->
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
