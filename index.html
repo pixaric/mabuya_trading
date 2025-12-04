@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Mabuya Trading Academy</title>
+    <title>index | Mabuya Trading Academy</title>
     <!-- Carga de Tailwind CSS para estilos responsivos y rápidos -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Configuración de Tailwind para usar el color principal y la fuente -->
@@ -36,6 +36,11 @@
             color: #06b6d4; /* Cyan */
             border-bottom: 2px solid #06b6d4;
         }
+        /* Estilo general para las tarjetas de contenido */
+        .content-card {
+            background-color: #1f2937; /* Dark Gray for cards */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body class="bg-primary-dark">
@@ -45,14 +50,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
-                    <a href="inicio.html" class="text-3xl font-extrabold text-accent tracking-widest">
+                    <a href="index.html" class="text-3xl font-extrabold text-accent tracking-widest">
                         MABUYA
                         <span class="text-secondary-accent text-lg block leading-none">Trading Academy</span>
                     </a>
                 </div>
                 <!-- Menú de Navegación (Escritorio) -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="inicio.html" class="nav-link active-page text-lg px-2 py-1 transition duration-300">Inicio</a>
+                    <a href="index.html" class="nav-link active-page text-lg px-2 py-1 transition duration-300">index</a>
                     <a href="academia.html" class="nav-link text-lg px-2 py-1 transition duration-300">Academia</a>
                     <a href="calculadora.html" class="nav-link text-lg px-2 py-1 transition duration-300">Calculadora RR</a>
                     <a href="videos.html" class="nav-link text-lg px-2 py-1 transition duration-300">Videos</a>
@@ -66,7 +71,7 @@
         <!-- Menú Móvil Desplegable -->
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-primary-dark/95 border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
-                <a href="inicio.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Inicio</a>
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">index</a>
                 <a href="academia.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Academia</a>
                 <a href="calculadora.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Calculadora RR</a>
                 <a href="videos.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Videos</a>
@@ -74,9 +79,9 @@
         </div>
     </header>
 
-    <main>
-        <!-- SECCIÓN 1: INICIO (HOME) -->
-        <section id="inicio" class="min-h-[calc(100vh-10rem)] flex items-center justify-center p-4">
+    <main class="max-w-7xl mx-auto">
+        <!-- SECCIÓN 1: HERO -->
+        <section id="hero" class="min-h-[calc(100vh-10rem)] flex items-center justify-center p-4">
             <div class="max-w-4xl text-center">
                 <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight mb-4">
                     Domina el Mercado con <span class="text-accent">Mabuya Trading</span>
@@ -89,6 +94,90 @@
                 </a>
             </div>
         </section>
+
+        <!-- SECCIÓN 2: Fundamentos de Trading -->
+        <section id="fundamentos" class="py-16 px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-secondary-accent">Principios Clave del Trading</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Principio 1: Análisis Técnico -->
+                <div class="content-card p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-semibold text-accent mb-3">Análisis Técnico</h3>
+                    <p class="text-gray-300 text-sm">
+                        Estudio de la acción del precio histórico para predecir futuros movimientos. Se basa en patrones, soportes y resistencias.
+                    </p>
+                    <div class="mt-4">[Image of candlestick chart analysis]</div>
+                </div>
+                
+                <!-- Principio 2: Gestión de Riesgos (Risk Management) -->
+                <div class="content-card p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-semibold text-accent mb-3">Gestión de Riesgos</h3>
+                    <p class="text-gray-300 text-sm">
+                        La práctica fundamental de limitar las pérdidas (Stop Loss) y proteger el capital. Nunca arriesgues más de lo que estás dispuesto a perder en una sola operación.
+                    </p>
+                    <div class="mt-4">[Image of risk reward ratio diagram]</div>
+                </div>
+
+                <!-- Principio 3: Psicología del Trading -->
+                <div class="content-card p-6 rounded-xl text-center">
+                    <h3 class="text-xl font-semibold text-accent mb-3">Psicología del Trading</h3>
+                    <p class="text-gray-300 text-sm">
+                        El control de las emociones (miedo y avaricia) es crucial. Un plan bien definido te ayuda a ejecutar sin dejarte llevar por el pánico o la euforia.
+                    </p>
+                    <div class="mt-4">[Image of trader psychology]</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Lista de Seguimiento (Watchlist) - Estática -->
+        <section id="watchlist" class="py-16 px-4 bg-gray-900/50">
+            <h2 class="text-4xl font-bold text-center mb-10 text-accent">Lista de Seguimiento (Watchlist) - Análisis Fundamental</h2>
+            <div class="max-w-5xl mx-auto content-card p-6 rounded-xl overflow-x-auto">
+                
+                <!-- Contenedor de la Tabla/Lista -->
+                <div id="watchlist-items" class="min-w-[600px]">
+                    <!-- Contenido generado por JavaScript -->
+                    <p class="text-gray-400 text-center py-4">Cargando datos estáticos...</p>
+                </div>
+                
+                <div class="mt-6 text-xs text-gray-500 text-right border-t border-gray-700 pt-3">
+                    <p>Fuente: Datos estáticos simulados. Para datos en tiempo real, consulta los enlaces de interés.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: Enlaces de Interés -->
+        <section id="enlaces" class="py-16 px-4">
+            <h2 class="text-4xl font-bold text-center mb-10 text-secondary-accent">Enlaces y Herramientas Esenciales</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Enlace 1: Investing -->
+                <a href="https://www.investing.com/" target="_blank" class="content-card p-6 rounded-xl hover:bg-gray-700 transition duration-300 flex items-center space-x-3">
+                    <span class="text-4xl text-accent">📊</span>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white">Investing.com</h3>
+                        <p class="text-gray-400 text-sm">Noticias, datos en tiempo real y calendario económico.</p>
+                    </div>
+                </a>
+                
+                <!-- Enlace 2: Finviz -->
+                <a href="https://finviz.com/" target="_blank" class="content-card p-6 rounded-xl hover:bg-gray-700 transition duration-300 flex items-center space-x-3">
+                    <span class="text-4xl text-accent">📈</span>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white">Finviz</h3>
+                        <p class="text-gray-400 text-sm">Filtro de acciones (screener) y mapas de calor del mercado.</p>
+                    </div>
+                </a>
+
+                <!-- Enlace 3: Yahoo Finanzas -->
+                <a href="https://finance.yahoo.com/" target="_blank" class="content-card p-6 rounded-xl hover:bg-gray-700 transition duration-300 flex items-center space-x-3">
+                    <span class="text-4xl text-accent">📰</span>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white">Yahoo Finanzas</h3>
+                        <p class="text-gray-400 text-sm">Cotizaciones, gráficos y análisis de compañías.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
     </main>
 
     <!-- FOOTER -->
@@ -103,15 +192,111 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT: Lógica de la Navegación Móvil -->
+
+    <!-- JAVASCRIPT: Lógica de la Navegación Móvil y Lista Estática -->
     <script>
-        document.getElementById('menu-button').addEventListener('click', function() {
+        // --- Datos Estáticos para la Lista de Seguimiento ---
+        const staticWatchlistData = [
+            {
+                symbol: 'APPL',
+                name: 'Apple Inc.',
+                recommendation: 'Comprar',
+                targetPrice: 220.00,
+                historicalHigh: 225.00,
+                historicalLow: 130.00
+            },
+            {
+                symbol: 'MSFT',
+                name: 'Microsoft Corp.',
+                recommendation: 'Mantener',
+                targetPrice: 450.00,
+                historicalHigh: 460.00,
+                historicalLow: 250.00
+            },
+            {
+                symbol: 'TSLA',
+                name: 'Tesla Inc.',
+                recommendation: 'Vender',
+                targetPrice: 150.00,
+                historicalHigh: 407.36,
+                historicalLow: 101.81
+            },
+            {
+                symbol: 'GOOGL',
+                name: 'Alphabet Inc.',
+                recommendation: 'Comprar',
+                targetPrice: 195.00,
+                historicalHigh: 180.00,
+                historicalLow: 83.34
+            }
+        ];
+
+        /**
+         * Dibuja los elementos estáticos de la watchlist en el DOM
+         */
+        function renderStaticWatchlist() {
+            const container = document.getElementById('watchlist-items');
+            
+            // Crear el encabezado de la tabla/lista
+            const header = `
+                <div class="flex font-semibold text-gray-300 border-b border-gray-600 pb-2 mb-3 px-4">
+                    <div class="w-1/6">Símbolo</div>
+                    <div class="w-2/6 hidden sm:block">Empresa</div>
+                    <div class="w-1/6 text-center">Recomendación</div>
+                    <div class="w-1/6 text-right">Precio Objetivo</div>
+                    <div class="w-1/6 text-right hidden lg:block">Máximo Histórico</div>
+                    <div class="w-1/6 text-right hidden lg:block">Mínimo Histórico</div>
+                </div>
+            `;
+            
+            // Mapear los datos a filas de la lista
+            const listItems = staticWatchlistData.map(item => {
+                let recClass = '';
+                if (item.recommendation === 'Comprar') recClass = 'text-green-400';
+                else if (item.recommendation === 'Vender') recClass = 'text-red-400';
+                else recClass = 'text-yellow-400';
+
+                return `
+                    <div class="flex items-center bg-gray-700/50 p-4 rounded-lg hover:bg-gray-700 transition duration-150 mb-2">
+                        <!-- Símbolo -->
+                        <div class="w-1/6 font-bold text-accent text-sm sm:text-base">${item.symbol}</div>
+                        <!-- Nombre -->
+                        <div class="w-2/6 hidden sm:block text-gray-400 text-sm">${item.name}</div>
+                        <!-- Recomendación -->
+                        <div class="w-1/6 text-center text-sm font-semibold ${recClass}">${item.recommendation}</div>
+                        <!-- Precio Objetivo -->
+                        <div class="w-1/6 text-right text-white font-medium text-sm">$${item.targetPrice.toFixed(2)}</div>
+                        <!-- Máximo Histórico -->
+                        <div class="w-1/6 text-right text-gray-400 text-sm hidden lg:block">$${item.historicalHigh.toFixed(2)}</div>
+                        <!-- Mínimo Histórico -->
+                        <div class="w-1/6 text-right text-gray-400 text-sm hidden lg:block">$${item.historicalLow.toFixed(2)}</div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = header + listItems;
+        }
+
+        // --- Lógica de la Navegación Móvil y Carga Inicial ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Renderiza la lista estática al cargar el DOM
+            renderStaticWatchlist();
+
+            // Configura el botón del menú móvil
+            const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.getElementById('mobile-menu').classList.add('hidden');
+
+            if (menuButton) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Oculta el menú móvil al hacer clic en un enlace
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
             });
         });
     </script>
