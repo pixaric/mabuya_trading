@@ -13,8 +13,8 @@
                 extend: {
                     colors: {
                         'primary-dark': '#0a0a0a',
-                        'accent': '#06b6d4', // Cyan
-                        'secondary-accent': '#facc15', // Amber
+                        'accent': '#06b6d4', // Cyan (Básico)
+                        'secondary-accent': '#facc15', // Amber (Intermedio)
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -40,6 +40,25 @@
         .content-card {
             background-color: #1f2937; /* Dark Gray for cards */
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+            min-height: 480px; /* Altura mínima para uniformidad */
+            display: flex;
+            flex-direction: column;
+        }
+        /* Estilos específicos para las listas de capítulos */
+        .chapter-list li {
+            padding: 4px 0;
+            border-bottom: 1px dashed #374151; /* Gris oscuro para separación */
+        }
+        .chapter-list li:last-child {
+            border-bottom: none;
+        }
+        /* Estilo para el acordeón (acordion) */
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #1f2937;
         }
     </style>
 </head>
@@ -50,14 +69,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
-                    <a href="index.html" class="text-3xl font-extrabold text-accent tracking-widest">
+                    <a href="inicio.html" class="text-3xl font-extrabold text-accent tracking-widest">
                         MABUYA
                         <span class="text-secondary-accent text-lg block leading-none">Trading Academy</span>
                     </a>
                 </div>
                 <!-- Menú de Navegación (Escritorio) -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="nav-link text-lg px-2 py-1 transition duration-300">index</a>
+                    <a href="inicio.html" class="nav-link text-lg px-2 py-1 transition duration-300">Inicio</a>
                     <a href="academia.html" class="nav-link active-page text-lg px-2 py-1 transition duration-300">Academia</a>
                     <a href="calculadora.html" class="nav-link text-lg px-2 py-1 transition duration-300">Calculadora RR</a>
                     <a href="videos.html" class="nav-link text-lg px-2 py-1 transition duration-300">Videos</a>
@@ -71,7 +90,7 @@
         <!-- Menú Móvil Desplegable -->
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-primary-dark/95 border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Inicio</a>
+                <a href="inicio.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Inicio</a>
                 <a href="academia.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Academia</a>
                 <a href="calculadora.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Calculadora RR</a>
                 <a href="videos.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-700 w-full text-center">Videos</a>
@@ -80,48 +99,260 @@
     </header>
 
     <main>
-        <!-- SECCIÓN 2: ACADEMIA (ACADEMY) -->
-        <section id="academia" class="py-20 px-4 bg-gray-900 min-h-[calc(100vh-10rem)]">
+        <!-- SECCIÓN 1: ACADEMIA (ACADEMY) - Resumen de Módulos -->
+        <section id="academia" class="py-20 px-4 bg-gray-900">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-4xl font-bold text-center mb-12 text-accent">Nuestra Academia de Trading</h2>
+                <h2 class="text-4xl font-bold text-center mb-12 text-accent">Nuestra Academia de Trading: Currículo Detallado</h2>
                 <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-16">
-                    Ofrecemos un currículo estructurado desde nivel principiante hasta avanzado, cubriendo análisis técnico, gestión de riesgo y psicología del trading.
+                    Aprende el trading de forma estructurada. Nuestro programa te guía a través de los conceptos esenciales, las estrategias de mercado y el control mental necesario para la consistencia.
                 </p>
 
-                <!-- Módulos de la Academia -->
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Módulo 1 -->
-                    <div class="content-card p-6 rounded-xl transform hover:scale-[1.02] transition duration-300 cursor-pointer">
+                <!-- Módulos de la Academia (Resumen) -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                    <!-- Módulo 1: Nivel Básico (Cyan - Accent) -->
+                    <div class="content-card p-6 rounded-xl transform hover:scale-[1.02] transition duration-300">
                         <div class="text-accent text-3xl mb-3">
                             <!-- Icono de Básico -->
                             <svg class="w-8 h-8 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3 .895-3 2 1.343 2 3 2m-3 2h6m-6-12h6"></path></svg>
                             <span class="font-bold">Nivel Básico</span>
                         </div>
-                        <h3 class="text-2xl font-semibold mb-3 text-white">Introducción a los Mercados</h3>
-                        <p class="text-gray-400">Conceptos fundamentales, tipos de órdenes y estructura del mercado. Perfecto para empezar desde cero.</p>
+                        <h3 class="text-2xl font-semibold mb-3 text-white border-b border-gray-700 pb-2">Introducción y Fundamentos</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Domina el lenguaje del mercado. Conceptos esenciales, funcionamiento de los brokers y la mecánica de las operaciones.
+                        </p>
+                        
+                        <ul class="text-gray-300 text-sm chapter-list mt-auto">
+                            <li class="font-semibold text-base text-accent">Capítulo 1: ¿Qué es el Trading?</li>
+                            <li class="ml-4">Diferencia entre Inversión y Trading.</li>
+                            <li class="ml-4">Participantes del Mercado (Brokers, Liquidez, Reguladores).</li>
+                            
+                            <li class="font-semibold text-base text-accent mt-3">Capítulo 2: Tipos de Mercado</li>
+                            <li class="ml-4">Mercado de Divisas (Forex) y Acciones.</li>
+                            <li class="ml-4">Criptomonedas, Índices y Commodities.</li>
+
+                            <li class="font-semibold text-base text-accent mt-3">Capítulo 3: Conceptos Esenciales</li>
+                            <li class="ml-4">Bid, Ask, y el Spread.</li>
+                            <li class="ml-4">Lote, Pip, y Apalancamiento (Leverage).</li>
+                            <li class="ml-4">Tipos de Órdenes (Mercado, Límite, Stop).</li>
+                        </ul>
                     </div>
 
-                    <!-- Módulo 2 -->
-                    <div class="content-card p-6 rounded-xl transform hover:scale-[1.02] transition duration-300 cursor-pointer">
+                    <!-- Módulo 2: Nivel Intermedio (Amber - Secondary Accent) -->
+                    <div class="content-card p-6 rounded-xl transform hover:scale-[1.02] transition duration-300">
                         <div class="text-secondary-accent text-3xl mb-3">
                             <!-- Icono de Intermedio -->
                             <svg class="w-8 h-8 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v14m-6 3h-6a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
                             <span class="font-bold">Análisis Intermedio</span>
                         </div>
-                        <h3 class="text-2xl font-semibold mb-3 text-white">Análisis Técnico y Estrategias</h3>
-                        <p class="text-gray-400">Indicadores, patrones de velas, zonas de soporte y resistencia. Desarrolla tu plan de trading.</p>
+                        <h3 class="text-2xl font-semibold mb-3 text-white border-b border-gray-700 pb-2">Análisis Técnico y Estrategias</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            Aprende a leer el gráfico como un profesional. Identifica oportunidades usando patrones de precio e indicadores técnicos clave.
+                        </p>
+
+                        <ul class="text-gray-300 text-sm chapter-list mt-auto">
+                            <li class="font-semibold text-base text-secondary-accent">Capítulo 4: Lectura de Gráficos</li>
+                            <li class="ml-4">Tipos de Gráficos (Barras, Líneas, Velas Japonesas).</li>
+                            <li class="ml-4">Temporalidades (Timeframes) y su uso.</li>
+
+                            <li class="font-semibold text-base text-secondary-accent mt-3">Capítulo 5: Estructura del Precio</li>
+                            <li class="ml-4">Soportes, Resistencias y Puntos Pivote.</li>
+                            <li class="ml-4">Identificación de Tendencias y Canales.</li>
+                            
+                            <li class="font-semibold text-base text-secondary-accent mt-3">Capítulo 6: Herramientas Técnicas</li>
+                            <li class="ml-4">Media Móvil (MA) y sus Cruces.</li>
+                            <li class="ml-4">RSI, MACD y el uso de Osciladores.</li>
+                            <li class="ml-4">Estrategias (Scalping, Day Trading, Swing Trading).</li>
+                        </ul>
                     </div>
 
-                    <!-- Módulo 3 -->
-                    <div class="content-card p-6 rounded-xl transform hover:scale-[1.02] transition duration-300 cursor-pointer">
-                        <div class="text-accent text-3xl mb-3">
+                    <!-- Módulo 3: Nivel Avanzado (Green - Emerald 400) -->
+                    <div class="content-card p-6 rounded-xl transform hover:scale-[1.02] transition duration-300">
+                        <div class="text-emerald-400 text-3xl mb-3">
                             <!-- Icono de Avanzado -->
                             <svg class="w-8 h-8 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             <span class="font-bold">Trading Avanzado</span>
                         </div>
-                        <h3 class="text-2xl font-semibold mb-3 text-white">Gestión de Riesgo y Psicología</h3>
-                        <p class="text-gray-400">Dominio de la gestión monetaria, cálculo de riesgo y control emocional avanzado.</p>
+                        <h3 class="text-2xl font-semibold mb-3 text-white border-b border-emerald-700 pb-2">Riesgo, Psicología y Consistencia</h3>
+                        <p class="text-gray-400 mb-4 flex-grow">
+                            El nivel que separa a los traders amateurs de los profesionales. Enfoque en la disciplina, el control del capital y la mentalidad ganadora.
+                        </p>
+
+                        <ul class="text-gray-300 text-sm chapter-list mt-auto">
+                            <li class="font-semibold text-base text-emerald-400">Capítulo 7: Gestión de Riesgo (Risk Management)</li>
+                            <li class="ml-4">Cálculo de Posición y Tamaño de Lote.</li>
+                            <li class="ml-4">Ratio Riesgo/Recompensa (R:R) y Expectativa.</li>
+                            <li class="ml-4">Implementación de Stop Loss y Take Profit.</li>
+
+                            <li class="font-semibold text-base text-emerald-400 mt-3">Capítulo 8: Psicología del Trading</li>
+                            <li class="ml-4">Control del Miedo, la Avaricia y la Venganza.</li>
+                            <li class="ml-4">Sesgos Cognitivos Comunes en el Trading.</li>
+                            
+                            <li class="font-semibold text-base text-emerald-400 mt-3">Capítulo 9: El Sistema de Trading</li>
+                            <li class="ml-4">Desarrollo de Reglas Claras de Entrada y Salida.</li>
+                            <li class="ml-4">La Importancia del Diario de Trading.</li>
+                            <li class="ml-4">Evaluación de Rendimiento y Backtesting.</li>
+                        </ul>
                     </div>
+                </div>
+
+                <!-- SECCIÓN 2: DESARROLLO DETALLADO DE CAPÍTULOS (ACORDEÓN) -->
+                <h2 class="text-4xl font-bold text-center mb-10 text-secondary-accent pt-10 border-t border-gray-700">Desarrollo Detallado de Capítulos</h2>
+                
+                <div class="max-w-4xl mx-auto space-y-4">
+
+                    <!-- Capítulo 1: ¿Qué es el Trading? (Básico - Cyan) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-gray-700">
+                        <div id="header-c1" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-accent">
+                            Capítulo 1: ¿Qué es el Trading?
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c1" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-gray-700">
+                            <p class="mb-3">El trading es la compra y venta de activos financieros con el objetivo de obtener ganancias a corto o mediano plazo a partir de la fluctuación del precio. Se diferencia de la inversión en que esta última busca el crecimiento del capital a lo largo de varios años.</p>
+                            <h4 class="text-white font-semibold mt-3">Actores Clave:</h4>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Brokers:** Intermediarios que ejecutan nuestras órdenes en el mercado.</li>
+                                <li>**Bolsas de Valores:** Lugares donde se negocian los activos.</li>
+                                <li>**Bancos Centrales:** Influyen con políticas monetarias (tasas de interés).</li>
+                                <li>**Liquidez:** La facilidad con la que un activo puede comprarse o venderse sin afectar drásticamente su precio.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 2: Tipos de Mercado (Básico - Cyan) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-gray-700">
+                        <div id="header-c2" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-accent">
+                            Capítulo 2: Tipos de Mercado
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c2" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-gray-700">
+                            <p class="mb-3">Exploramos los principales vehículos de trading:</p>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Forex (FX):** Mercado de divisas, el más líquido del mundo. Se negocian pares (ej., EUR/USD).</li>
+                                <li>**Acciones:** Títulos de propiedad de empresas (ej., Apple, Tesla).</li>
+                                <li>**Índices:** Representan un grupo de acciones (ej., Nasdaq, Dow Jones). Ideales para medir la salud de un sector o economía.</li>
+                                <li>**Commodities:** Materias primas como el Oro (XAU), Plata, Petróleo y Gas Natural.</li>
+                                <li>**Criptomonedas:** Activos digitales con alta volatilidad, operando 24/7.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 3: Conceptos Esenciales (Básico - Cyan) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-gray-700">
+                        <div id="header-c3" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-accent">
+                            Capítulo 3: Conceptos Esenciales
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c3" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-gray-700">
+                            <p class="mb-3">Dominar esta terminología es vital:</p>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Bid & Ask:** El precio de "oferta" (Bid) al que el broker está dispuesto a comprar, y el precio de "demanda" (Ask) al que está dispuesto a vender.</li>
+                                <li>**Spread:** La diferencia entre Bid y Ask; es el costo de la operación.</li>
+                                <li>**Pip:** "Point in Percentage", la unidad mínima de cambio en el precio de una divisa.</li>
+                                <li>**Lote:** El volumen de la operación (Estándar: 100,000 unidades, Mini: 10,000, Micro: 1,000).</li>
+                                <li>**Apalancamiento (Leverage):** Uso de capital prestado para aumentar el poder adquisitivo. Multiplica las ganancias y las pérdidas.</li>
+                                <li>**Tipos de Órdenes:** Mercado (ejecución inmediata), Límite (ejecución a un precio futuro mejor), Stop (ejecución a un precio futuro peor para protegerse).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 4: Lectura de Gráficos (Intermedio - Amber) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-gray-700">
+                        <div id="header-c4" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-secondary-accent">
+                            Capítulo 4: Lectura de Gráficos
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c4" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-gray-700">
+                            <p class="mb-3">Las **Velas Japonesas** son la herramienta visual más importante. Cada vela muestra el precio de apertura, cierre, y el máximo/mínimo del periodo seleccionado (ej., 1 hora, 1 día). La forma y color de la vela indican la presión de compra o venta en ese periodo.</p>
+                            <p class="mb-3">La **Temporalidad (Timeframe)** es el periodo que representa cada vela. Usar múltiples temporalidades (ej., análisis de tendencia en D1 y entrada en H1) mejora la precisión de la operación.</p>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 5: Estructura del Precio (Intermedio - Amber) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-gray-700">
+                        <div id="header-c5" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-secondary-accent">
+                            Capítulo 5: Estructura del Precio
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c5" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-gray-700">
+                            <p class="mb-3">La estructura del precio define el flujo del mercado:</p>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Soportes:** Nivel de precio donde la presión de compra supera a la de venta, actuando como "piso".</li>
+                                <li>**Resistencias:** Nivel de precio donde la presión de venta supera a la de compra, actuando como "techo".</li>
+                                <li>**Tendencias:** Sucesión de máximos y mínimos. Alcista (máximos y mínimos crecientes), Bajista (máximos y mínimos decrecientes), y Lateral (rango).</li>
+                                <li>**Puntos Pivote:** Niveles calculados a partir de los precios del día anterior, utilizados como posibles puntos de inversión o continuación.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 6: Herramientas Técnicas (Intermedio - Amber) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-gray-700">
+                        <div id="header-c6" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-secondary-accent">
+                            Capítulo 6: Herramientas Técnicas
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c6" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-gray-700">
+                            <p class="mb-3">Los indicadores técnicos nos ayudan a confirmar decisiones, no a tomarlas. Dos categorías principales:</p>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Medias Móviles (MA):** Suavizan la acción del precio. Los cruces de MAs (ej., 50 vs 200 periodos) son señales comunes de cambio de tendencia.</li>
+                                <li>**Osciladores:** Miden el momentum (velocidad del cambio de precio).</li>
+                                <li>**RSI (Relative Strength Index):** Identifica zonas de sobrecompra ($>70$) y sobreventa ($<30$).</li>
+                                <li>**MACD (Moving Average Convergence Divergence):** Mide la relación entre dos Medias Móviles y ayuda a identificar la fuerza de la tendencia.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 7: Gestión de Riesgo (Avanzado - Green) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-emerald-700">
+                        <div id="header-c7" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-emerald-400">
+                            Capítulo 7: Gestión de Riesgo (Risk Management)
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c7" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-emerald-700">
+                            <p class="mb-3">La gestión de riesgo es la clave de la supervivencia en el trading. La regla de oro es **no arriesgar más del $1\%$ o $2\%$ de tu capital total por operación.**</p>
+                            <h4 class="text-white font-semibold mt-3">Conceptos Cruciales:</h4>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Cálculo de Posición:** Determinar el tamaño exacto del lote para que si el Stop Loss se activa, solo se pierda el $1-2\%$ del capital.</li>
+                                <li>**Ratio Riesgo/Recompensa (R:R):** La relación entre lo que arriesgas (Stop Loss) y lo que esperas ganar (Take Profit). Un $R:R$ de $1:2$ significa que arriesgas $100$ para ganar $200$. Se recomienda un mínimo de $1:2$ o $1:3$.</li>
+                                <li>**Expectativa:** Es la fórmula que determina la rentabilidad a largo plazo de tu sistema $\text{E} = (\% \text{Ganancias} \times \text{Ganancia Media}) - (\% \text{Pérdidas} \times \text{Pérdida Media})$.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 8: Psicología del Trading (Avanzado - Green) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-emerald-700">
+                        <div id="header-c8" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-emerald-400">
+                            Capítulo 8: Psicología del Trading
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c8" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-emerald-700">
+                            <p class="mb-3">La parte más difícil del trading es la mentalidad. Debemos operar sin emociones:</p>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Miedo y Avaricia:** El miedo nos hace cerrar ganancias prematuramente; la avaricia nos hace sobreapalancarnos o no tomar el Take Profit.</li>
+                                <li>**Trading de Venganza:** Intentar recuperar inmediatamente una pérdida, lo que conduce a operaciones impulsivas y peores pérdidas.</li>
+                                <li>**Sesgos Cognitivos:** Evitar el **sesgo de anclaje** (fijarse en un precio pasado) y el **sesgo de confirmación** (buscar solo información que valide nuestra idea).</li>
+                            </ul>
+                            <p class="mt-3">La disciplina para seguir el plan es lo único que garantiza la supervivencia a largo plazo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Capítulo 9: El Sistema de Trading (Avanzado - Green) -->
+                    <div class="rounded-xl overflow-hidden bg-gray-800 border border-emerald-700">
+                        <div id="header-c9" class="accordion-header flex justify-between items-center p-5 text-lg font-semibold text-emerald-400">
+                            Capítulo 9: El Sistema de Trading
+                            <svg class="w-5 h-5 transition-transform transform rotate-0" data-target="content-c9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div id="content-c9" class="accordion-content hidden p-5 pt-0 text-gray-300 border-t border-emerald-700">
+                            <p class="mb-3">Un sistema es un conjunto de reglas objetivas que dictan cuándo entrar y salir del mercado. **Un plan sin reglas claras es una apuesta.**</p>
+                            <h4 class="text-white font-semibold mt-3">Herramientas del Trader Profesional:</h4>
+                            <ul class="list-disc list-inside ml-4 text-sm">
+                                <li>**Reglas de Entrada y Salida:** Detallar las condiciones de precio, indicadores y patrones que deben cumplirse para iniciar y cerrar una operación.</li>
+                                <li>**Diario de Trading:** Documentar cada operación (razón de entrada, emociones, resultado). Es la herramienta más valiosa para identificar errores y fortalezas.</li>
+                                <li>**Backtesting:** Aplicar el sistema a datos históricos para verificar su rentabilidad en el pasado.</li>
+                                <li>**Evaluación de Rendimiento:** Revisar el diario de trading semanal o mensual para calcular la Expectativa y hacer ajustes basados en datos, no en sentimientos.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -139,8 +370,9 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT: Lógica de la Navegación Móvil -->
+    <!-- JAVASCRIPT: Lógica de la Navegación Móvil y Acordeón -->
     <script>
+        // Lógica para la navegación móvil
         document.getElementById('menu-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
@@ -148,6 +380,39 @@
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', function() {
                 document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Lógica para el Acordeón
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const contentId = header.querySelector('svg').dataset.target;
+                    const content = document.getElementById(contentId);
+                    const icon = header.querySelector('svg');
+
+                    // Toggle visibility of the content
+                    const isHidden = content.classList.contains('hidden');
+                    
+                    // Close all other open accordions
+                    document.querySelectorAll('.accordion-content').forEach(c => {
+                        if (c !== content) {
+                            c.classList.add('hidden');
+                            c.previousElementSibling.querySelector('svg').classList.remove('rotate-180');
+                        }
+                    });
+
+                    // Toggle the clicked accordion
+                    if (isHidden) {
+                        content.classList.remove('hidden');
+                        icon.classList.add('rotate-180');
+                    } else {
+                        content.classList.add('hidden');
+                        icon.classList.remove('rotate-180');
+                    }
+                });
             });
         });
     </script>
