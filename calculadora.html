@@ -85,6 +85,20 @@
     </header>
 
     <main>
+        <!-- SECCIÓN 0: RELOJ DE MERCADO NYSE -->
+        <!-- Muestra la hora actual de Nueva York y el estado del mercado (Abierto/Cerrado) con un temporizador. -->
+        <section id="reloj-mercado" class="py-6 px-4 bg-gray-900 border-b border-gray-700">
+            <div class="max-w-7xl mx-auto text-center">
+                <h3 class="text-xl font-semibold text-gray-300 mb-1 sm:text-2xl">Bolsa de Valores de Nueva York (NYSE) - Hora ET</h3>
+                <p class="text-5xl font-extrabold text-accent mb-2 sm:text-6xl" id="nyse-time">--:--:--</p>
+                <p class="text-lg font-medium text-gray-400 mb-4" id="nyse-date">Cargando fecha...</p>
+                
+                <!-- TEMPORIZADOR DE ESTATUS (Se actualiza con JS para mostrar Abre/Cierra en X tiempo) -->
+                <!-- Clase dinámica: 'text-green-500' para abierto, 'text-red-500' para cerrado/fin de semana -->
+                <p id="market-status-text" class="text-xl font-extrabold text-white sm:text-2xl">Cargando estado...</p>
+            </div>
+        </section>
+
         <!-- SECCIÓN 1: CALCULADORA DE PRECIO OBJETIVO POR PORCENTAJE -->
         <section id="calculadora-objetivo" class="py-10 px-4 flex items-start justify-center">
             <div class="max-w-xl mx-auto w-full"> 
@@ -249,7 +263,7 @@
     </footer>
 
 
-    <!-- JAVASCRIPT: Lógica de las Calculadoras y Navegación Móvil -->
+    <!-- JAVASCRIPT: Lógica de las Calculadoras, Reloj y Navegación Móvil -->
     <script>
         // --- Lógica de la Navegación Móvil ---
         document.getElementById('menu-button').addEventListener('click', function() {
@@ -266,6 +280,121 @@
         const formatOptionsPrice = { minimumFractionDigits: 2, maximumFractionDigits: 4 };
         const formatOptionsCurrency = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
         
+        // --- Lógica del Reloj y Temporizador del Mercado NYSE ---
+        const TIMEZONE = 'America/New_York';
+        const OPEN_HOUR = 9;
+        const OPEN_MINUTE = 30;
+        const CLOSE_HOUR = 16;
+        const CLOSE_MINUTE = 0; // 4:00 PM
+
+        /**
+         * Formatea la diferencia de tiempo en horas, minutos y segundos.
+         * @param {number} ms - Diferencia de tiempo en milisegundos.
+         * @returns {string} Diferencia de tiempo formateada.
+         */
+        function formatTimeDifference(ms) {
+            if (ms < 0) ms = 0; 
+            
+            const totalSeconds = Math.floor(ms / 1000);
+            const days = Math.floor(totalSeconds / (3600 * 24));
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            let parts = [];
+            if (days > 0) parts.push(`${days} días`);
+            // Muestra horas solo si hay días o si es la última parte significativa
+            if (hours > 0 || days > 0) parts.push(`${hours}h`);
+            // Muestra minutos y segundos siempre
+            parts.push(`${minutes}m`);
+            parts.push(`${seconds}s`);
+
+            // Asegurar que siempre se muestre al menos minutos y segundos si el tiempo es corto
+            if (parts.length === 1 && totalSeconds > 0) {
+                 return `${minutes}m ${seconds}s`; // Should not happen with the logic above, but safety first
+            }
+
+            return parts.join(' ');
+        }
+
+        /**
+         * Actualiza el reloj de la NYSE y el temporizador de estado.
+         */
+        function updateClockAndTimer() {
+            const nowET = new Date(new Date().toLocaleString("en-US", { timeZone: TIMEZONE }));
+            const currentDay = nowET.getDay(); // 0=Dom, 6=Sáb
+            const currentTimeInMinutes = nowET.getHours() * 60 + nowET.getMinutes();
+            
+            // Tiempos de mercado en minutos
+            const openTimeInMinutes = OPEN_HOUR * 60 + OPEN_MINUTE; // 9:30 ET
+            const closeTimeInMinutes = CLOSE_HOUR * 60 + CLOSE_MINUTE; // 16:00 ET
+
+            let statusText = '';
+            let statusClass = '';
+            let countdownMs = 0;
+            
+            const isWeekend = (currentDay === 0 || currentDay === 6); // Domingo o Sábado
+            const isTradingDay = (currentDay >= 1 && currentDay <= 5); // Lunes a Viernes
+            const isOpen = isTradingDay && (currentTimeInMinutes >= openTimeInMinutes && currentTimeInMinutes < closeTimeInMinutes);
+
+            if (isWeekend) {
+                // Mercado Cerrado - Fin de Semana
+                statusText = 'CERRADO (Fin de Semana)';
+                statusClass = 'text-red-500';
+
+            } else if (isOpen) {
+                // Mercado Abierto: Calcular tiempo hasta el cierre (16:00 ET)
+                const closeTime = new Date(nowET);
+                closeTime.setHours(CLOSE_HOUR, CLOSE_MINUTE, 0, 0);
+                countdownMs = closeTime.getTime() - nowET.getTime();
+                
+                statusText = `CIERRA en ${formatTimeDifference(countdownMs)}`;
+                statusClass = 'text-green-500';
+
+            } else {
+                // Mercado Cerrado: Calcular tiempo hasta la próxima apertura (9:30 AM ET)
+                let nextOpenTime = new Date(nowET);
+                nextOpenTime.setHours(OPEN_HOUR, OPEN_MINUTE, 0, 0); // Establece el tiempo de apertura de hoy
+
+                // Ajustar si la apertura ya pasó hoy (después de 16:00 ET de ayer o antes de 9:30 ET de hoy)
+                if (currentTimeInMinutes >= closeTimeInMinutes) {
+                    // Si es después de las 16:00 ET, la próxima apertura es mañana
+                    nextOpenTime.setDate(nextOpenTime.getDate() + 1);
+                }
+                
+                // Ajustar para el fin de semana: si la próxima apertura cae en Sáb/Dom, avanzar al Lunes.
+                let nextDay = nextOpenTime.getDay();
+                if (nextDay === 0) { // Domingo -> Lunes
+                    nextOpenTime.setDate(nextOpenTime.getDate() + 1);
+                } else if (nextDay === 6) { // Sábado -> Lunes
+                    nextOpenTime.setDate(nextOpenTime.getDate() + 2);
+                }
+                
+                // Recalcular el tiempo si el día fue ajustado
+                countdownMs = nextOpenTime.getTime() - nowET.getTime();
+                
+                if (countdownMs > 0) {
+                    statusText = `ABRE en ${formatTimeDifference(countdownMs)}`;
+                    statusClass = 'text-red-500';
+                } else {
+                    statusText = 'CERRADO'; // Fallback
+                    statusClass = 'text-red-500';
+                }
+            }
+
+            // Actualizar elementos HTML
+            document.getElementById('nyse-time').textContent = nowET.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, timeZone: TIMEZONE });
+            document.getElementById('nyse-date').textContent = nowET.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: TIMEZONE });
+            document.getElementById('market-status-text').textContent = statusText;
+            document.getElementById('market-status-text').className = `text-xl font-extrabold ${statusClass} sm:text-2xl`;
+        }
+
+        // --- Inicialización del Reloj ---
+        // Se ejecuta una vez al cargar y luego cada segundo
+        updateClockAndTimer();
+        setInterval(updateClockAndTimer, 1000);
+
+
         /**
          * CALCULADORA 1: Precio Objetivo (Ganancia %)
          */
