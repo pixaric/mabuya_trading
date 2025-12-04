@@ -40,23 +40,12 @@
         .content-card {
             background-color: #1f2937; /* Dark Gray for cards */
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
-            border-radius: 0.75rem; /* rounded-xl */
-        }
-        /* Estilo para el enlace del símbolo de la acción (Finviz) */
-        .symbol-link {
-            transition: color 0.3s;
-            text-decoration: none;
-            color: #06b6d4; /* Cyan - accent */
-        }
-        .symbol-link:hover {
-            text-decoration: underline;
-            color: #38bdf8; /* Lighter Cyan */
         }
     </style>
 </head>
 <body class="bg-primary-dark">
 
-    <!-- BARRA DE NAVEGACIÓN (HEADER) -->
+    <!-- BARRA DE NAVEGACIÓN (HEADER) - Enlaces externos a otros archivos -->
     <header class="sticky top-0 z-50 bg-primary-dark/95 border-b border-gray-800 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -154,7 +143,7 @@
                 </div>
                 
                 <div class="mt-6 text-xs text-gray-500 text-right border-t border-gray-700 pt-3">
-                    <p>Fuente: Datos estáticos simulados. Al hacer clic en el símbolo se abrirá la página de Finviz.com.</p>
+                    <p>Fuente: Datos estáticos simulados. Para datos en tiempo real, consulta los enlaces de interés.</p>
                 </div>
             </div>
         </section>
@@ -221,6 +210,7 @@
         </div>
     </footer>
 
+
     <!-- JAVASCRIPT: Lógica de la Navegación Móvil y Lista Estática -->
     <script>
         // --- Datos Estáticos para la Lista de Seguimiento ---
@@ -240,6 +230,7 @@
                 targetPrice: 450.00,
                 historicalHigh: 460.00,
                 historicalLow: 250.00
+                
             },
             {
                 symbol: 'TSLA',
@@ -260,58 +251,44 @@
         ];
 
         /**
-         * Determina las clases CSS para la recomendación.
-         * @param {string} recommendation - 'Comprar', 'Vender', 'Mantener'
-         * @returns {string} - Clases Tailwind para el color.
-         */
-        function getRecommendationClass(recommendation) {
-            if (recommendation === 'Comprar') return 'text-green-400';
-            if (recommendation === 'Vender') return 'text-red-400';
-            return 'text-yellow-400'; // Mantener
-        }
-
-        /**
-         * Dibuja los elementos estáticos de la watchlist en el DOM.
+         * Dibuja los elementos estáticos de la watchlist en el DOM
          */
         function renderStaticWatchlist() {
             const container = document.getElementById('watchlist-items');
             
             // Crear el encabezado de la tabla/lista
             const header = `
-                <div class="flex font-semibold text-gray-400 border-b border-gray-700 pb-2 mb-3 px-4 text-sm">
-                    <div class="w-1/5 sm:w-1/6">Símbolo</div>
-                    <div class="w-2/5 sm:w-2/6 hidden sm:block">Empresa</div>
-                    <div class="w-1/5 sm:w-1/6 text-center">Rec.</div>
-                    <div class="w-1/5 sm:w-1/6 text-right">P. Objetivo</div>
-                    <div class="w-1/5 text-right hidden lg:block">Máximo H</div>
-                    <div class="w-1/5 text-right hidden lg:block">Mínimo H</div>
+                <div class="flex font-semibold text-gray-300 border-b border-gray-600 pb-2 mb-3 px-4">
+                    <div class="w-1/6">Símbolo</div>
+                    <div class="w-2/6 hidden sm:block">Empresa</div>
+                    <div class="w-1/6 text-center">Recomendación</div>
+                    <div class="w-1/6 text-right">Precio Objetivo</div>
+                    <div class="w-1/6 text-right hidden lg:block">Máximo H</div>
+                    <div class="w-1/6 text-right hidden lg:block">Mínimo H</div>
                 </div>
             `;
             
             // Mapear los datos a filas de la lista
             const listItems = staticWatchlistData.map(item => {
-                const recClass = getRecommendationClass(item.recommendation);
-                // URL de Finviz, asegurándose de que el símbolo esté en mayúsculas
-                const finvizUrl = `https://finviz.com/quote.ashx?t=${item.symbol.toUpperCase()}`;
+                let recClass = '';
+                if (item.recommendation === 'Comprar') recClass = 'text-green-400';
+                else if (item.recommendation === 'Vender') recClass = 'text-red-400';
+                else recClass = 'text-yellow-400';
 
                 return `
-                    <div class="flex items-center bg-gray-800/70 p-4 rounded-lg hover:bg-gray-800 transition duration-150 mb-2">
-                        <!-- Símbolo (AHORA CON ENLACE A FINVIZ) -->
-                        <div class="w-1/5 sm:w-1/6 font-bold text-sm sm:text-base">
-                            <a href="${finvizUrl}" target="_blank" rel="noopener noreferrer" class="symbol-link">
-                                ${item.symbol}
-                            </a>
-                        </div>
+                    <div class="flex items-center bg-gray-700/50 p-4 rounded-lg hover:bg-gray-700 transition duration-150 mb-2">
+                        <!-- Símbolo -->
+                        <div class="w-1/6 font-bold text-accent text-sm sm:text-base">${item.symbol}</div>
                         <!-- Nombre -->
-                        <div class="w-2/5 sm:w-2/6 hidden sm:block text-gray-300 text-xs sm:text-sm">${item.name}</div>
+                        <div class="w-2/6 hidden sm:block text-gray-400 text-sm">${item.name}</div>
                         <!-- Recomendación -->
-                        <div class="w-1/5 sm:w-1/6 text-center text-xs sm:text-sm font-semibold ${recClass}">${item.recommendation}</div>
+                        <div class="w-1/6 text-center text-sm font-semibold ${recClass}">${item.recommendation}</div>
                         <!-- Precio Objetivo -->
-                        <div class="w-1/5 sm:w-1/6 text-right text-white font-medium text-xs sm:text-sm">$${item.targetPrice.toFixed(2)}</div>
+                        <div class="w-1/6 text-right text-white font-medium text-sm">$${item.targetPrice.toFixed(2)}</div>
                         <!-- Máximo Histórico -->
-                        <div class="w-1/5 text-right text-gray-400 text-xs sm:text-sm hidden lg:block">$${item.historicalHigh.toFixed(2)}</div>
+                        <div class="w-1/6 text-right text-gray-400 text-sm hidden lg:block">$${item.historicalHigh.toFixed(2)}</div>
                         <!-- Mínimo Histórico -->
-                        <div class="w-1/5 text-right text-gray-400 text-xs sm:text-sm hidden lg:block">$${item.historicalLow.toFixed(2)}</div>
+                        <div class="w-1/6 text-right text-gray-400 text-sm hidden lg:block">$${item.historicalLow.toFixed(2)}</div>
                     </div>
                 `;
             }).join('');
@@ -328,13 +305,20 @@
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
-            if (menuButton && mobileMenu) {
+            if (menuButton) {
                 menuButton.addEventListener('click', function() {
-                    // Muestra/Oculta el menú móvil
                     mobileMenu.classList.toggle('hidden');
                 });
             }
+
+            // Oculta el menú móvil al hacer clic en un enlace
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
         });
     </script>
+
 </body>
 </html>
