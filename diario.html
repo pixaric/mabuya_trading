@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Trading | Cloud Firestore</title>
+    <!-- Incluir Tailwind CSS para un diseño moderno y responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef2f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        .log-card {
+            transition: all 0.2s ease-in-out;
+            border-left: 5px solid;
+            /* Estilo para las líneas de P/L */
+        }
+        .log-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px);
+        }
+        /* Clases definidas en el CSS personalizado original */
+        .pnl-positive { border-color: #10b981; } /* emerald-500 */
+        .pnl-negative { border-color: #ef4444; } /* red-500 */
+        .pnl-zero { border-color: #64748b; } /* slate-500 */
+        
+        /* Estilo para el esqueleto de carga */
+        .loading-skeleton {
+            background: linear-gradient(-90deg, #f0f0f0 0%, #f8f8f8 50%, #f0f0f0 100%);
+            background-size: 400% 400%;
+            animation: pulse 1.2s ease-in-out infinite;
+            border-radius: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        @keyframes pulse {
+            0% { background-position: 0% 0%; }
+            100% { background-position: -135% 0%; }
+        }
+    </style>
+</head>
+<body class="p-4">
+
+    <div class="container bg-white shadow-2xl rounded-2xl p-6 md:p-10">
+        <header class="mb-8 border-b pb-4">
+            <h1 class="text-3xl font-extrabold text-gray-900 mb-1 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+                Diario de Trading (Cloud)
+            </h1>
+            <p class="text-sm text-gray-500">
+                Almacenamiento de operaciones sincronizado en tiempo real con Firebase Firestore.
+            </p>
+        </header>
+
+        <!-- Información de Usuario -->
+        <div class="mb-6 p-3 bg-gray-100 rounded-lg text-xs break-words shadow-inner">
+            <p class="font-semibold text-gray-600 mb-1">ID de Usuario (UID):</p>
+            <p id="userIdDisplay" class="text-gray-800 font-mono italic">Cargando...</p>
+        </div>
+
+        <!-- Formulario para agregar nuevas operaciones -->
+        <div class="mb-10 p-6 bg-indigo-50 rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold text-indigo-800 mb-4">Registrar Nueva Operación</h2>
+            <div id="formGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- Columna 1 -->
+                <div class="space-y-4">
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Símbolo</span>
+                        <input type="text" id="symbolInput" placeholder="AAPL, TSLA..."
+                               class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Acciones (Cantidad)</span>
+                        <input type="number" id="sharesInput" placeholder="100" min="1"
+                               class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Fecha Entrada</span>
+                        <input type="date" id="entryDateInput" 
+                               class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Entrada (Precio)</span>
+                        <input type="number" step="0.01" id="entryPriceInput" placeholder="150.50"
+                               class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                    </label>
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="space-y-4">
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Fecha Salida</span>
+                        <input type="date" id="exitDateInput" 
+                               class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Salida (Precio)</span>
+                        <input type="number" step="0.01" id="exitPriceInput" placeholder="160.75"
+                               class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700" required>
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Estrategia</span>
+                        <select id="strategySelect" class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                            <option value="Scalping">Scalping</option>
+                            <option value="Day Trading">Day Trading</option>
+                            <option value="Swing Trading">Swing Trading</option>
+                            <option value="Posicional">Posicional</option>
+                            <option value="Otras">Otras</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="text-sm font-medium text-gray-700">Emoción Dominante</span>
+                        <select id="emotionSelect" class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                            <option value="Neutral">Neutral/Calma</option>
+                            <option value="Euforia">Euforia</option>
+                            <option value="Miedo">Miedo/Pánico</option>
+                            <option value="Codicia">Codicia</option>
+                            <option value="Frustracion">Frustración</option>
+                        </select>
+                    </label>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="space-y-4 md:col-span-1">
+                    <label class="block h-full">
+                        <span class="text-sm font-medium text-gray-700">Notas de la Operación</span>
+                        <textarea id="notesInput" rows="7" placeholder="Razones para entrar/salir, lecciones aprendidas..."
+                                     class="mt-1 w-full p-2 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 resize-none h-4/5"></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Botón de Envío -->
+            <button id="addButton"
+                    class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition duration-200 shadow-xl disabled:opacity-50" disabled>
+                Guardar Operación
+            </button>
+        </div>
+
+        <!-- Lista de operaciones registradas -->
+        <div>
+            <h2 class="text-xl font-bold text-gray-700 mb-4 border-b pb-2 flex justify-between items-center">
+                Registro de Operaciones (Tiempo Real)
+            </h2>
+            <div id="tradeLogList" class="space-y-5">
+                <!-- Esqueleto de carga inicial -->
+                <div class="loading-skeleton h-28"></div>
+                <div class="loading-skeleton h-28 w-5/6"></div>
+            </div>
+        </div>
+        
+        <!-- Mensaje de error o éxito -->
+        <div id="messageBox" class="mt-6 p-3 text-sm rounded-lg hidden" role="alert"></div>
+
+    </div>
+
+    <script type="module">
+        // --- IMPORTS DE FIREBASE ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, addDoc, deleteDoc, onSnapshot, collection, query, serverTimestamp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- VARIABLES GLOBALES DE CANVAS (MANDATORIAS EN ESTE ENTORNO) ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const canvasFirebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        // --- CONFIGURACIÓN MANUAL PARA DESPLIEGUE EXTERNO ---
+        // ESTOS SON VALORES DE MARCADOR DE POSICIÓN. SI DESPLIEGAS ESTE CÓDIGO FUERA DE CANVAS, 
+        // DEBES REEMPLAZARLOS CON LA CONFIGURACIÓN REAL DE TU PROYECTO FIREBASE.
+        const manualFirebaseConfig = {
+            apiKey: "TU_API_KEY_AQUI", 
+            authDomain: "TU_PROJECT_ID.firebaseapp.com",
+            projectId: "TU_PROJECT_ID",
+            storageBucket: "TU_PROJECT_ID.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+
+
+        // Nombre de la colección en Firestore
+        const COLLECTION_NAME = 'tradeLogs';
+
+        // --- REFERENCIAS DE FIREBASE Y ESTADO ---
+        let app;
+        let db;
+        let auth;
+        let userId = null;
+        let authReady = false; // Bandera para indicar que la autenticación ha finalizado.
+
+        // --- REFERENCIAS DOM ---
+        const formInputs = {
+            symbol: document.getElementById('symbolInput'),
+            shares: document.getElementById('sharesInput'),
+            entryDate: document.getElementById('entryDateInput'),
+            entryPrice: document.getElementById('entryPriceInput'),
+            exitDate: document.getElementById('exitDateInput'),
+            exitPrice: document.getElementById('exitPriceInput'),
+            strategy: document.getElementById('strategySelect'),
+            emotion: document.getElementById('emotionSelect'),
+            notes: document.getElementById('notesInput'),
+        };
+
+        const addButton = document.getElementById('addButton');
+        const tradeLogList = document.getElementById('tradeLogList');
+        const messageBox = document.getElementById('messageBox');
+        const userIdDisplay = document.getElementById('userIdDisplay');
+
+        // --- FUNCIONES DE UTILIDAD ---
+
+        /**
+         * Habilita/Deshabilita los controles de la UI.
+         * @param {boolean} enable Si debe habilitar (true) o deshabilitar (false).
+         */
+        function toggleControls(enable) {
+            addButton.disabled = !enable;
+            Object.values(formInputs).forEach(input => input.disabled = !enable);
+        }
+        
+        /**
+         * Muestra un mensaje temporal en la caja de mensajes.
+         * @param {string} message El mensaje a mostrar.
+         * @param {string} type 'success' o 'error'.
+         */
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800', 'bg-yellow-100', 'text-yellow-800');
+            
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'text-red-800');
+            } else if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'text-green-800');
+            } else {
+                messageBox.classList.add('bg-yellow-100', 'text-yellow-800');
+            }
+
+
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 5000);
+        }
+
+        /**
+         * Genera la ruta de la colección de operaciones privada para el usuario actual.
+         * @returns {string} La ruta de la colección.
+         */
+        function getUserTradeLogCollectionPath() {
+            // Ruta privada obligatoria: /artifacts/{appId}/users/{userId}/tradeLogs
+            return `artifacts/${appId}/users/${userId}/${COLLECTION_NAME}`;
+        }
+
+        /**
+         * Calcula las ganancias/pérdidas en $ y %.
+         * @param {number} entryPrice Precio de entrada.
+         * @param {number} exitPrice Precio de salida.
+         * @param {number} shares Cantidad de acciones.
+         * @returns {{pnl_$: number, pnl_percent: number}}
+         */
+        function calculatePNL(entryPrice, exitPrice, shares) {
+            const entry = parseFloat(entryPrice);
+            const exit = parseFloat(exitPrice);
+            const qty = parseInt(shares);
+
+            if (isNaN(entry) || isNaN(exit) || isNaN(qty) || qty <= 0 || entry === 0) {
+                return { pnl_$: 0, pnl_percent: 0 };
+            }
+
+            const pnl_dollars = (exit - entry) * qty;
+            // Cálculo del porcentaje: (Salida - Entrada) / Entrada * 100
+            const pnl_percentage = ((exit - entry) / entry) * 100;
+
+            return {
+                pnl_$: parseFloat(pnl_dollars.toFixed(2)),
+                pnl_percent: parseFloat(pnl_percentage.toFixed(2))
+            };
+        }
+
+        // --- OPERACIONES DE FIRESTORE (CRUD) ---
+
+        /**
+         * Agrega una nueva operación de trading a Firestore.
+         */
+        async function addTradeLog() {
+            if (!authReady || !userId) {
+                showMessage("Autenticación no lista. Por favor, espere.", 'error');
+                return;
+            }
+
+            // Validación básica de campos requeridos
+            const requiredFields = ['symbol', 'shares', 'entryDate', 'entryPrice', 'exitDate', 'exitPrice'];
+            for (const key of requiredFields) {
+                if (!formInputs[key].value.trim()) {
+                    showMessage(`El campo "${document.querySelector(`label span[for="${formInputs[key].id}"]`)?.textContent || key}" es obligatorio.`, 'error');
+                    return;
+                }
+            }
+            
+            const shares = parseFloat(formInputs.shares.value);
+            const entryPrice = parseFloat(formInputs.entryPrice.value);
+            const exitPrice = parseFloat(formInputs.exitPrice.value);
+
+            if (isNaN(shares) || shares <= 0) {
+                showMessage("La cantidad de acciones debe ser un número positivo.", 'error');
+                return;
+            }
+            if (isNaN(entryPrice) || isNaN(exitPrice) || entryPrice <= 0 || exitPrice <= 0) {
+                showMessage("Los precios de entrada y salida deben ser números positivos.", 'error');
+                return;
+            }
+            
+            const { pnl_$, pnl_percent } = calculatePNL(entryPrice, exitPrice, shares);
+
+            try {
+                const newLog = {
+                    "Fecha entrada": formInputs.entryDate.value,
+                    "Símbolo": formInputs.symbol.value.toUpperCase(),
+                    "Acciones": shares,
+                    "Entrada": entryPrice,
+                    "Fecha salida": formInputs.exitDate.value,
+                    "Salida": exitPrice,
+                    "P/L $": pnl_$,
+                    "% P/L": pnl_percent,
+                    "Estrategia": formInputs.strategy.value,
+                    "Emoción": formInputs.emotion.value,
+                    "Notas": formInputs.notes.value,
+                    "timestamp": serverTimestamp() // Para ordenar y referencia de creación
+                };
+
+                const docRef = await addDoc(collection(db, getUserTradeLogCollectionPath()), newLog);
+                showMessage("Operación registrada con éxito.", 'success');
+                
+                // Limpiar solo los campos que probablemente cambien en la próxima operación
+                formInputs.symbol.value = '';
+                formInputs.shares.value = '';
+                formInputs.entryPrice.value = '';
+                formInputs.exitPrice.value = '';
+                formInputs.notes.value = '';
+                
+                console.log("Documento escrito con ID: ", docRef.id);
+            } catch (error) {
+                console.error("Error al agregar documento: ", error);
+                showMessage(`Error al guardar operación: ${error.message}`, 'error');
+            }
+        }
+
+        /**
+         * Elimina una operación por su ID.
+         * @param {string} logId El ID del documento de la operación.
+         */
+        async function deleteTradeLog(logId) {
+            if (!authReady || !userId) {
+                showMessage("Autenticación no lista.", 'error');
+                return;
+            }
+            try {
+                // Usamos un modal/confirmación simple para simular la experiencia
+                // En una app real, aquí usaríamos un modal Tailwind.
+                console.log(`Intentando eliminar el log: ${logId}`);
+                
+                const logDocRef = doc(db, getUserTradeLogCollectionPath(), logId);
+                await deleteDoc(logDocRef);
+                showMessage("Operación eliminada.", 'success');
+            } catch (error) {
+                console.error("Error al eliminar documento: ", error);
+                showMessage(`Error al eliminar operación: ${error.message}`, 'error');
+            }
+        }
+
+        // --- LÓGICA DE LA INTERFAZ Y TIEMPO REAL ---
+
+        /**
+         * Renderiza la lista de operaciones en la interfaz.
+         * @param {Array<Object>} logs La lista de operaciones con sus IDs y datos.
+         */
+        function renderTradeLogs(logs) {
+            tradeLogList.innerHTML = ''; // Limpiar la lista actual
+
+            if (logs.length === 0) {
+                tradeLogList.innerHTML = '<li class="text-gray-500 text-center py-10 bg-gray-50 rounded-lg shadow-inner">¡Aún no has registrado ninguna operación!</li>';
+                return;
+            }
+
+            // Ordenar por timestamp, de más reciente a más antigua (mejor UX)
+            // Ya que Firestore no soporta orderBy sin índices en este entorno, ordenamos en cliente.
+            const sortedLogs = logs.sort((a, b) => (b.timestamp?.toMillis() || 0) - (a.timestamp?.toMillis() || 0));
+
+            sortedLogs.forEach(log => {
+                const pnlClass = log["P/L $"] > 0 ? 'pnl-positive text-emerald-600' 
+                                 : log["P/L $"] < 0 ? 'pnl-negative text-red-600'
+                                 : 'pnl-zero text-gray-600';
+
+                const cardClass = log["P/L $"] > 0 ? 'pnl-positive' 
+                                 : log["P/L $"] < 0 ? 'pnl-negative'
+                                 : 'pnl-zero';
+                
+                const deleteIcon = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 hover:text-red-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                `;
+
+                // Usamos el ID del log para el botón de eliminar
+                const html = `
+                    <div class="log-card bg-white p-5 rounded-xl shadow-md ${cardClass}">
+                        <div class="flex justify-between items-start mb-3 border-b pb-2">
+                            <h3 class="text-2xl font-bold text-gray-900">${log["Símbolo"]}</h3>
+                            <button data-id="${log.id}" class="delete-btn p-1 rounded-full hover:bg-gray-100">${deleteIcon}</button>
+                        </div>
+
+                        <!-- Panel de P&L -->
+                        <div class="flex items-center justify-between p-3 mb-4 rounded-lg bg-white shadow-inner">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Ganancia/Pérdida ($)</p>
+                                <p class="text-2xl font-extrabold ${pnlClass}">
+                                    $${log["P/L $"] ? log["P/L $"].toFixed(2) : '0.00'}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Rentabilidad (%)</p>
+                                <p class="text-xl font-bold ${pnlClass}">
+                                    ${log["% P/L"] ? log["% P/L"].toFixed(2) : '0.00'}%
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Detalles de la Operación (Grid) -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 text-sm gap-y-3">
+                            <div class="col-span-1">
+                                <p class="text-gray-500">Entrada</p>
+                                <p class="font-semibold text-gray-800">$${log["Entrada"].toFixed(2)}</p>
+                            </div>
+                            <div class="col-span-1">
+                                <p class="text-gray-500">Salida</p>
+                                <p class="font-semibold text-gray-800">$${log["Salida"].toFixed(2)}</p>
+                            </div>
+                            <div class="col-span-1">
+                                <p class="text-gray-500">Fecha Entrada</p>
+                                <p class="font-semibold text-gray-800">${log["Fecha entrada"]}</p>
+                            </div>
+                            <div class="col-span-1">
+                                <p class="text-gray-500">Fecha Salida</p>
+                                <p class="font-semibold text-gray-800">${log["Fecha salida"]}</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Estrategia y Emoción -->
+                        <div class="mt-4 pt-3 border-t">
+                            <p class="text-xs font-medium text-gray-500 uppercase">Estrategia & Emoción</p>
+                            <p class="font-medium text-gray-700">${log["Estrategia"]} | Emoción: ${log["Emoción"]}</p>
+                        </div>
+                        
+                        <!-- Notas -->
+                        <div class="mt-4 pt-3 border-t">
+                            <p class="text-xs font-medium text-gray-500 uppercase">Notas</p>
+                            <p class="text-gray-600 text-sm italic whitespace-pre-wrap">${log["Notas"] || 'Sin notas.'}</p>
+                        </div>
+                    </div>
+                `;
+
+                tradeLogList.insertAdjacentHTML('beforeend', html);
+            });
+
+            // Reasignar listeners a los botones de eliminar después de renderizar
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const logId = e.currentTarget.dataset.id;
+                    deleteTradeLog(logId);
+                });
+            });
+        }
+
+        /**
+         * Configura el listener de tiempo real con Firestore.
+         */
+        function setupRealtimeListener() {
+            if (!db || !authReady || !userId) {
+                console.warn("No se puede iniciar el listener de Firestore sin autenticación/DB.");
+                return;
+            }
+
+            const tradeLogCollectionRef = collection(db, getUserTradeLogCollectionPath());
+            
+            // Creamos una query simple (sin orderBy para evitar errores de índice en este entorno)
+            const q = query(tradeLogCollectionRef); 
+
+            // onSnapshot proporciona una actualización en tiempo real
+            onSnapshot(q, (snapshot) => {
+                const logs = [];
+                snapshot.forEach((doc) => {
+                    // Mapeamos los datos del documento y agregamos el ID
+                    logs.push({ id: doc.id, ...doc.data() });
+                });
+                renderTradeLogs(logs);
+                console.log(`Operaciones cargadas en tiempo real: ${logs.length}`);
+            }, (error) => {
+                console.error("Error en onSnapshot:", error);
+                tradeLogList.innerHTML = `<li class="text-red-600 text-center py-8 bg-red-50 rounded-lg">Error de conexión a la base de datos: ${error.message}</li>`;
+            });
+        }
+
+        // --- HANDLERS DE EVENTOS ---
+
+        function handleAddLogClick(e) {
+            e.preventDefault();
+            addTradeLog();
+        }
+
+        // --- INICIALIZACIÓN DE FIREBASE Y AUTH ---
+
+        /**
+         * Inicializa la aplicación: Firebase, Auth y Listener.
+         */
+        async function initializeApp() {
+            // Determinar la configuración de Firebase
+            let currentFirebaseConfig = canvasFirebaseConfig;
+            
+            // Si no está disponible (GitHub), usa la configuración manual
+            if (!currentFirebaseConfig) {
+                currentFirebaseConfig = manualFirebaseConfig;
+            }
+
+            // Validación de la configuración
+            if (!currentFirebaseConfig || currentFirebaseConfig.apiKey === "TU_API_KEY_AQUI") {
+                console.error("Configuración de Firebase no disponible o incompleta. Revisa el bloque 'manualFirebaseConfig'.");
+                showMessage("Error: Por favor, introduce tu configuración de Firebase en el código fuente (si usas fuera de Canvas).", 'error');
+                return;
+            }
+
+            // Habilitar logging para debug
+            setLogLevel('debug');
+            
+            // 1. Inicializar servicios de Firebase
+            app = initializeApp(currentFirebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            toggleControls(false);
+            userIdDisplay.textContent = "Autenticando...";
+            
+            // 2. Manejar autenticación
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    userId = user.uid;
+                    authReady = true;
+                    userIdDisplay.textContent = userId;
+                    toggleControls(true);
+                    
+                    // 3. Iniciar el listener de Firestore SÓLO después de la autenticación
+                    setupRealtimeListener();
+                } else {
+                    userId = null;
+                    authReady = false;
+                    userIdDisplay.textContent = "Usuario no autenticado.";
+                    toggleControls(false);
+                    tradeLogList.innerHTML = '<li class="text-gray-500 text-center py-10 bg-gray-50 rounded-lg shadow-inner">Debe autenticarse para ver sus operaciones.</li>';
+                }
+            });
+
+            // Intento de inicio de sesión
+            try {
+                if (initialAuthToken) {
+                    // Si estamos en Canvas, usamos el token inyectado
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    // Si estamos en otro lugar (y no hay token), usamos autenticación anónima
+                    // Esto permite que la app funcione inmediatamente, pero solo dentro de la colección privada.
+                    await signInAnonymously(auth);
+                }
+                console.log("Autenticación exitosa.");
+                showMessage("Sesión iniciada con éxito.", 'success');
+            } catch (error) {
+                console.error("Error de autenticación:", error);
+                userIdDisplay.textContent = `Error Auth: ${error.message}`;
+                showMessage(`Fallo en la autenticación. Revise la consola.`, 'error');
+            }
+        }
+
+        // --- EVENT LISTENERS ---
+
+        addButton.addEventListener('click', handleAddLogClick);
+
+        // Iniciar la aplicación al cargar la página
+        window.onload = initializeApp;
+
+    </script>
+</body>
+</html>
