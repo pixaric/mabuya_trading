@@ -128,7 +128,7 @@
                     <p class="text-gray-300 text-sm">
                         La práctica fundamental de limitar las pérdidas (Stop Loss) y proteger el capital. Nunca arriesgues más de lo que estás dispuesto a perder en una sola operación.
                     </p>
-                    <div class="mt-4">[Image of risk reward ratio diagram]</div>
+                    <div class="mt-4"></div>
                 </div>
 
                 <!-- Principio 3: Psicología del Trading -->
@@ -141,26 +141,9 @@
                 </div>
             </div>
         </section>
-
-        <!-- SECCIÓN 3: Lista de Seguimiento (Watchlist) - Estática -->
-        <section id="watchlist" class="py-16 px-4 bg-gray-900/50">
-            <h2 class="text-4xl font-bold text-center mb-10 text-accent">Lista de Seguimiento (Watchlist) - Análisis Fundamental</h2>
-            <div class="max-w-5xl mx-auto content-card p-6 rounded-xl overflow-x-auto">
-                
-                <!-- Contenedor de la Tabla/Lista -->
-                <div id="watchlist-items" class="min-w-[600px]">
-                    <!-- Contenido generado por JavaScript -->
-                    <p class="text-gray-400 text-center py-4">Cargando datos estáticos...</p>
-                </div>
-                
-                <div class="mt-6 text-xs text-gray-500 text-right border-t border-gray-700 pt-3">
-                    <p>Fuente: Datos estáticos simulados. Al hacer clic en el símbolo se abrirá la página de Finviz.com.</p>
-                </div>
-            </div>
-        </section>
         
-        <!-- SECCIÓN 4: CHECKLIST PRE-TRADING -->
-        <section id="pre-trading-checklist" class="py-16 px-4">
+        <!-- SECCIÓN 3: CHECKLIST PRE-TRADING -->
+        <section id="pre-trading-checklist" class="py-16 px-4 bg-gray-900/50">
             <h2 class="text-4xl font-bold text-center mb-10 text-secondary-accent">Checklist Antes de la Jornada</h2>
             <div class="max-w-4xl mx-auto content-card p-8">
                 <p class="text-lg text-gray-300 mb-6 border-b border-gray-700 pb-4">
@@ -206,7 +189,41 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 5: Enlaces de Interés -->
+        <!-- SECCIÓN 4: MÉTRICAS CLAVE DEL TRADER (KPIs) -->
+        <section id="kpis" class="py-16 px-4">
+            <h2 class="text-4xl font-bold text-center mb-10 text-accent">Tus Métricas Clave (KPIs)</h2>
+            <p class="max-w-4xl mx-auto text-lg text-gray-300 text-center mb-8">
+                El trading profesional se basa en la estadística. Estas métricas son esenciales para evaluar tu rendimiento y optimizar tu estrategia.
+            </p>
+            <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- KPI 1: Win Rate -->
+                <div class="content-card p-6 rounded-xl text-center border-b-4 border-cyan-500">
+                    <p class="text-5xl font-extrabold text-white">65<span class="text-3xl">%</span></p>
+                    <h3 class="text-lg font-semibold text-accent mt-2">Tasa de Acierto (Win Rate)</h3>
+                    <p class="text-xs text-gray-400 mt-1">Porcentaje de operaciones ganadoras.</p>
+                </div>
+                <!-- KPI 2: R:R Promedio -->
+                <div class="content-card p-6 rounded-xl text-center border-b-4 border-secondary-accent">
+                    <p class="text-5xl font-extrabold text-white">1:2.5</p>
+                    <h3 class="text-lg font-semibold text-accent mt-2">R:R Promedio</h3>
+                    <p class="text-xs text-gray-400 mt-1">Media de riesgo/beneficio por operación.</p>
+                </div>
+                <!-- KPI 3: Profit Factor -->
+                <div class="content-card p-6 rounded-xl text-center border-b-4 border-green-500">
+                    <p class="text-5xl font-extrabold text-white">1.8</p>
+                    <h3 class="text-lg font-semibold text-accent mt-2">Factor de Beneficio</h3>
+                    <p class="text-xs text-gray-400 mt-1">Ganancias brutas / Pérdidas brutas.</p>
+                </div>
+                <!-- KPI 4: Max Drawdown -->
+                <div class="content-card p-6 rounded-xl text-center border-b-4 border-red-500">
+                    <p class="text-5xl font-extrabold text-white">8<span class="text-3xl">%</span></p>
+                    <h3 class="text-lg font-semibold text-accent mt-2">Max Drawdown</h3>
+                    <p class="text-xs text-gray-400 mt-1">Máxima caída de capital observada.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: Enlaces de Interés (Antes era SECCIÓN 4) -->
         <section id="enlaces" class="py-16 px-4">
             <h2 class="text-4xl font-bold text-center mb-10 text-accent">Enlaces y Herramientas Esenciales</h2>
             <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -239,7 +256,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 6: DESCARGO DE RESPONSABILIDAD (DISCLAIMER) -->
+        <!-- SECCIÓN 6: DESCARGO DE RESPONSABILIDAD (DISCLAIMER) (Antes era SECCIÓN 5) -->
         <section id="disclaimer" class="py-12 px-4 bg-gray-900/50 border-t border-gray-800">
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="text-2xl font-bold mb-4 text-red-500">Descargo de Responsabilidad (Disclaimer)</h2>
@@ -268,109 +285,10 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT: Lógica de la Navegación Móvil y Lista Estática -->
+    <!-- JAVASCRIPT: Lógica de la Navegación Móvil -->
     <script>
-        // --- Datos Estáticos para la Lista de Seguimiento ---
-        const staticWatchlistData = [
-            {
-                symbol: 'APPL',
-                name: 'Apple Inc.',
-                recommendation: 'Comprar',
-                targetPrice: 220.00,
-                historicalHigh: 225.00,
-                historicalLow: 130.00
-            },
-            {
-                symbol: 'MSFT',
-                name: 'Microsoft Corp.',
-                recommendation: 'Mantener',
-                targetPrice: 450.00,
-                historicalHigh: 460.00,
-                historicalLow: 250.00
-            },
-            {
-                symbol: 'TSLA',
-                name: 'Tesla Inc.',
-                recommendation: 'Vender',
-                targetPrice: 150.00,
-                historicalHigh: 407.36,
-                historicalLow: 101.81
-            },
-            {
-                symbol: 'GOOGL',
-                name: 'Alphabet Inc.',
-                recommendation: 'Comprar',
-                targetPrice: 195.00,
-                historicalHigh: 180.00,
-                historicalLow: 83.34
-            }
-        ];
-
-        /**
-         * Determina las clases CSS para la recomendación.
-         * @param {string} recommendation - 'Comprar', 'Vender', 'Mantener'
-         * @returns {string} - Clases Tailwind para el color.
-         */
-        function getRecommendationClass(recommendation) {
-            if (recommendation === 'Comprar') return 'text-green-400';
-            if (recommendation === 'Vender') return 'text-red-400';
-            return 'text-yellow-400'; // Mantener
-        }
-
-        /**
-         * Dibuja los elementos estáticos de la watchlist en el DOM.
-         */
-        function renderStaticWatchlist() {
-            const container = document.getElementById('watchlist-items');
-            
-            // Crear el encabezado de la tabla/lista
-            const header = `
-                <div class="flex font-semibold text-gray-400 border-b border-gray-700 pb-2 mb-3 px-4 text-sm">
-                    <div class="w-1/5 sm:w-1/6">Símbolo</div>
-                    <div class="w-2/5 sm:w-2/6 hidden sm:block">Empresa</div>
-                    <div class="w-1/5 sm:w-1/6 text-center">Rec.</div>
-                    <div class="w-1/5 sm:w-1/6 text-right">P. Objetivo</div>
-                    <div class="w-1/5 text-right hidden lg:block">Máximo H</div>
-                    <div class="w-1/5 text-right hidden lg:block">Mínimo H</div>
-                </div>
-            `;
-            
-            // Mapear los datos a filas de la lista
-            const listItems = staticWatchlistData.map(item => {
-                const recClass = getRecommendationClass(item.recommendation);
-                // URL de Finviz, asegurándose de que el símbolo esté en mayúsculas
-                const finvizUrl = `https://finviz.com/quote.ashx?t=${item.symbol.toUpperCase()}`;
-
-                return `
-                    <div class="flex items-center bg-gray-800/70 p-4 rounded-lg hover:bg-gray-800 transition duration-150 mb-2">
-                        <!-- Símbolo (AHORA CON ENLACE A FINVIZ) -->
-                        <div class="w-1/5 sm:w-1/6 font-bold text-sm sm:text-base">
-                            <a href="${finvizUrl}" target="_blank" rel="noopener noreferrer" class="symbol-link">
-                                ${item.symbol}
-                            </a>
-                        </div>
-                        <!-- Nombre -->
-                        <div class="w-2/5 sm:w-2/6 hidden sm:block text-gray-300 text-xs sm:text-sm">${item.name}</div>
-                        <!-- Recomendación -->
-                        <div class="w-1/5 sm:w-1/6 text-center text-xs sm:text-sm font-semibold ${recClass}">${item.recommendation}</div>
-                        <!-- Precio Objetivo -->
-                        <div class="w-1/5 sm:w-1/6 text-right text-white font-medium text-xs sm:text-sm">$${item.targetPrice.toFixed(2)}</div>
-                        <!-- Máximo Histórico -->
-                        <div class="w-1/5 text-right text-gray-400 text-xs sm:text-sm hidden lg:block">$${item.historicalHigh.toFixed(2)}</div>
-                        <!-- Mínimo Histórico -->
-                        <div class="w-1/5 text-right text-gray-400 text-xs sm:text-sm hidden lg:block">$${item.historicalLow.toFixed(2)}</div>
-                    </div>
-                `;
-            }).join('');
-
-            container.innerHTML = header + listItems;
-        }
-
         // --- Lógica de la Navegación Móvil y Carga Inicial ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Renderiza la lista estática al cargar el DOM
-            renderStaticWatchlist();
-
             // Configura el botón del menú móvil
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
