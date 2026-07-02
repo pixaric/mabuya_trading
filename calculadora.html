@@ -727,7 +727,7 @@
 
 
 
-        function calculateSystemMetrics() {
+    function calculateSystemMetrics() {
     const total = parseFloat(document.getElementById('metricTotalEntries').value);
     const wins = parseFloat(document.getElementById('metricWins').value);
     const losses = parseFloat(document.getElementById('metricLosses').value);
@@ -747,15 +747,20 @@
     warning.classList.add("hidden");
 
     // Validación
-    if (isNaN(total) || isNaN(wins) || isNaN(losses) || isNaN(cycle) ||
-        total <= 0 || wins < 0 || losses < 0 || cycle < 0) {
+    if (
+        isNaN(total) || isNaN(wins) || isNaN(losses) || isNaN(cycle) ||
+        total <= 0 || wins < 0 || losses < 0 || cycle < 0
+    ) {
         warning.classList.remove("hidden");
         return;
     }
 
-    // Cálculos
-    const iepValue = (wins / total) * 100;
-    const ipcValue = (losses / total) * 100;
+    // Operaciones cerradas
+    const closed = wins + losses;
+
+    // Fórmulas reales del Sistema Mabuya
+    const iepValue = (wins / closed) * 100;
+    const ipcValue = (losses / closed) * 100;
     const picValue = (cycle / total) * 100;
     const csValue = losses > 0 ? (wins / losses).toFixed(1) : "∞";
 
@@ -765,6 +770,7 @@
     PIC.textContent = picValue.toFixed(1) + "%";
     CS.textContent = csValue + ":1";
 }
+
 
     </script>
 </body>
