@@ -275,82 +275,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- SECCIÓN 4: CALCULADORA DE MÉTRICAS DEL SISTEMA -->
-<section id="calculadora-metricas" class="py-8 px-4 sm:py-10 flex items-start justify-center">
-    <div class="max-w-xl mx-auto w-full"> 
-        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-secondary-accent sm:text-4xl">
-            Calculadora de Métricas del Sistema
-        </h2>
-
-        <div class="content-card p-4 sm:p-6 rounded-xl sm:p-8">
-            <p class="text-gray-300 mb-5 sm:mb-6 text-center text-sm sm:text-base">
-                Calcula las métricas clave del Sistema Mabuya: efectividad, pérdida controlada, posiciones en ciclo y continuidad del sistema.
-            </p>
-
-            <div class="grid grid-cols-2 gap-3 mobile-compact-gap">
-                <!-- Entradas Totales -->
-                <div>
-                    <label class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Entradas Totales</label>
-                    <input type="number" id="metricTotalEntries" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 127">
-                </div>
-
-                <!-- Entradas Ganadoras -->
-                <div>
-                    <label class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Entradas Ganadoras</label>
-                    <input type="number" id="metricWins" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 118">
-                </div>
-
-                <!-- Entradas Perdedoras -->
-                <div>
-                    <label class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Entradas Perdedoras</label>
-                    <input type="number" id="metricLosses" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 7">
-                </div>
-
-                <!-- Posiciones en Ciclo -->
-                <div>
-                    <label class="block text-xs font-medium text-gray-400 mb-1 sm:text-sm">Posiciones en Ciclo</label>
-                    <input type="number" id="metricCyclePositions" step="1" class="w-full input-compact bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-accent focus:border-accent" placeholder="Ej. 12">
-                </div>
-            </div>
-
-            <!-- Botón -->
-            <button onclick="calculateSystemMetrics()" class="w-full bg-secondary-accent text-primary-dark font-bold py-3 rounded-lg hover:bg-amber-400 transition duration-300 transform hover:scale-[1.01] mt-2">
-                Calcular Métricas
-            </button>
-
-            <!-- Resultados -->
-            <div id="results-metricas" class="results-space border-t border-gray-700 space-y-2 sm:space-y-3">
-                <h3 class="text-lg font-semibold text-white mb-2 sm:text-xl">Resultados del Sistema:</h3>
-
-                <p class="text-sm sm:text-base">
-                    Índice de Efectividad (IEP): 
-                    <span id="metricIEP" class="font-bold text-green-500">0%</span>
-                </p>
-
-                <p class="text-sm sm:text-base">
-                    Índice de Pérdida Controlada (IPC): 
-                    <span id="metricIPC" class="font-bold text-red-500">0%</span>
-                </p>
-
-                <p class="text-sm sm:text-base">
-                    Posiciones en Ciclo (PIC): 
-                    <span id="metricPIC" class="font-bold text-secondary-accent">0%</span>
-                </p>
-
-                <p class="text-lg pt-1 font-extrabold sm:text-xl sm:pt-2">
-                    Continuidad del Sistema (CS): 
-                    <span id="metricCS" class="text-accent">0:1</span>
-                </p>
-
-                <p id="metricWarning" class="text-red-400 text-xs mt-1 hidden sm:text-sm">
-                    ⚠️ Por favor, ingresa valores válidos y positivos.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
     </main>
 
     <!-- FOOTER -->
@@ -724,47 +648,6 @@
                  warningEl.classList.remove('hidden');
             }
         }
-
-
-
-        function calculateSystemMetrics() {
-    const total = parseFloat(document.getElementById('metricTotalEntries').value);
-    const wins = parseFloat(document.getElementById('metricWins').value);
-    const losses = parseFloat(document.getElementById('metricLosses').value);
-    const cycle = parseFloat(document.getElementById('metricCyclePositions').value);
-
-    const IEP = document.getElementById('metricIEP');
-    const IPC = document.getElementById('metricIPC');
-    const PIC = document.getElementById('metricPIC');
-    const CS = document.getElementById('metricCS');
-    const warning = document.getElementById('metricWarning');
-
-    // Reset
-    IEP.textContent = "0%";
-    IPC.textContent = "0%";
-    PIC.textContent = "0%";
-    CS.textContent = "0:1";
-    warning.classList.add("hidden");
-
-    // Validación
-    if (isNaN(total) || isNaN(wins) || isNaN(losses) || isNaN(cycle) ||
-        total <= 0 || wins < 0 || losses < 0 || cycle < 0) {
-        warning.classList.remove("hidden");
-        return;
-    }
-
-    // Cálculos
-    const iepValue = (wins / total) * 100;
-    const ipcValue = (losses / total) * 100;
-    const picValue = (cycle / total) * 100;
-    const csValue = losses > 0 ? (wins / losses).toFixed(1) : "∞";
-
-    // Mostrar
-    IEP.textContent = iepValue.toFixed(1) + "%";
-    IPC.textContent = ipcValue.toFixed(1) + "%";
-    PIC.textContent = picValue.toFixed(1) + "%";
-    CS.textContent = csValue + ":1";
-}
 
     </script>
 </body>
